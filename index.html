@@ -737,41 +737,73 @@
   <div class="payment-box fade-up">
     <!-- QR Code -->
     <div class="qr-wrap">
-      <div style="font-size:13px; color:#d4a017; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">Chuyển Khoản Nhận Ebook</div>
-      <div class="qr-img">
-        <!-- Thay src bằng ảnh QR ngân hàng thật của bạn -->
-        <img src="images/qr.png" alt="QR chuyển khoản"
-          onerror="this.parentNode.innerHTML='<div style=\'padding:20px;text-align:center;font-size:12px;color:#888;\'>📱<br>Thêm ảnh QR vào<br><code>images/qr.png</code></div>'" />
+      <div style="font-size:13px; color:#d4a017; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">⚡ Quét QR để thanh toán ngay</div>
+      <div class="qr-img" style="width:200px;height:200px;">
+        <img
+          src="https://img.vietqr.io/image/VPB-6868836636-compact2.png?amount=99000&addInfo=EBOOK%20TEN%20BAN%20DANG%20GIA%20BAO%20NHIEU&accountName=LE%20THI%20THU%20NHUNG"
+          alt="QR VietQR VPBank"
+          style="width:100%;height:100%;object-fit:contain;"
+        />
       </div>
-      <div class="qr-bank">
-        <strong>Ngân hàng: [TÊN NGÂN HÀNG]</strong>
-        <strong>STK: [SỐ TÀI KHOẢN]</strong>
-        <strong>Chủ TK: NHUNG TECH AI</strong>
-        Nội dung CK: <span style="color:#d4a017;font-weight:700;">EBOOK + [Tên bạn]</span>
+      <div style="font-size:11px; color:#555; margin:8px 0 14px;">Hỗ trợ tất cả ứng dụng ngân hàng</div>
+
+      <!-- Bank info table -->
+      <div style="background:#0f0f0f; border:1px solid #222; border-radius:12px; padding:14px 16px; text-align:left; font-size:13px; line-height:2.2;">
+        <div style="display:flex;justify-content:space-between;border-bottom:1px solid #1a1a1a;padding-bottom:8px;margin-bottom:8px;">
+          <span style="color:#666;">Ngân hàng</span>
+          <span style="font-weight:700;">VPBank</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #1a1a1a;padding-bottom:8px;margin-bottom:8px;">
+          <span style="color:#666;">Số tài khoản</span>
+          <span style="font-weight:700;">6868836636
+            <button onclick="copyText('6868836636',this)" style="background:none;border:1px solid #333;color:#888;padding:2px 8px;border-radius:4px;cursor:pointer;font-size:11px;margin-left:6px;">Copy</button>
+          </span>
+        </div>
+        <div style="display:flex;justify-content:space-between;border-bottom:1px solid #1a1a1a;padding-bottom:8px;margin-bottom:8px;">
+          <span style="color:#666;">Chủ tài khoản</span>
+          <span style="font-weight:700;">LE THI THU NHUNG</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #1a1a1a;padding-bottom:8px;margin-bottom:8px;">
+          <span style="color:#666;">Số tiền</span>
+          <span style="font-weight:700;color:#d4a017;">99.000đ
+            <button onclick="copyText('99000',this)" style="background:none;border:1px solid #333;color:#888;padding:2px 8px;border-radius:4px;cursor:pointer;font-size:11px;margin-left:6px;">Copy</button>
+          </span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <span style="color:#666;">Nội dung CK</span>
+          <span style="font-weight:700;color:#d4a017;">EBOOK
+            <button onclick="copyText('EBOOK',this)" style="background:none;border:1px solid #333;color:#888;padding:2px 8px;border-radius:4px;cursor:pointer;font-size:11px;margin-left:6px;">Copy</button>
+          </span>
+        </div>
       </div>
-      <div style="margin-top:14px; background:#1a1a1a; border-radius:8px; padding:10px 14px; display:inline-block;">
-        <div style="font-size:22px; font-weight:900; color:#d4a017;">99.000đ</div>
-        <div style="font-size:11px; color:#555; text-decoration:line-through;">299.000đ</div>
-        <div style="font-size:11px; color:#c0392b; font-weight:700;">Giảm 67% hôm nay</div>
+      <div style="margin-top:10px; font-size:12px; color:#666;">
+        ⚠️ Vui lòng giữ <strong style="color:#fff;">đúng nội dung chuyển khoản</strong>
       </div>
     </div>
 
     <!-- Steps + Link -->
     <div class="ebook-link-box">
-      <h3>📖 Nhận Ebook Ngay Sau Khi Chuyển Khoản</h3>
+      <h3>📖 Nhận Link Ebook Ngay Sau Khi Chuyển</h3>
       <ul class="steps-list">
         <li><div class="step-num">1</div><span>Quét QR hoặc chuyển khoản theo thông tin bên cạnh</span></li>
-        <li><div class="step-num">2</div><span>Chụp màn hình bill chuyển khoản</span></li>
+        <li><div class="step-num">2</div><span>Chụp màn hình bill chuyển khoản thành công</span></li>
         <li><div class="step-num">3</div><span>Gửi bill qua Zalo <strong style="color:#fff;">0902921645</strong> hoặc Facebook</span></li>
-        <li><div class="step-num">4</div><span>Nhận link ebook trong vòng <strong style="color:#d4a017;">5 phút</strong></span></li>
+        <li><div class="step-num">4</div><span>Nhận link ebook trong vòng <strong style="color:#d4a017;">5 phút</strong> ⚡</span></li>
       </ul>
-      <p style="font-size:12px; color:#555; margin-bottom:16px;">Hoặc bấm nút bên dưới để xem trước một phần nội dung ebook miễn phí:</p>
+      <div style="background:rgba(192,57,43,.08);border:1px solid rgba(192,57,43,.3);border-radius:10px;padding:14px;margin-bottom:16px;">
+        <div style="font-size:13px;color:#e74c3c;font-weight:700;margin-bottom:6px;">🎁 Sau khi thanh toán bạn nhận được:</div>
+        <div style="font-size:13px;color:#ccc;line-height:1.8;">
+          ✅ Link đọc ebook trọn đời<br>
+          ✅ Tài liệu bonus độc quyền<br>
+          ✅ Vào nhóm hỗ trợ VIP
+        </div>
+      </div>
       <a href="https://heyzine.com/flip-book/abf9f5216c.html" target="_blank">
-        <button class="ebook-link-btn">📖 Xem Trước Ebook Ngay</button>
+        <button class="ebook-link-btn">📖 Xem Trước Ebook Miễn Phí</button>
       </a>
-      <div style="margin-top:16px; padding-top:14px; border-top:1px solid #222; display:flex; gap:12px; flex-wrap:wrap;">
-        <a href="https://www.facebook.com/nhungtechai" target="_blank" style="font-size:13px; color:#888; display:flex; align-items:center; gap:6px;">📘 Facebook</a>
-        <a href="https://zalo.me/0902921645" target="_blank" style="font-size:13px; color:#888; display:flex; align-items:center; gap:6px;">💬 Zalo: 0902921645</a>
+      <div style="margin-top:12px;text-align:center;font-size:13px;color:#555;">
+        💬 Đã chuyển khoản nhưng chưa thấy?
+        <a href="https://zalo.me/0902921645" target="_blank" style="color:#d4a017;font-weight:700;">Nhắn Zalo 0902921645</a>
       </div>
     </div>
   </div>
@@ -849,6 +881,16 @@
 </footer>
 
 <script>
+  // Copy to clipboard
+  function copyText(text, btn) {
+    navigator.clipboard.writeText(text).then(() => {
+      const orig = btn.textContent;
+      btn.textContent = '✓ Đã copy';
+      btn.style.color = '#d4a017';
+      setTimeout(() => { btn.textContent = orig; btn.style.color = ''; }, 2000);
+    });
+  }
+
   // Scroll animations
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
