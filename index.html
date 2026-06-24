@@ -471,6 +471,79 @@
       font-size:11px; font-weight:800; color:#fff;
     }
 
+    /* ── Preview Modal ── */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 10000;
+      background: rgba(0,0,0,.85); backdrop-filter: blur(6px);
+      align-items: center; justify-content: center; padding: 20px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-box {
+      background: #111; border: 1px solid #2a2a2a;
+      border-radius: 20px; width: 100%; max-width: 680px;
+      max-height: 90vh; overflow-y: auto;
+      position: relative;
+    }
+    .modal-header {
+      position: sticky; top: 0; background: #111;
+      border-bottom: 1px solid #1e1e1e;
+      padding: 16px 24px; display: flex;
+      align-items: center; justify-content: space-between; z-index: 1;
+    }
+    .modal-header h3 { font-size: 16px; font-weight: 800; color: #d4a017; }
+    .modal-close {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: #1e1e1e; border: none; color: #fff;
+      font-size: 18px; cursor: pointer; display: flex;
+      align-items: center; justify-content: center; transition: background .2s;
+    }
+    .modal-close:hover { background: #333; }
+    .preview-badge {
+      background: #c0392b; color: #fff; font-size: 11px;
+      font-weight: 700; padding: 3px 10px; border-radius: 50px;
+      letter-spacing: 0.5px;
+    }
+    .preview-page {
+      padding: 28px 28px 0;
+    }
+    .preview-page-label {
+      font-size: 11px; font-weight: 700; color: #555;
+      letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px;
+    }
+    .preview-page-content {
+      background: #0d0d0d; border: 1px solid #1e1e1e;
+      border-radius: 12px; padding: 24px; margin-bottom: 16px;
+    }
+    .preview-page-title {
+      font-size: 18px; font-weight: 800; margin-bottom: 12px; color: #fff;
+    }
+    .preview-page-text {
+      font-size: 14px; color: #999; line-height: 1.9;
+    }
+    .preview-page-text strong { color: #d4a017; }
+    .preview-divider {
+      border: none; border-top: 1px dashed #1e1e1e; margin: 0 28px;
+    }
+    .preview-blur-wrap {
+      padding: 20px 28px 0; position: relative;
+    }
+    .preview-blur-content {
+      filter: blur(5px); pointer-events: none; user-select: none;
+      opacity: .5;
+    }
+    .preview-lock {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 14px;
+      text-align: center; padding: 20px;
+    }
+    .preview-lock-icon { font-size: 40px; }
+    .preview-lock h4 { font-size: 18px; font-weight: 800; }
+    .preview-lock p  { font-size: 14px; color: #888; max-width: 300px; line-height: 1.6; }
+    .modal-footer {
+      padding: 24px 28px 28px;
+    }
+
     /* ── Animations ── */
     .fade-up { opacity: 0; transform: translateY(30px); transition: opacity .6s ease, transform .6s ease; }
     .fade-up.vis { opacity: 1; transform: none; }
@@ -499,9 +572,7 @@
     <a href="https://www.facebook.com/nhungtechai" target="_blank">
       <button class="btn-nav-contact"><span>📘</span> Facebook</button>
     </a>
-    <a href="https://ebook-tenbandanggiabaonhieu.lovable.app/" target="_blank">
-      <button class="btn-nav-cta">📖 Mua Ebook Ngay</button>
-    </a>
+    <button class="btn-nav-cta" onclick="goToPayment()">📖 Mua Ebook Ngay</button>
     <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
   </div>
 </nav>
@@ -519,12 +590,8 @@
     <strong>Tạo ảnh hưởng</strong> · <strong>Thu nhập bền vững</strong>
   </p>
   <div class="hero-cta-group fade-up">
-    <a href="https://ebook-tenbandanggiabaonhieu.lovable.app/" target="_blank">
-      <button class="btn-primary">📖 Sở Hữu Ebook Ngay</button>
-    </a>
-    <a href="#sach">
-      <button class="btn-secondary">Tìm Hiểu Thêm ↓</button>
-    </a>
+    <button class="btn-primary" onclick="goToPayment()">📖 Mua Ebook – 99.000đ</button>
+    <button class="btn-secondary" onclick="openPreview()">👀 Xem Trước Miễn Phí</button>
   </div>
   <!-- Book Mockup -->
   <div class="book-mockup-wrap fade-up">
@@ -606,9 +673,10 @@
           </div>
         </li>
       </ul>
-      <a href="https://ebook-tenbandanggiabaonhieu.lovable.app/" target="_blank">
-        <button class="btn-primary" style="font-size:16px; padding:16px 36px;">📖 Sở Hữu Ngay – Xem Chi Tiết &rarr;</button>
-      </a>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;">
+        <button class="btn-primary" style="font-size:16px;padding:16px 32px;" onclick="goToPayment()">💳 Mua Ngay – 99.000đ</button>
+        <button class="btn-secondary" style="font-size:15px;padding:16px 28px;" onclick="openPreview()">👀 Xem Trước</button>
+      </div>
     </div>
   </div>
 </section>
@@ -798,9 +866,7 @@
           ✅ Vào nhóm hỗ trợ VIP
         </div>
       </div>
-      <a href="https://heyzine.com/flip-book/abf9f5216c.html" target="_blank">
-        <button class="ebook-link-btn">📖 Xem Trước Ebook Miễn Phí</button>
-      </a>
+      <button class="ebook-link-btn" onclick="openPreview()">👀 Xem Trước Vài Trang Đầu</button>
       <div style="margin-top:12px;text-align:center;font-size:13px;color:#555;">
         💬 Đã chuyển khoản nhưng chưa thấy?
         <a href="https://zalo.me/0902921645" target="_blank" style="color:#d4a017;font-weight:700;">Nhắn Zalo 0902921645</a>
@@ -836,6 +902,112 @@
     </div>
   </div>
 </section>
+
+<!-- Preview Modal -->
+<div class="modal-overlay" id="preview-modal" onclick="closePreviewOutside(event)">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3>📖 Xem Trước Ebook</h3>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span class="preview-badge">XEM TRƯỚC – 3 TRANG ĐẦU</span>
+        <button class="modal-close" onclick="closePreview()">✕</button>
+      </div>
+    </div>
+
+    <!-- Trang 1: Bìa -->
+    <div class="preview-page">
+      <div class="preview-page-label">Trang 1 · Bìa Sách</div>
+      <div class="preview-page-content" style="text-align:center;padding:36px 24px;">
+        <img src="images/book.png" alt="Bìa sách" style="max-width:180px;border-radius:8px;box-shadow:0 10px 40px rgba(0,0,0,.8);margin-bottom:20px;">
+        <div style="font-size:22px;font-weight:900;color:#d4a017;line-height:1.2;margin-bottom:8px;">TÊN BẠN ĐÁNG GIÁ BAO NHIÊU</div>
+        <div style="font-size:13px;color:#888;margin-bottom:4px;">Hiểu giá trị bản thân · Xây dựng thương hiệu</div>
+        <div style="font-size:13px;color:#888;">Tạo ảnh hưởng · Thu nhập bền vững</div>
+        <div style="margin-top:16px;font-size:14px;color:#d4a017;font-style:italic;font-weight:600;">By Nhung Tech AI</div>
+      </div>
+    </div>
+
+    <hr class="preview-divider">
+
+    <!-- Trang 2: Lời mở đầu -->
+    <div class="preview-page">
+      <div class="preview-page-label">Trang 2 · Lời Mở Đầu</div>
+      <div class="preview-page-content">
+        <div class="preview-page-title">Bạn có biết mình đáng giá bao nhiêu không?</div>
+        <div class="preview-page-text">
+          Không phải thu nhập của bạn. Không phải bằng cấp bạn có. Không phải số followers trên mạng xã hội.<br><br>
+          Mà là <strong>giá trị thực sự bạn mang lại cho người khác</strong> — thứ mà chỉ bạn mới có, không ai có thể copy được.<br><br>
+          Trong thế giới AI phát triển chóng mặt ngày nay, hàng nghìn việc làm đang bị thay thế. Nhưng có một thứ AI không thể thay thế được: <strong>đó là TÊN BẠN — thương hiệu cá nhân của bạn.</strong><br><br>
+          Cuốn sách này sẽ giúp bạn khám phá ra điều đó.
+        </div>
+      </div>
+    </div>
+
+    <hr class="preview-divider">
+
+    <!-- Trang 3: Mục lục -->
+    <div class="preview-page">
+      <div class="preview-page-label">Trang 3 · Mục Lục</div>
+      <div class="preview-page-content">
+        <div class="preview-page-title">Nội Dung Cuốn Sách</div>
+        <div class="preview-page-text">
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div style="display:flex;gap:12px;align-items:flex-start;">
+              <span style="color:#d4a017;font-weight:800;min-width:28px;">01</span>
+              <span><strong>Bạn Thực Sự Là Ai?</strong> – Khám phá điểm mạnh cốt lõi của bạn</span>
+            </div>
+            <div style="display:flex;gap:12px;align-items:flex-start;">
+              <span style="color:#d4a017;font-weight:800;min-width:28px;">02</span>
+              <span><strong>Xây Dựng Thương Hiệu Cá Nhân</strong> – Từ 0 đến có tên tuổi online</span>
+            </div>
+            <div style="display:flex;gap:12px;align-items:flex-start;">
+              <span style="color:#d4a017;font-weight:800;min-width:28px;">03</span>
+              <span><strong>AI Là Đòn Bẩy Của Bạn</strong> – Dùng AI để nhân đôi ảnh hưởng</span>
+            </div>
+            <div style="display:flex;gap:12px;align-items:flex-start;">
+              <span style="color:#555;font-weight:800;min-width:28px;">04</span>
+              <span style="color:#555;"><strong>Tạo Ảnh Hưởng Thật Sự</strong> – 🔒 Mở khóa sau khi mua</span>
+            </div>
+            <div style="display:flex;gap:12px;align-items:flex-start;">
+              <span style="color:#555;font-weight:800;min-width:28px;">05</span>
+              <span style="color:#555;"><strong>Biến Tên Tuổi Thành Thu Nhập</strong> – 🔒 Mở khóa sau khi mua</span>
+            </div>
+            <div style="display:flex;gap:12px;align-items:flex-start;">
+              <span style="color:#555;font-weight:800;min-width:28px;">06</span>
+              <span style="color:#555;"><strong>Lộ Trình 90 Ngày Thực Chiến</strong> – 🔒 Mở khóa sau khi mua</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Blur lock -->
+    <div class="preview-blur-wrap">
+      <div class="preview-blur-content">
+        <div class="preview-page-content">
+          <div class="preview-page-title">Chương 4: Tạo Ảnh Hưởng Thật Sự</div>
+          <div class="preview-page-text">
+            Để xây dựng ảnh hưởng thật sự, bạn cần hiểu rõ ba trụ cột: Authority, Trust và Reach. Hầu hết mọi người chỉ tập trung vào Reach mà bỏ quên hai trụ cột quan trọng hơn...
+          </div>
+        </div>
+      </div>
+      <div class="preview-lock">
+        <div class="preview-lock-icon">🔒</div>
+        <h4>Nội dung bị khóa</h4>
+        <p>Mua ebook để đọc toàn bộ 6 chương + tài liệu bonus độc quyền</p>
+      </div>
+    </div>
+
+    <!-- Footer modal -->
+    <div class="modal-footer">
+      <button class="btn-primary" style="width:100%;font-size:16px;padding:16px;" onclick="closePreview();goToPayment();">
+        💳 Mua Ebook Ngay – Chỉ 99.000đ để đọc toàn bộ
+      </button>
+      <div style="text-align:center;margin-top:12px;font-size:13px;color:#555;">
+        Quét QR chuyển khoản → Nhận link ebook trong 5 phút
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- Floating order toast -->
 <div id="order-toast">
@@ -881,6 +1053,25 @@
 </footer>
 
 <script>
+  // Go to payment QR
+  function goToPayment() {
+    document.getElementById('dat-sach').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // Preview modal
+  function openPreview() {
+    document.getElementById('preview-modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closePreview() {
+    document.getElementById('preview-modal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function closePreviewOutside(e) {
+    if (e.target === document.getElementById('preview-modal')) closePreview();
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closePreview(); });
+
   // Copy to clipboard
   function copyText(text, btn) {
     navigator.clipboard.writeText(text).then(() => {
