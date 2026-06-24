@@ -999,27 +999,61 @@
       </div>
     </div>
 
-    <!-- Steps + Link -->
+    <!-- Steps + Verify -->
     <div class="ebook-link-box">
-      <h3>📖 Nhận Link Ebook Ngay Sau Khi Chuyển</h3>
-      <ul class="steps-list">
-        <li><div class="step-num">1</div><span>Quét QR hoặc chuyển khoản theo thông tin bên cạnh</span></li>
-        <li><div class="step-num">2</div><span>Chụp màn hình bill chuyển khoản thành công</span></li>
-        <li><div class="step-num">3</div><span>Gửi bill qua Zalo <strong style="color:#fff;">0902921645</strong> hoặc Facebook</span></li>
-        <li><div class="step-num">4</div><span>Nhận link ebook trong vòng <strong style="color:#d4a017;">5 phút</strong> ⚡</span></li>
-      </ul>
-      <div style="background:rgba(192,57,43,.08);border:1px solid rgba(192,57,43,.3);border-radius:10px;padding:14px;margin-bottom:16px;">
-        <div style="font-size:13px;color:#e74c3c;font-weight:700;margin-bottom:6px;">🎁 Sau khi thanh toán bạn nhận được:</div>
-        <div style="font-size:13px;color:#ccc;line-height:1.8;">
-          ✅ Link đọc ebook trọn đời<br>
-          ✅ Tài liệu bonus độc quyền<br>
-          ✅ Vào nhóm hỗ trợ VIP
+      <h3>⚡ Nhận Link Ebook Tự Động</h3>
+
+      <!-- Bước 1: Nhập SĐT -->
+      <div style="margin-bottom:18px;">
+        <div style="font-size:13px;color:#888;margin-bottom:8px;">
+          <strong style="color:#d4a017;">Bước 1:</strong> Nhập số điện thoại để tạo mã chuyển khoản riêng
+        </div>
+        <div style="display:flex;gap:8px;">
+          <input
+            id="phone-input"
+            type="tel"
+            placeholder="Nhập SĐT của bạn (VD: 0901234567)"
+            oninput="updateTransferCode(this.value)"
+            style="flex:1;background:#0a0a0a;border:1px solid #333;border-radius:8px;padding:11px 14px;color:#fff;font-size:14px;outline:none;"
+          />
+        </div>
+        <div id="transfer-code-display" style="display:none;margin-top:10px;background:#1a1a00;border:1px solid rgba(212,160,23,.3);border-radius:8px;padding:10px 14px;font-size:13px;">
+          Nội dung CK của bạn:
+          <strong id="transfer-code-value" style="color:#d4a017;font-size:15px;"></strong>
+          <button id="copy-code-btn" onclick="copyTransferCode()" style="background:none;border:1px solid #333;color:#888;padding:2px 8px;border-radius:4px;cursor:pointer;font-size:11px;margin-left:8px;">Copy</button>
         </div>
       </div>
-      <button class="ebook-link-btn" onclick="openPreview()">👀 Xem Trước Vài Trang Đầu</button>
-      <div style="margin-top:12px;text-align:center;font-size:13px;color:#555;">
-        💬 Đã chuyển khoản nhưng chưa thấy?
-        <a href="https://zalo.me/0902921645" target="_blank" style="color:#d4a017;font-weight:700;">Nhắn Zalo 0902921645</a>
+
+      <!-- Bước 2: Quét QR / chuyển khoản (hướng dẫn) -->
+      <div style="font-size:13px;color:#888;margin-bottom:14px;">
+        <strong style="color:#d4a017;">Bước 2:</strong> Quét QR bên cạnh — <strong style="color:#fff;">dùng đúng nội dung CK ở trên</strong>
+      </div>
+
+      <!-- Bước 3: Xác nhận sau thanh toán -->
+      <div style="font-size:13px;color:#888;margin-bottom:12px;">
+        <strong style="color:#d4a017;">Bước 3:</strong> Bấm nút xác nhận bên dưới — hệ thống tự kiểm tra &amp; gửi link ngay
+      </div>
+
+      <button
+        id="verify-btn"
+        onclick="verifyPayment()"
+        style="width:100%;background:linear-gradient(135deg,#27ae60,#1e8449);color:#fff;border:none;padding:14px;border-radius:50px;font-size:15px;font-weight:800;cursor:pointer;transition:opacity .2s;margin-bottom:12px;"
+      >
+        ✅ Tôi Đã Chuyển Khoản – Nhận Link Ngay
+      </button>
+
+      <!-- Kết quả xác nhận -->
+      <div id="verify-result" style="display:none;border-radius:10px;padding:16px;margin-bottom:14px;text-align:center;"></div>
+
+      <!-- Nếu có vấn đề -->
+      <div style="border-top:1px solid #1e1e1e;padding-top:12px;display:flex;flex-direction:column;gap:8px;">
+        <button class="ebook-link-btn" onclick="openPreview()" style="background:#1a1a1a;color:#d4a017;border:1px solid #d4a017;">
+          👀 Xem Trước Vài Trang Đầu
+        </button>
+        <div style="text-align:center;font-size:12px;color:#444;margin-top:4px;">
+          Vẫn chưa nhận được link?
+          <a href="https://zalo.me/0902921645" target="_blank" style="color:#d4a017;">Nhắn Zalo 0902921645</a>
+        </div>
       </div>
     </div>
   </div>
@@ -1206,6 +1240,96 @@
   // Go to payment QR
   function goToPayment() {
     document.getElementById('dat-sach').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // Update transfer code based on phone input
+  function updateTransferCode(phone) {
+    const digits = phone.replace(/\D/g, '');
+    const display = document.getElementById('transfer-code-display');
+    const codeEl  = document.getElementById('transfer-code-value');
+    const qrImg   = document.querySelector('.qr-img img');
+
+    if (digits.length >= 4) {
+      const last4 = digits.slice(-4);
+      const code  = 'EBOOK' + last4;
+      codeEl.textContent = code;
+      display.style.display = 'block';
+      // Update QR with personalized transfer content
+      if (qrImg) {
+        qrImg.src = `https://img.vietqr.io/image/VPB-6868836636-compact2.png?amount=99000&addInfo=${encodeURIComponent(code)}&accountName=LE%20THI%20THU%20NHUNG`;
+      }
+    } else {
+      display.style.display = 'none';
+      if (qrImg) {
+        qrImg.src = 'https://img.vietqr.io/image/VPB-6868836636-compact2.png?amount=99000&addInfo=EBOOK&accountName=LE%20THI%20THU%20NHUNG';
+      }
+    }
+  }
+
+  function copyTransferCode() {
+    const code = document.getElementById('transfer-code-value').textContent;
+    const btn  = document.getElementById('copy-code-btn');
+    navigator.clipboard.writeText(code).then(() => {
+      btn.textContent = '✓ Đã copy';
+      btn.style.color = '#d4a017';
+      setTimeout(() => { btn.textContent = 'Copy'; btn.style.color = ''; }, 2000);
+    });
+  }
+
+  // Verify payment via SePay API
+  async function verifyPayment() {
+    const phone = document.getElementById('phone-input').value.trim();
+    const resultEl = document.getElementById('verify-result');
+    const btn = document.getElementById('verify-btn');
+
+    if (!phone || phone.replace(/\D/g,'').length < 9) {
+      resultEl.style.display = 'block';
+      resultEl.style.background = 'rgba(192,57,43,.1)';
+      resultEl.style.border = '1px solid rgba(192,57,43,.3)';
+      resultEl.innerHTML = '⚠️ Vui lòng nhập số điện thoại hợp lệ trước.';
+      return;
+    }
+
+    btn.textContent = '🔄 Đang kiểm tra...';
+    btn.disabled = true;
+
+    try {
+      const resp = await fetch('/api/verify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone }),
+      });
+      const data = await resp.json();
+
+      resultEl.style.display = 'block';
+
+      if (data.success) {
+        resultEl.style.background = 'rgba(39,174,96,.1)';
+        resultEl.style.border = '1px solid rgba(39,174,96,.4)';
+        resultEl.innerHTML = `
+          <div style="font-size:15px;font-weight:700;color:#2ecc71;margin-bottom:12px;">${data.message}</div>
+          <a href="${data.link}" target="_blank"
+             style="display:inline-block;background:linear-gradient(135deg,#d4a017,#b8860b);color:#000;font-weight:800;padding:14px 28px;border-radius:50px;font-size:15px;">
+            📖 Mở Ebook Ngay
+          </a>
+          <div style="margin-top:10px;font-size:12px;color:#555;">Lưu link này lại để đọc bất cứ lúc nào.</div>
+        `;
+        btn.style.display = 'none';
+      } else {
+        resultEl.style.background = 'rgba(192,57,43,.08)';
+        resultEl.style.border = '1px solid rgba(192,57,43,.3)';
+        resultEl.innerHTML = `<div style="font-size:14px;color:#e74c3c;">${data.message}</div>`;
+        btn.textContent = '✅ Thử Lại';
+        btn.disabled = false;
+      }
+    } catch {
+      resultEl.style.display = 'block';
+      resultEl.style.background = 'rgba(192,57,43,.08)';
+      resultEl.style.border = '1px solid rgba(192,57,43,.3)';
+      resultEl.innerHTML = '<div style="color:#e74c3c;">Lỗi kết nối. Vui lòng thử lại.</div>';
+      btn.textContent = '✅ Thử Lại';
+      btn.disabled = false;
+    }
   }
 
   // Preview modal
