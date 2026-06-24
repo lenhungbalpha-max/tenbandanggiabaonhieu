@@ -1,13 +1,17 @@
-// SePay webhook endpoint
-// SePay gọi URL này khi có giao dịch mới vào tài khoản ngân hàng
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
 
   if (req.method !== 'POST') return res.status(405).end();
 
-  const tx = req.body;
+  // Xác thực API Key từ SePay (header: Authorization: Apikey YOUR_KEY)
+  const authHeader = req.headers['authorization'] || '';
+  const expectedKey = process.env.WEBHOOK_API_KEY || 'NhungTechAI2026Ebook';
+  if (authHeader !== `Apikey ${expectedKey}`) {
+    console.warn('[webhook] Unauthorized request');
+    return res.status(401).json({ status: false, message: 'Unauthorized' });
+  }
 
-  // Chỉ xử lý giao dịch tiền vào, đúng số tài khoản, đủ tiền
+  const tx = req.body;
   const isValid =
     tx.transferType === 'in' &&
     Number(tx.transferAmount) >= 99000 &&
@@ -15,9 +19,7 @@ export default async function handler(req, res) {
 
   if (isValid) {
     console.log('[SePay] Payment confirmed:', JSON.stringify(tx));
-    // Tương lai: gửi email/Zalo tự động tại đây
   }
 
-  // SePay yêu cầu phản hồi 200 để xác nhận đã nhận webhook
   return res.status(200).json({ status: true });
 }
