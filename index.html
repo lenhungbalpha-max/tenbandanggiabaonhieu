@@ -391,21 +391,95 @@
     }
     .footer-bottom p { font-size: 12px; color: #333; }
 
-    /* ── Book glow pulse ── */
-    .book-main img, .book-side img {
-      animation: book-pulse 2.8s ease-in-out infinite;
+    /* ── Single Book ── */
+    .single-book-wrap {
+      margin-top: 40px;
+      display: flex; justify-content: center;
     }
-    .book-main img {
-      animation: book-glow 2.2s ease-in-out infinite;
+    .single-book-wrap img {
+      width: 260px;
+      border-radius: 10px;
+      animation: book-hero 3s ease-in-out infinite;
+      cursor: pointer;
     }
-    @keyframes book-pulse {
-      0%,100% { transform: scale(1);   filter: drop-shadow(0 10px 30px rgba(212,160,23,.25)); }
-      50%      { transform: scale(1.04); filter: drop-shadow(0 16px 50px rgba(212,160,23,.6)); }
+    @keyframes book-hero {
+      0%,100% {
+        transform: translateY(0) rotate(-1deg) scale(1);
+        filter: drop-shadow(0 24px 60px rgba(0,0,0,.9))
+                drop-shadow(0 0 40px rgba(212,160,23,.35));
+      }
+      50% {
+        transform: translateY(-14px) rotate(1deg) scale(1.03);
+        filter: drop-shadow(0 40px 80px rgba(0,0,0,.9))
+                drop-shadow(0 0 80px rgba(212,160,23,.75))
+                drop-shadow(0 0 20px rgba(212,160,23,.5));
+      }
     }
-    @keyframes book-glow {
-      0%,100% { transform: scale(1) translateY(0);  filter: drop-shadow(0 20px 60px rgba(0,0,0,.9)) drop-shadow(0 0 30px rgba(212,160,23,.3)); }
-      50%      { transform: scale(1.06) translateY(-8px); filter: drop-shadow(0 30px 80px rgba(0,0,0,.9)) drop-shadow(0 0 60px rgba(212,160,23,.7)); }
+
+    /* ── CTA button pulse ── */
+    .btn-primary {
+      position: relative;
+      overflow: visible;
     }
+    .btn-primary::after {
+      content: '';
+      position: absolute; inset: -4px;
+      border-radius: 50px;
+      background: linear-gradient(135deg, #d4a017, #b8860b);
+      opacity: 0;
+      animation: cta-ring 2s ease-out infinite;
+      z-index: -1;
+    }
+    @keyframes cta-ring {
+      0%   { opacity: .6; transform: scale(1); }
+      100% { opacity: 0;  transform: scale(1.25); }
+    }
+
+    /* ── Pain Points Section ── */
+    .pain-section {
+      padding: 80px 60px;
+      background: #0a0a0a;
+      text-align: center;
+    }
+    @media(max-width:700px){ .pain-section{ padding:60px 20px; } }
+    .pain-headline {
+      font-size: clamp(26px, 4vw, 44px);
+      font-weight: 900; line-height: 1.25;
+      margin-bottom: 12px;
+    }
+    .pain-subline {
+      font-size: 16px; color: #777; margin-bottom: 48px;
+    }
+    .pain-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px; max-width: 1000px; margin: 0 auto 48px;
+    }
+    .pain-card {
+      background: #111;
+      border: 1px solid #1e1e1e;
+      border-left: 3px solid #c0392b;
+      border-radius: 12px; padding: 20px 22px;
+      display: flex; gap: 14px; align-items: flex-start;
+      text-align: left;
+      transition: border-color .2s, transform .2s;
+    }
+    .pain-card:hover { border-color: #e74c3c; transform: translateX(4px); }
+    .pain-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+    .pain-text { font-size: 15px; color: #ccc; line-height: 1.6; }
+    .pain-text strong { color: #fff; display: block; margin-bottom: 4px; }
+    .pain-verdict {
+      background: linear-gradient(135deg, #1a0800, #120800);
+      border: 1px solid rgba(192,57,43,.4);
+      border-radius: 16px; padding: 32px 40px;
+      max-width: 680px; margin: 0 auto 40px;
+    }
+    .pain-verdict-icon { font-size: 40px; margin-bottom: 14px; }
+    .pain-verdict p {
+      font-size: clamp(17px, 2.5vw, 22px);
+      font-weight: 800; line-height: 1.5; color: #fff;
+    }
+    .pain-verdict p span { color: #e74c3c; }
 
     /* ── Floating order toast ── */
     #order-toast {
@@ -593,17 +667,9 @@
     <button class="btn-primary" onclick="goToPayment()">📖 Mua Ebook – 99.000đ</button>
     <button class="btn-secondary" onclick="openPreview()">👀 Xem Trước Miễn Phí</button>
   </div>
-  <!-- Book Mockup -->
-  <div class="book-mockup-wrap fade-up">
-    <div class="book-side">
-      <img src="images/book.png" alt="Tên Bạn Đáng Giá Bao Nhiêu">
-    </div>
-    <div class="book-main">
-      <img src="images/book.png" alt="Tên Bạn Đáng Giá Bao Nhiêu">
-    </div>
-    <div class="book-side">
-      <img src="images/book.png" alt="Tên Bạn Đáng Giá Bao Nhiêu">
-    </div>
+  <!-- Single Book -->
+  <div class="single-book-wrap fade-up">
+    <img src="images/book.png" alt="Tên Bạn Đáng Giá Bao Nhiêu">
   </div>
 </section>
 
@@ -630,6 +696,75 @@
     <div class="pillar-desc">Biến thương hiệu cá nhân thành nguồn thu ổn định</div>
   </div>
 </div>
+
+<!-- Pain Points -->
+<section class="pain-section">
+  <div class="sec-tag" style="background:rgba(192,57,43,.12);color:#e74c3c;">BẠN CÓ ĐANG GẶP TÌNH TRẠNG NÀY KHÔNG?</div>
+  <h2 class="pain-headline">Bạn Đăng Bài Mỗi Ngày...<br><span style="color:#e74c3c;">Nhưng Khách Vẫn Không Mua?</span></h2>
+  <p class="pain-subline">Vấn đề không phải ở sản phẩm. Không phải ở giá cả. Mà là ở chỗ này...</p>
+
+  <div class="pain-grid">
+    <div class="pain-card fade-up">
+      <div class="pain-icon">😔</div>
+      <div class="pain-text">
+        <strong>Đăng bài đều đặn nhưng ít ai tương tác</strong>
+        Viết cả buổi, đăng lên rồi... im lặng. Không like, không comment, không tin nhắn.
+      </div>
+    </div>
+    <div class="pain-card fade-up">
+      <div class="pain-icon">😤</div>
+      <div class="pain-text">
+        <strong>Có sản phẩm tốt nhưng khách vẫn bỏ qua</strong>
+        Chất lượng rõ ràng hơn người khác, nhưng họ vẫn chọn đối thủ thay vì chọn bạn.
+      </div>
+    </div>
+    <div class="pain-card fade-up">
+      <div class="pain-icon">😩</div>
+      <div class="pain-text">
+        <strong>Khách hỏi giá rồi... biến mất</strong>
+        Inbox đông, hỏi han nhiều, nhưng khi chốt thì "để em nghĩ thêm" rồi không thấy quay lại.
+      </div>
+    </div>
+    <div class="pain-card fade-up">
+      <div class="pain-icon">😣</div>
+      <div class="pain-text">
+        <strong>Người khác bán dễ hơn với sản phẩm tương tự</strong>
+        Cùng ngành, cùng giá, nhưng họ chốt đơn ào ào còn bạn thì vật lộn mỗi ngày.
+      </div>
+    </div>
+    <div class="pain-card fade-up">
+      <div class="pain-icon">🤯</div>
+      <div class="pain-text">
+        <strong>Không biết cách khiến khách tin tưởng ngay từ đầu</strong>
+        Giải thích mãi vẫn bị nghi ngờ. Cảm giác mình đang "xin" khách mua hàng.
+      </div>
+    </div>
+    <div class="pain-card fade-up">
+      <div class="pain-icon">💸</div>
+      <div class="pain-text">
+        <strong>Muốn xây thương hiệu nhưng không biết bắt đầu từ đâu</strong>
+        Biết là cần làm, nhưng mỗi lần ngồi xuống lại không biết viết gì, đăng gì, làm gì trước.
+      </div>
+    </div>
+    <div class="pain-card fade-up" style="grid-column: 1/-1; max-width: 580px; margin: 0 auto; border-left-color: #d4a017;">
+      <div class="pain-icon">😰</div>
+      <div class="pain-text">
+        <strong>Đang bán bằng sản phẩm – chưa bán bằng niềm tin</strong>
+        Khách mua sản phẩm từ người họ TIN – không phải từ người có giá tốt nhất.
+      </div>
+    </div>
+  </div>
+
+  <div class="pain-verdict fade-up">
+    <div class="pain-verdict-icon">💡</div>
+    <p>Sự thật là: Bạn không bán chậm vì <span>sản phẩm kém</span>.<br>
+    Bạn bán chậm vì khách chưa tin <span>TÊN BẠN.</span></p>
+  </div>
+
+  <button class="btn-primary" style="font-size:17px;padding:18px 44px;" onclick="goToPayment()">
+    📖 Tôi Muốn Xây Thương Hiệu Ngay – 99.000đ
+  </button>
+</section>
 
 <!-- Book Detail -->
 <section class="sec dark" id="sach">
@@ -772,26 +907,34 @@
   <div class="testimonials-grid">
     <div class="tcard fade-up">
       <div class="tcard-stars">★★★★★</div>
-      <div class="tcard-text">"Đây là cuốn sách đầu tiên giúp tôi thực sự hiểu giá trị của bản thân. Sau khi đọc và áp dụng, tôi đã tăng gấp đôi thu nhập chỉ trong 3 tháng."</div>
-      <div class="tcard-author">
-        <div class="tcard-av">H</div>
-        <div><div class="tcard-name">Hương Trần</div><div class="tcard-role">Freelance Designer, TP.HCM</div></div>
-      </div>
-    </div>
-    <div class="tcard fade-up">
-      <div class="tcard-stars">★★★★★</div>
-      <div class="tcard-text">"Nhung viết rất thực tế, không hoa mỹ. Từng bước đều làm được ngay. Tôi đã xây dựng được thương hiệu cá nhân và có khách hàng đầu tiên sau 30 ngày."</div>
+      <div class="tcard-text">"Mình cứ tưởng xây thương hiệu cá nhân là gì đó phức tạp, tốn kém. Đọc xong mới hiểu ra là mình đã có đủ nguyên liệu, chỉ cần biết cách sắp xếp lại thôi."</div>
       <div class="tcard-author">
         <div class="tcard-av">M</div>
-        <div><div class="tcard-name">Minh Khoa</div><div class="tcard-role">Coach Sức Khỏe, Hà Nội</div></div>
+        <div><div class="tcard-name">Mai Anh</div><div class="tcard-role">Kinh doanh online, TP.HCM</div></div>
       </div>
     </div>
     <div class="tcard fade-up">
       <div class="tcard-stars">★★★★★</div>
-      <div class="tcard-text">"Phần về AI trong sách thực sự mở ra một thế giới mới. Tôi tiết kiệm được 3-4 tiếng mỗi ngày và nội dung chất lượng hơn hẳn trước."</div>
+      <div class="tcard-text">"Cái mình thích nhất là cách tác giả dạy nhìn 'tên mình' như một tài sản cần đầu tư. Góc nhìn đó thay đổi cách mình làm content hoàn toàn."</div>
       <div class="tcard-author">
-        <div class="tcard-av">A</div>
-        <div><div class="tcard-name">Anh Đức</div><div class="tcard-role">Content Creator, Đà Nẵng</div></div>
+        <div class="tcard-av">T</div>
+        <div><div class="tcard-name">Tuấn Minh</div><div class="tcard-role">Freelancer, Hà Nội</div></div>
+      </div>
+    </div>
+    <div class="tcard fade-up">
+      <div class="tcard-stars">★★★★★</div>
+      <div class="tcard-text">"Phần kể chuyện để tạo niềm tin là phần mình áp dụng ngay và có kết quả liền. Khách hàng bắt đầu nhắn tin hỏi chủ động thay vì mình phải chạy theo."</div>
+      <div class="tcard-author">
+        <div class="tcard-av">H</div>
+        <div><div class="tcard-name">Hồng Nhung</div><div class="tcard-role">Coach dinh dưỡng, Đà Nẵng</div></div>
+      </div>
+    </div>
+    <div class="tcard fade-up">
+      <div class="tcard-stars">★★★★★</div>
+      <div class="tcard-text">"Nội dung dễ hiểu, không lý thuyết vòng vo. Mình đọc xong là biết cần làm gì ngay ngày hôm sau. Đáng giá hơn nhiều so với giá tiền."</div>
+      <div class="tcard-author">
+        <div class="tcard-av">L</div>
+        <div><div class="tcard-name">Lan Phương</div><div class="tcard-role">Chủ shop thời trang, Cần Thơ</div></div>
       </div>
     </div>
   </div>
@@ -846,6 +989,13 @@
       </div>
       <div style="margin-top:10px; font-size:12px; color:#666;">
         ⚠️ Vui lòng giữ <strong style="color:#fff;">đúng nội dung chuyển khoản</strong>
+      </div>
+      <div style="margin-top:12px; background:#1a1a1a; border-radius:8px; padding:10px 14px; display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <div style="font-size:20px; font-weight:900; color:#d4a017;">99.000đ</div>
+          <div style="font-size:11px; color:#555; text-decoration:line-through;">199.000đ</div>
+        </div>
+        <div style="font-size:11px; color:#c0392b; font-weight:700; background:rgba(192,57,43,.1); padding:4px 10px; border-radius:20px;">⚡ Giảm 50%</div>
       </div>
     </div>
 
