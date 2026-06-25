@@ -1,6 +1,4 @@
-// Xác nhận thanh toán qua SePay API
-// Khách nhập số điện thoại → hệ thống kiểm tra giao dịch khớp → trả về link ebook
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -39,15 +37,13 @@ export default async function handler(req, res) {
 
     const last4 = phone.replace(/\D/g, '').slice(-4);
 
-    // Tìm giao dịch: tiền vào, đủ 99,000đ, nội dung chứa EBOOK
-    // Ưu tiên khớp 4 số cuối SĐT trong nội dung CK
     const match = data.transactions.find((tx) => {
       const content = (tx.transaction_content || '').toUpperCase();
       const amount = Number(tx.amount_in);
       return (
         amount >= 99000 &&
         content.includes('EBOOK') &&
-        (content.includes(last4) || content.includes('EBOOK'))
+        content.includes(last4)
       );
     });
 
