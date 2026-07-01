@@ -12,30 +12,29 @@ module.exports = async function handler(req, res) {
   if (!token) return res.status(500).json({ success: false, message: 'Hệ thống chưa cấu hình. Vui lòng liên hệ hỗ trợ.' });
 
   try {
-    // Lấy 50 giao dịch gần nhất từ SePay
     const resp = await fetch(
-      'https://my.sepay.vn/userapi/transactions/list?limit=50&sort=DESC',
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-      }
+      'https://my.sepay.vn/userapi/transactions/list?limit=100&sort=DESC',
+      { headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' } }
     );
 
     const data = await resp.json();
+    console.log('[verify] SePay response keys:', JSON.stringify(Object.keys(data || {})));
 
     if (!data || !Array.isArray(data.transactions)) {
-      return res.status(200).json({
-        success: false,
-        message: 'Không thể kiểm tra giao dịch. Vui lòng thử lại sau 1 phút.',
-      });
+      console.log('[verify] No transactions array. Full response:', JSON.stringify(data).slice(0, 500));
+      return res.status(200).json({ success: false, message: 'Không thể kiểm tra giao dịch. Vui lòng thử lại sau 1 phút.' });
+    }
+
+    if (data.transactions.length > 0) {
+      console.log('[verify] Sample transaction fields:', JSON.stringify(data.transactions[0]));
     }
 
     const match = data.transactions.find((tx) => {
-      const content = (tx.transaction_content || '').toUpperCase();
-      const amount = Number(tx.amount_in);
-      return amount >= 99000 && content.includes('EBOOK');
+      // SePay dùng nhiều tên field khác nhau — kiểm tra tất cả
+      const content = (tx.transaction_content || tx.content || tx.description || '').toUpperCase();
+      const amount = Number(tx.amount_in || tx.transferAmount || tx.amount || 0);
+      const type = (tx.transferType || tx.type || 'in').toLowerCase();
+      return amount >= 99000 && content.includes('EBOOK') && type !== 'out';
     });
 
     if (match) {
@@ -43,21 +42,15 @@ module.exports = async function handler(req, res) {
         success: true,
         message: '✅ Thanh toán thành công! Đây là link ebook của bạn:',
         link: ebookLink || 'https://heyzine.com/flip-book/abf9f5216c.html',
-        amount: match.amount_in,
-        date: match.transaction_date,
       });
     }
 
     return res.status(200).json({
       success: false,
-      message:
-        'Chưa tìm thấy giao dịch hợp lệ. Nếu bạn vừa chuyển, hãy đợi 1–2 phút rồi thử lại. Vẫn không được? Nhắn Zalo 0902921645.',
+      message: 'Chưa tìm thấy giao dịch hợp lệ. Nếu bạn vừa chuyển, hãy đợi 1–2 phút rồi thử lại. Vẫn không được? Nhắn Zalo 0902921645.',
     });
   } catch (err) {
     console.error('[verify] Error:', err);
-    return res.status(500).json({
-      success: false,
-      message: 'Lỗi kết nối. Vui lòng thử lại hoặc liên hệ Zalo 0902921645.',
-    });
+    return res.status(500).json({ success: false, message: 'Lỗi kết nối. Vui lòng thử lại hoặc liên hệ Zalo 0902921645.' });
   }
-}
+};
