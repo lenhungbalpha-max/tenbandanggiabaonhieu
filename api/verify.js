@@ -6,9 +6,6 @@ module.exports = async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  const { phone } = req.body || {};
-  if (!phone) return res.status(400).json({ success: false, message: 'Vui lòng nhập số điện thoại.' });
-
   const token = process.env.SEPAY_TOKEN;
   const ebookLink = process.env.EBOOK_LINK;
 
@@ -34,8 +31,6 @@ module.exports = async function handler(req, res) {
         message: 'Không thể kiểm tra giao dịch. Vui lòng thử lại sau 1 phút.',
       });
     }
-
-    const last4 = phone.replace(/\D/g, '').slice(-4);
 
     const match = data.transactions.find((tx) => {
       const content = (tx.transaction_content || '').toUpperCase();

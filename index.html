@@ -1023,41 +1023,26 @@
     <div class="ebook-link-box">
       <h3>⚡ Nhận Link Ebook Tự Động</h3>
 
-      <!-- Bước 1: Nhập SĐT -->
-      <div style="margin-bottom:18px;">
-        <div style="font-size:13px;color:#888;margin-bottom:8px;">
-          <strong style="color:#d4a017;">Bước 1:</strong> Nhập số điện thoại để tạo mã chuyển khoản riêng
-        </div>
-        <div style="display:flex;gap:8px;">
-          <input
-            id="phone-input"
-            type="tel"
-            placeholder="Nhập SĐT của bạn (VD: 0901234567)"
-            oninput="updateTransferCode(this.value)"
-            style="flex:1;background:#0a0a0a;border:1px solid #333;border-radius:8px;padding:11px 14px;color:#fff;font-size:14px;outline:none;"
-          />
-        </div>
-        <div id="transfer-code-display" style="display:none;margin-top:10px;background:#1a1a00;border:1px solid rgba(212,160,23,.3);border-radius:8px;padding:10px 14px;font-size:13px;">
-          Nội dung CK của bạn:
-          <strong id="transfer-code-value" style="color:#d4a017;font-size:15px;"></strong>
-          <button id="copy-code-btn" onclick="copyTransferCode()" style="background:none;border:1px solid #333;color:#888;padding:2px 8px;border-radius:4px;cursor:pointer;font-size:11px;margin-left:8px;">Copy</button>
+      <!-- Bước 1 -->
+      <div style="background:#111;border-radius:10px;padding:14px 16px;margin-bottom:14px;display:flex;gap:12px;align-items:flex-start;">
+        <div style="background:#d4a017;color:#000;font-weight:900;font-size:13px;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">1</div>
+        <div style="font-size:13px;color:#ccc;line-height:1.6;">
+          Quét mã QR bên cạnh bằng app ngân hàng — số tiền và nội dung <strong style="color:#d4a017;">EBOOK</strong> sẽ được điền sẵn. Bấm chuyển tiền.
         </div>
       </div>
 
-      <!-- Bước 2: Quét QR / chuyển khoản (hướng dẫn) -->
-      <div style="font-size:13px;color:#888;margin-bottom:14px;">
-        <strong style="color:#d4a017;">Bước 2:</strong> Quét QR bên cạnh — <strong style="color:#fff;">dùng đúng nội dung CK ở trên</strong>
-      </div>
-
-      <!-- Bước 3: Xác nhận sau thanh toán -->
-      <div style="font-size:13px;color:#888;margin-bottom:12px;">
-        <strong style="color:#d4a017;">Bước 3:</strong> Bấm nút xác nhận bên dưới — hệ thống tự kiểm tra &amp; gửi link ngay
+      <!-- Bước 2 -->
+      <div style="background:#111;border-radius:10px;padding:14px 16px;margin-bottom:20px;display:flex;gap:12px;align-items:flex-start;">
+        <div style="background:#d4a017;color:#000;font-weight:900;font-size:13px;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">2</div>
+        <div style="font-size:13px;color:#ccc;line-height:1.6;">
+          Chuyển khoản xong → bấm nút bên dưới → hệ thống tự kiểm tra &amp; gửi link ebook ngay cho bạn.
+        </div>
       </div>
 
       <button
         id="verify-btn"
         onclick="verifyPayment()"
-        style="width:100%;background:linear-gradient(135deg,#27ae60,#1e8449);color:#fff;border:none;padding:14px;border-radius:50px;font-size:15px;font-weight:800;cursor:pointer;transition:opacity .2s;margin-bottom:12px;"
+        style="width:100%;background:linear-gradient(135deg,#27ae60,#1e8449);color:#fff;border:none;padding:16px;border-radius:50px;font-size:16px;font-weight:800;cursor:pointer;transition:opacity .2s;margin-bottom:12px;box-shadow:0 4px 20px rgba(39,174,96,.4);"
       >
         ✅ Tôi Đã Chuyển Khoản – Nhận Link Ngay
       </button>
@@ -1298,17 +1283,8 @@
 
   // Verify payment via SePay API
   async function verifyPayment() {
-    const phone = document.getElementById('phone-input').value.trim();
     const resultEl = document.getElementById('verify-result');
     const btn = document.getElementById('verify-btn');
-
-    if (!phone || phone.replace(/\D/g,'').length < 9) {
-      resultEl.style.display = 'block';
-      resultEl.style.background = 'rgba(192,57,43,.1)';
-      resultEl.style.border = '1px solid rgba(192,57,43,.3)';
-      resultEl.innerHTML = '⚠️ Vui lòng nhập số điện thoại hợp lệ trước.';
-      return;
-    }
 
     btn.textContent = '🔄 Đang kiểm tra...';
     btn.disabled = true;
@@ -1317,7 +1293,7 @@
       const resp = await fetch('/api/verify', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ phone }),
+        body: JSON.stringify({}),
       });
       const data = await resp.json();
 
