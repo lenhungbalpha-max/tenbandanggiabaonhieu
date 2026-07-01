@@ -40,11 +40,7 @@ module.exports = async function handler(req, res) {
     const match = data.transactions.find((tx) => {
       const content = (tx.transaction_content || '').toUpperCase();
       const amount = Number(tx.amount_in);
-      return (
-        amount >= 99000 &&
-        content.includes('EBOOK') &&
-        content.includes(last4)
-      );
+      return amount >= 99000 && content.includes('EBOOK');
     });
 
     if (match) {
