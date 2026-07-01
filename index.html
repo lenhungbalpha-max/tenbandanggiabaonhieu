@@ -971,7 +971,7 @@
       <div style="font-size:13px; color:#d4a017; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">⚡ Quét QR để thanh toán ngay</div>
       <div class="qr-img" style="width:200px;height:200px;">
         <img
-          src="https://img.vietqr.io/image/VPB-6868836636-compact2.png?amount=99000&addInfo=EBOOK&accountName=LE%20THI%20THU%20NHUNG"
+          src="https://img.vietqr.io/image/VPB-6868836636-compact2.png?amount=99000&addInfo=AGBSPM4UBD&accountName=LE%20THI%20THU%20NHUNG"
           alt="QR VietQR VPBank"
           style="width:100%;height:100%;object-fit:contain;"
         />
@@ -1002,8 +1002,8 @@
         </div>
         <div style="display:flex;justify-content:space-between;align-items:center;">
           <span style="color:#666;">Nội dung CK</span>
-          <span style="font-weight:700;color:#d4a017;">EBOOK
-            <button onclick="copyText('EBOOK',this)" style="background:none;border:1px solid #333;color:#888;padding:2px 8px;border-radius:4px;cursor:pointer;font-size:11px;margin-left:6px;">Copy</button>
+          <span style="font-weight:700;color:#d4a017;">AGBSPM4UBD
+            <button onclick="copyText('AGBSPM4UBD',this)" style="background:none;border:1px solid #333;color:#888;padding:2px 8px;border-radius:4px;cursor:pointer;font-size:11px;margin-left:6px;">Copy</button>
           </span>
         </div>
       </div>
@@ -1027,7 +1027,7 @@
       <div style="background:#111;border-radius:10px;padding:14px 16px;margin-bottom:14px;display:flex;gap:12px;align-items:flex-start;">
         <div style="background:#d4a017;color:#000;font-weight:900;font-size:13px;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">1</div>
         <div style="font-size:13px;color:#ccc;line-height:1.6;">
-          Quét mã QR bên cạnh bằng app ngân hàng — số tiền và nội dung <strong style="color:#d4a017;">EBOOK</strong> sẽ được điền sẵn. Bấm chuyển tiền.
+          Quét mã QR bên cạnh bằng app ngân hàng — số tiền và nội dung chuyển khoản sẽ được điền sẵn tự động. Bấm chuyển tiền.
         </div>
       </div>
 
@@ -1256,17 +1256,16 @@
 
     if (digits.length >= 4) {
       const last4 = digits.slice(-4);
-      const code  = 'EBOOK' + last4;
+      const code  = 'AGBSPM4UBD' + last4;
       codeEl.textContent = code;
       display.style.display = 'block';
-      // Update QR with personalized transfer content
       if (qrImg) {
         qrImg.src = `https://img.vietqr.io/image/VPB-6868836636-compact2.png?amount=99000&addInfo=${encodeURIComponent(code)}&accountName=LE%20THI%20THU%20NHUNG`;
       }
     } else {
       display.style.display = 'none';
       if (qrImg) {
-        qrImg.src = 'https://img.vietqr.io/image/VPB-6868836636-compact2.png?amount=99000&addInfo=EBOOK&accountName=LE%20THI%20THU%20NHUNG';
+        qrImg.src = 'https://img.vietqr.io/image/VPB-6868836636-compact2.png?amount=99000&addInfo=AGBSPM4UBD&accountName=LE%20THI%20THU%20NHUNG';
       }
     }
   }

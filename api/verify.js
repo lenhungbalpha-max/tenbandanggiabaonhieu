@@ -34,11 +34,12 @@ module.exports = async function handler(req, res) {
     }
 
     const match = data.transactions.find((tx) => {
-      // SePay dùng nhiều tên field khác nhau — kiểm tra tất cả
       const content = (tx.transaction_content || tx.content || tx.description || '').toUpperCase();
+      const va = (tx.virtual_account_number || tx.va || '').toUpperCase();
       const amount = Number(tx.amount_in || tx.transferAmount || tx.amount || 0);
       const type = (tx.transferType || tx.type || 'in').toLowerCase();
-      return amount >= 99000 && content.includes('EBOOK') && type !== 'out';
+      const hasVA = content.includes('AGBSPM4UBD') || va.includes('AGBSPM4UBD');
+      return amount >= 99000 && hasVA && type !== 'out';
     });
 
     if (match) {
