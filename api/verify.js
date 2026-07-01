@@ -21,12 +21,16 @@ module.exports = async function handler(req, res) {
     console.log('[verify] SePay response keys:', JSON.stringify(Object.keys(data || {})));
 
     if (!data || !Array.isArray(data.transactions)) {
-      console.log('[verify] No transactions array. Full response:', JSON.stringify(data).slice(0, 500));
+      console.log('[verify] No transactions array. Full response:', JSON.stringify(data).slice(0, 800));
       return res.status(200).json({ success: false, message: 'Không thể kiểm tra giao dịch. Vui lòng thử lại sau 1 phút.' });
     }
 
+    console.log('[verify] Total transactions:', data.transactions.length);
     if (data.transactions.length > 0) {
-      console.log('[verify] Sample transaction fields:', JSON.stringify(data.transactions[0]));
+      console.log('[verify] First tx:', JSON.stringify(data.transactions[0]));
+      console.log('[verify] Last tx:', JSON.stringify(data.transactions[data.transactions.length - 1]));
+    } else {
+      console.log('[verify] Transactions array is EMPTY. SePay error field:', data.error, data.messages);
     }
 
     const match = data.transactions.find((tx) => {
