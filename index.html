@@ -966,98 +966,124 @@
   <p>Chỉ cần chuyển khoản — nhận ngay link ebook đọc trọn đời. Không cần chờ đợi.</p>
 
   <div class="payment-box fade-up">
-    <!-- QR Code -->
-    <div class="qr-wrap">
-      <div style="font-size:13px; color:#d4a017; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">⚡ Quét QR để thanh toán ngay</div>
-      <div class="qr-img" style="width:200px;height:200px;">
-        <img
-          src="https://img.vietqr.io/image/VPB-6868836636-compact2.png?amount=99000&addInfo=AGBSPM4UBD&accountName=LE%20THI%20THU%20NHUNG"
-          alt="QR VietQR VPBank"
-          style="width:100%;height:100%;object-fit:contain;"
-        />
-      </div>
-      <div style="font-size:11px; color:#555; margin:8px 0 14px;">Hỗ trợ tất cả ứng dụng ngân hàng</div>
 
-      <!-- Bank info table -->
-      <div style="background:#0f0f0f; border:1px solid #222; border-radius:12px; padding:14px 16px; text-align:left; font-size:13px; line-height:2.2;">
-        <div style="display:flex;justify-content:space-between;border-bottom:1px solid #1a1a1a;padding-bottom:8px;margin-bottom:8px;">
-          <span style="color:#666;">Ngân hàng</span>
-          <span style="font-weight:700;">VPBank</span>
-        </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #1a1a1a;padding-bottom:8px;margin-bottom:8px;">
-          <span style="color:#666;">Số tài khoản</span>
-          <span style="font-weight:700;">6868836636
-            <button onclick="copyText('6868836636',this)" style="background:none;border:1px solid #333;color:#888;padding:2px 8px;border-radius:4px;cursor:pointer;font-size:11px;margin-left:6px;">Copy</button>
-          </span>
-        </div>
-        <div style="display:flex;justify-content:space-between;border-bottom:1px solid #1a1a1a;padding-bottom:8px;margin-bottom:8px;">
-          <span style="color:#666;">Chủ tài khoản</span>
-          <span style="font-weight:700;">LE THI THU NHUNG</span>
-        </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #1a1a1a;padding-bottom:8px;margin-bottom:8px;">
-          <span style="color:#666;">Số tiền</span>
-          <span style="font-weight:700;color:#d4a017;">99.000đ
-            <button onclick="copyText('99000',this)" style="background:none;border:1px solid #333;color:#888;padding:2px 8px;border-radius:4px;cursor:pointer;font-size:11px;margin-left:6px;">Copy</button>
-          </span>
-        </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;">
-          <span style="color:#666;">Nội dung CK</span>
-          <span style="font-weight:700;color:#d4a017;">AGBSPM4UBD
-            <button onclick="copyText('AGBSPM4UBD',this)" style="background:none;border:1px solid #333;color:#888;padding:2px 8px;border-radius:4px;cursor:pointer;font-size:11px;margin-left:6px;">Copy</button>
-          </span>
-        </div>
+    <!-- Bước 0: Form thông tin khách hàng -->
+    <div id="customer-form-step" style="max-width:420px;margin:0 auto;">
+      <h3 style="margin-bottom:16px;">📝 Nhập Thông Tin Để Nhận Ebook</h3>
+      <div style="text-align:left;margin-bottom:12px;">
+        <label style="font-size:12px;color:#888;">Họ và tên</label>
+        <input id="customer-name" type="text" placeholder="Nguyễn Văn A"
+          style="width:100%;background:#111;border:1px solid #333;color:#fff;padding:12px 14px;border-radius:8px;font-size:14px;margin-top:6px;" />
       </div>
-      <div style="margin-top:10px; font-size:12px; color:#666;">
-        ⚠️ Vui lòng giữ <strong style="color:#fff;">đúng nội dung chuyển khoản</strong>
+      <div style="text-align:left;margin-bottom:20px;">
+        <label style="font-size:12px;color:#888;">Số điện thoại (Zalo)</label>
+        <input id="customer-phone" type="tel" placeholder="09xxxxxxxx"
+          style="width:100%;background:#111;border:1px solid #333;color:#fff;padding:12px 14px;border-radius:8px;font-size:14px;margin-top:6px;" />
       </div>
-      <div style="margin-top:12px; background:#1a1a1a; border-radius:8px; padding:10px 14px; display:flex; justify-content:space-between; align-items:center;">
-        <div>
-          <div style="font-size:20px; font-weight:900; color:#d4a017;">99.000đ</div>
-          <div style="font-size:11px; color:#555; text-decoration:line-through;">199.000đ</div>
-        </div>
-        <div style="font-size:11px; color:#c0392b; font-weight:700; background:rgba(192,57,43,.1); padding:4px 10px; border-radius:20px;">⚡ Giảm 50%</div>
-      </div>
+      <div id="customer-form-error" style="display:none;color:#e74c3c;font-size:12px;margin-bottom:12px;"></div>
+      <button
+        onclick="showPaymentStep()"
+        style="width:100%;background:linear-gradient(135deg,#d4a017,#b8860b);color:#000;border:none;padding:16px;border-radius:50px;font-size:16px;font-weight:800;cursor:pointer;box-shadow:0 4px 20px rgba(212,160,23,.35);"
+      >
+        Tiếp Tục Thanh Toán →
+      </button>
     </div>
 
-    <!-- Steps + Verify -->
-    <div class="ebook-link-box">
-      <h3>⚡ Nhận Link Ebook Tự Động</h3>
+    <!-- Bước 1+2: QR + Xác nhận (ẩn ban đầu) -->
+    <div id="payment-step" style="display:none;">
+      <!-- QR Code -->
+      <div class="qr-wrap">
+        <div style="font-size:13px; color:#d4a017; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px;">⚡ Quét QR để thanh toán ngay</div>
+        <div class="qr-img" style="width:200px;height:200px;">
+          <img
+            src="https://img.vietqr.io/image/ACB-33078337-compact2.png?amount=99000&addInfo=EBOOK&accountName=LE%20THI%20THU%20NHUNG"
+            alt="QR VietQR ACB"
+            style="width:100%;height:100%;object-fit:contain;"
+          />
+        </div>
+        <div style="font-size:11px; color:#555; margin:8px 0 14px;">Hỗ trợ tất cả ứng dụng ngân hàng</div>
 
-      <!-- Bước 1 -->
-      <div style="background:#111;border-radius:10px;padding:14px 16px;margin-bottom:14px;display:flex;gap:12px;align-items:flex-start;">
-        <div style="background:#d4a017;color:#000;font-weight:900;font-size:13px;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">1</div>
-        <div style="font-size:13px;color:#ccc;line-height:1.6;">
-          Quét mã QR bên cạnh bằng app ngân hàng — số tiền và nội dung chuyển khoản sẽ được điền sẵn tự động. Bấm chuyển tiền.
+        <!-- Bank info table -->
+        <div style="background:#0f0f0f; border:1px solid #222; border-radius:12px; padding:14px 16px; text-align:left; font-size:13px; line-height:2.2;">
+          <div style="display:flex;justify-content:space-between;border-bottom:1px solid #1a1a1a;padding-bottom:8px;margin-bottom:8px;">
+            <span style="color:#666;">Ngân hàng</span>
+            <span style="font-weight:700;">ACB</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #1a1a1a;padding-bottom:8px;margin-bottom:8px;">
+            <span style="color:#666;">Số tài khoản</span>
+            <span style="font-weight:700;">33078337
+              <button onclick="copyText('33078337',this)" style="background:none;border:1px solid #333;color:#888;padding:2px 8px;border-radius:4px;cursor:pointer;font-size:11px;margin-left:6px;">Copy</button>
+            </span>
+          </div>
+          <div style="display:flex;justify-content:space-between;border-bottom:1px solid #1a1a1a;padding-bottom:8px;margin-bottom:8px;">
+            <span style="color:#666;">Chủ tài khoản</span>
+            <span style="font-weight:700;">LE THI THU NHUNG</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #1a1a1a;padding-bottom:8px;margin-bottom:8px;">
+            <span style="color:#666;">Số tiền</span>
+            <span style="font-weight:700;color:#d4a017;">99.000đ
+              <button onclick="copyText('99000',this)" style="background:none;border:1px solid #333;color:#888;padding:2px 8px;border-radius:4px;cursor:pointer;font-size:11px;margin-left:6px;">Copy</button>
+            </span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="color:#666;">Nội dung CK</span>
+            <span style="font-weight:700;color:#d4a017;" id="transfer-code-value">EBOOK
+              <button id="copy-code-btn" onclick="copyTransferCode()" style="background:none;border:1px solid #333;color:#888;padding:2px 8px;border-radius:4px;cursor:pointer;font-size:11px;margin-left:6px;">Copy</button>
+            </span>
+          </div>
+        </div>
+        <div style="margin-top:10px; font-size:12px; color:#666;">
+          ⚠️ Vui lòng giữ <strong style="color:#fff;">đúng nội dung chuyển khoản</strong>
+        </div>
+        <div style="margin-top:12px; background:#1a1a1a; border-radius:8px; padding:10px 14px; display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <div style="font-size:20px; font-weight:900; color:#d4a017;">99.000đ</div>
+            <div style="font-size:11px; color:#555; text-decoration:line-through;">199.000đ</div>
+          </div>
+          <div style="font-size:11px; color:#c0392b; font-weight:700; background:rgba(192,57,43,.1); padding:4px 10px; border-radius:20px;">⚡ Giảm 50%</div>
         </div>
       </div>
 
-      <!-- Bước 2 -->
-      <div style="background:#111;border-radius:10px;padding:14px 16px;margin-bottom:20px;display:flex;gap:12px;align-items:flex-start;">
-        <div style="background:#d4a017;color:#000;font-weight:900;font-size:13px;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">2</div>
-        <div style="font-size:13px;color:#ccc;line-height:1.6;">
-          Chuyển khoản xong → bấm nút bên dưới → hệ thống tự kiểm tra &amp; gửi link ebook ngay cho bạn.
+      <!-- Steps + Verify -->
+      <div class="ebook-link-box">
+        <h3>⚡ Nhận Link Ebook Tự Động</h3>
+
+        <!-- Bước 1 -->
+        <div style="background:#111;border-radius:10px;padding:14px 16px;margin-bottom:14px;display:flex;gap:12px;align-items:flex-start;">
+          <div style="background:#d4a017;color:#000;font-weight:900;font-size:13px;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">1</div>
+          <div style="font-size:13px;color:#ccc;line-height:1.6;">
+            Quét mã QR bên cạnh bằng app ngân hàng — số tiền và nội dung chuyển khoản sẽ được điền sẵn tự động. Bấm chuyển tiền.
+          </div>
         </div>
-      </div>
 
-      <button
-        id="verify-btn"
-        onclick="verifyPayment()"
-        style="width:100%;background:linear-gradient(135deg,#27ae60,#1e8449);color:#fff;border:none;padding:16px;border-radius:50px;font-size:16px;font-weight:800;cursor:pointer;transition:opacity .2s;margin-bottom:12px;box-shadow:0 4px 20px rgba(39,174,96,.4);"
-      >
-        ✅ Tôi Đã Chuyển Khoản – Nhận Link Ngay
-      </button>
+        <!-- Bước 2 -->
+        <div style="background:#111;border-radius:10px;padding:14px 16px;margin-bottom:20px;display:flex;gap:12px;align-items:flex-start;">
+          <div style="background:#d4a017;color:#000;font-weight:900;font-size:13px;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">2</div>
+          <div style="font-size:13px;color:#ccc;line-height:1.6;">
+            Chuyển khoản xong → bấm nút bên dưới → hệ thống tự kiểm tra &amp; gửi link ebook ngay cho bạn.
+          </div>
+        </div>
 
-      <!-- Kết quả xác nhận -->
-      <div id="verify-result" style="display:none;border-radius:10px;padding:16px;margin-bottom:14px;text-align:center;"></div>
-
-      <!-- Nếu có vấn đề -->
-      <div style="border-top:1px solid #1e1e1e;padding-top:12px;display:flex;flex-direction:column;gap:8px;">
-        <button class="ebook-link-btn" onclick="openPreview()" style="background:#1a1a1a;color:#d4a017;border:1px solid #d4a017;">
-          👀 Xem Trước Vài Trang Đầu
+        <button
+          id="verify-btn"
+          onclick="verifyPayment()"
+          style="width:100%;background:linear-gradient(135deg,#27ae60,#1e8449);color:#fff;border:none;padding:16px;border-radius:50px;font-size:16px;font-weight:800;cursor:pointer;transition:opacity .2s;margin-bottom:12px;box-shadow:0 4px 20px rgba(39,174,96,.4);"
+        >
+          ✅ Tôi Đã Chuyển Khoản – Nhận Link Ngay
         </button>
-        <div style="text-align:center;font-size:12px;color:#444;margin-top:4px;">
-          Vẫn chưa nhận được link?
-          <a href="https://zalo.me/0902921645" target="_blank" style="color:#d4a017;">Nhắn Zalo 0902921645</a>
+
+        <!-- Kết quả xác nhận -->
+        <div id="verify-result" style="display:none;border-radius:10px;padding:16px;margin-bottom:14px;text-align:center;"></div>
+
+        <!-- Nếu có vấn đề -->
+        <div style="border-top:1px solid #1e1e1e;padding-top:12px;display:flex;flex-direction:column;gap:8px;">
+          <button class="ebook-link-btn" onclick="openPreview()" style="background:#1a1a1a;color:#d4a017;border:1px solid #d4a017;">
+            👀 Xem Trước Vài Trang Đầu
+          </button>
+          <div style="text-align:center;font-size:12px;color:#444;margin-top:4px;">
+            Vẫn chưa nhận được link?
+            <a href="https://zalo.me/0902921645" target="_blank" style="color:#d4a017;">Nhắn Zalo 0902921645</a>
+          </div>
         </div>
       </div>
     </div>
@@ -1247,31 +1273,44 @@
     document.getElementById('dat-sach').scrollIntoView({ behavior: 'smooth' });
   }
 
-  // Update transfer code based on phone input
-  function updateTransferCode(phone) {
-    const digits = phone.replace(/\D/g, '');
-    const display = document.getElementById('transfer-code-display');
-    const codeEl  = document.getElementById('transfer-code-value');
-    const qrImg   = document.querySelector('.qr-img img');
+  // Trạng thái khách hàng đã nhập
+  let customerInfo = { name: '', phone: '', code: '' };
 
-    if (digits.length >= 4) {
-      const last4 = digits.slice(-4);
-      const code  = 'AGBSPM4UBD' + last4;
-      codeEl.textContent = code;
-      display.style.display = 'block';
-      if (qrImg) {
-        qrImg.src = `https://img.vietqr.io/image/VPB-6868836636-compact2.png?amount=99000&addInfo=${encodeURIComponent(code)}&accountName=LE%20THI%20THU%20NHUNG`;
-      }
-    } else {
-      display.style.display = 'none';
-      if (qrImg) {
-        qrImg.src = 'https://img.vietqr.io/image/VPB-6868836636-compact2.png?amount=99000&addInfo=AGBSPM4UBD&accountName=LE%20THI%20THU%20NHUNG';
-      }
+  function showPaymentStep() {
+    const nameEl  = document.getElementById('customer-name');
+    const phoneEl = document.getElementById('customer-phone');
+    const errEl   = document.getElementById('customer-form-error');
+    const name  = nameEl.value.trim();
+    const phone = phoneEl.value.trim();
+    const digits = phone.replace(/\D/g, '');
+
+    if (!name) {
+      errEl.textContent = 'Vui lòng nhập họ và tên.';
+      errEl.style.display = 'block';
+      return;
     }
+    if (digits.length < 9) {
+      errEl.textContent = 'Vui lòng nhập số điện thoại hợp lệ.';
+      errEl.style.display = 'block';
+      return;
+    }
+    errEl.style.display = 'none';
+
+    const code = 'EB' + digits.slice(-4);
+    customerInfo = { name, phone: digits, code };
+
+    document.getElementById('transfer-code-value').firstChild.textContent = code + ' ';
+    const qrImg = document.querySelector('.qr-img img');
+    if (qrImg) {
+      qrImg.src = `https://img.vietqr.io/image/ACB-33078337-compact2.png?amount=99000&addInfo=${encodeURIComponent(code)}&accountName=LE%20THI%20THU%20NHUNG`;
+    }
+
+    document.getElementById('customer-form-step').style.display = 'none';
+    document.getElementById('payment-step').style.display = 'block';
   }
 
   function copyTransferCode() {
-    const code = document.getElementById('transfer-code-value').textContent;
+    const code = customerInfo.code;
     const btn  = document.getElementById('copy-code-btn');
     navigator.clipboard.writeText(code).then(() => {
       btn.textContent = '✓ Đã copy';
@@ -1292,7 +1331,7 @@
       const resp = await fetch('/api/verify', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({}),
+        body: JSON.stringify(customerInfo),
       });
       const data = await resp.json();
 
@@ -1304,10 +1343,14 @@
         resultEl.innerHTML = `
           <div style="font-size:15px;font-weight:700;color:#2ecc71;margin-bottom:12px;">${data.message}</div>
           <a href="${data.link}" target="_blank"
-             style="display:inline-block;background:linear-gradient(135deg,#d4a017,#b8860b);color:#000;font-weight:800;padding:14px 28px;border-radius:50px;font-size:15px;">
+             style="display:inline-block;background:linear-gradient(135deg,#d4a017,#b8860b);color:#000;font-weight:800;padding:14px 28px;border-radius:50px;font-size:15px;margin-bottom:12px;">
             📖 Mở Ebook Ngay
           </a>
-          <div style="margin-top:10px;font-size:12px;color:#555;">Lưu link này lại để đọc bất cứ lúc nào.</div>
+          <div style="margin-top:10px;font-size:12px;color:#555;margin-bottom:14px;">Lưu link này lại để đọc bất cứ lúc nào.</div>
+          <a href="https://zalo.me/0902921645" target="_blank"
+             style="display:inline-block;background:#0068ff;color:#fff;font-weight:800;padding:12px 24px;border-radius:50px;font-size:14px;">
+            💬 Kết Nối Zalo Để Được Hỗ Trợ
+          </a>
         `;
         btn.style.display = 'none';
       } else {

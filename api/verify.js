@@ -8,6 +8,8 @@ module.exports = async function handler(req, res) {
 
   const token = (process.env.SEPAY_TOKEN || '').replace(/^﻿/, '').trim();
   const ebookLink = process.env.EBOOK_LINK;
+  const { name, phone, code } = req.body || {};
+  const searchCode = (code || 'EBOOK').toUpperCase();
 
   if (!token) return res.status(500).json({ success: false, message: 'Hệ thống chưa cấu hình. Vui lòng liên hệ hỗ trợ.' });
 
@@ -35,14 +37,34 @@ module.exports = async function handler(req, res) {
 
     const match = data.transactions.find((tx) => {
       const content = (tx.transaction_content || tx.content || tx.description || '').toUpperCase();
-      const va = (tx.virtual_account_number || tx.va || '').toUpperCase();
       const amount = Number(tx.amount_in || tx.transferAmount || tx.amount || 0);
       const type = (tx.transferType || tx.type || 'in').toLowerCase();
-      const hasVA = content.includes('AGBSPM4UBD') || va.includes('AGBSPM4UBD');
-      return amount >= 99000 && hasVA && type !== 'out';
+      return amount >= 99000 && content.includes(searchCode) && type !== 'out';
     });
 
     if (match) {
+      const amount = Number(match.amount_in || match.transferAmount || match.amount || 0);
+
+      const botToken = (process.env.TELEGRAM_BOT_TOKEN || '').trim();
+      const chatId = (process.env.TELEGRAM_CHAT_ID || '').trim();
+      if (botToken && chatId) {
+        const text =
+          `🎉 *Đơn hàng mới – Tên Bạn Đáng Giá Bao Nhiêu*\n` +
+          `👤 Tên: ${name || 'Không rõ'}\n` +
+          `📱 SĐT: ${phone || 'Không rõ'}\n` +
+          `💰 Số tiền: ${amount.toLocaleString('vi-VN')}đ\n` +
+          `🔖 Mã GD: ${searchCode}`;
+        try {
+          await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ chat_id: chatId, text, parse_mode: 'Markdown' }),
+          });
+        } catch (e) {
+          console.error('[verify] Telegram notify failed:', e);
+        }
+      }
+
       return res.status(200).json({
         success: true,
         message: '✅ Thanh toán thành công! Đây là link ebook của bạn:',
