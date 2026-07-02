@@ -67,7 +67,7 @@ module.exports = async function handler(req, res) {
 
       return res.status(200).json({
         success: true,
-        message: '✅ Thanh toán thành công! Đây là link ebook của bạn:',
+        message: '✅ Thanh toán thành công! Kết nối Zalo để nhận link ebook ngay.',
         link: ebookLink || 'https://heyzine.com/flip-book/abf9f5216c.html',
       });
     }
