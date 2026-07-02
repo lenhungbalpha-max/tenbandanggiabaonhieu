@@ -447,6 +447,25 @@
       100% { opacity: 0;  transform: scale(1.25); }
     }
 
+    /* ── CTA attention pulse ── */
+    @keyframes cta-pulse-purple {
+      0%, 100% { transform: scale(1); box-shadow: 0 6px 30px rgba(145,71,255,.4), 0 0 0 0 rgba(47,132,255,.5); }
+      50%      { transform: scale(1.045); box-shadow: 0 10px 42px rgba(145,71,255,.7), 0 0 0 14px rgba(47,132,255,0); }
+    }
+    @keyframes cta-pulse-green {
+      0%, 100% { transform: scale(1); box-shadow: 0 4px 20px rgba(39,174,96,.4), 0 0 0 0 rgba(39,174,96,.55); }
+      50%      { transform: scale(1.045); box-shadow: 0 8px 32px rgba(39,174,96,.7), 0 0 0 14px rgba(39,174,96,0); }
+    }
+    .btn-primary, .btn-nav-cta, #continue-payment-btn {
+      animation: cta-pulse-purple 1.7s ease-in-out infinite;
+    }
+    #verify-btn {
+      animation: cta-pulse-green 1.7s ease-in-out infinite;
+    }
+    .btn-primary:hover, .btn-nav-cta:hover, #continue-payment-btn:hover, #verify-btn:hover {
+      animation-play-state: paused;
+    }
+
     /* ── Pain Points Section ── */
     .pain-section {
       padding: 80px 60px;
@@ -1040,6 +1059,7 @@
       </div>
       <div id="customer-form-error" style="display:none;color:#e74c3c;font-size:12px;margin-bottom:12px;"></div>
       <button
+        id="continue-payment-btn"
         onclick="showPaymentStep()"
         style="width:100%;background:linear-gradient(135deg,#2F84FF,#9147FF);color:#fff;border:none;padding:16px;border-radius:50px;font-size:16px;font-weight:800;cursor:pointer;box-shadow:0 4px 20px rgba(145,71,255,.4);"
       >
