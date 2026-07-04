@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tư Duy Facebook Để Kiếm Tiền — Đọc Sách | Nhung Tech AI</title>
+<meta name="description" content="Đọc online: Tư Duy Facebook Để Kiếm Tiền — 10 tư duy đột phá cho người kinh doanh online. Có giọng đọc.">
+<style>
+  :root{
+    --navy-deep:#060919;
+    --navy:#0A0F2E;
+    --navy-mid:#161F52;
+    --blue:#2F84FF;
+    --purple:#9147FF;
+    --gold:#E5B04D;
+    --gold-dark:#C6923A;
+    --paper:#F7F2E7;
+    --paper-line:#E7DCC4;
+    --ink:#241F16;
+    --ink-soft:#5b5342;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;
+    background:linear-gradient(160deg,var(--navy-deep),var(--navy) 60%,var(--navy-mid));
+    color:#fff;
+    min-height:100vh;
+  }
+  a{color:inherit;}
+
+  /* ---------- TOP BAR ---------- */
+  .topbar{
+    position:sticky; top:0; z-index:40;
+    display:flex; align-items:center; justify-content:space-between;
+    gap:10px; padding:10px 16px;
+    background:linear-gradient(135deg,#161F52,#060919);
+    border-bottom:1px solid rgba(229,176,77,.25);
+  }
+  .topbar .home-link{
+    display:flex; align-items:center; gap:8px;
+    font-size:14px; font-weight:600; color:#cfd6ff; text-decoration:none;
+    white-space:nowrap;
+  }
+  .topbar .home-link:hover{color:var(--gold);}
+  .brand{
+    font-family:Georgia,serif; font-style:italic; color:var(--gold);
+    font-size:15px; display:none;
+  }
+  .controls{
+    display:flex; align-items:center; gap:8px; flex-wrap:wrap; justify-content:flex-end;
+  }
+  .ctrl-btn{
+    display:flex; align-items:center; justify-content:center;
+    width:38px; height:38px; border-radius:50%;
+    background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15);
+    color:#fff; cursor:pointer; font-size:16px; transition:.15s;
+  }
+  .ctrl-btn:hover{background:linear-gradient(135deg,var(--blue),var(--purple)); border-color:transparent;}
+  .ctrl-btn.active{background:linear-gradient(135deg,var(--blue),var(--purple)); border-color:transparent;}
+  select.rate-select{
+    background:rgba(255,255,255,.08); color:#fff; border:1px solid rgba(255,255,255,.15);
+    border-radius:20px; padding:8px 10px; font-size:13px; cursor:pointer;
+  }
+  .vol-wrap{display:flex; align-items:center; gap:6px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); border-radius:20px; padding:6px 12px;}
+  .vol-wrap input[type=range]{width:70px; accent-color:var(--gold);}
+
+  /* ---------- LAYOUT ---------- */
+  .layout{ max-width:1000px; margin:0 auto; padding:22px 16px 140px; }
+  .progress-top{
+    display:flex; align-items:center; gap:10px; margin-bottom:14px; font-size:12px; color:#b7bde8;
+  }
+  .progress-bar-track{ flex:1; height:6px; border-radius:6px; background:rgba(255,255,255,.12); overflow:hidden; }
+  .progress-bar-fill{ height:100%; background:linear-gradient(90deg,var(--blue),var(--purple)); width:0%; transition:width .3s; }
+
+  .book-page{
+    background:var(--paper);
+    color:var(--ink);
+    border-radius:14px;
+    padding:36px 40px 46px;
+    box-shadow:0 20px 60px rgba(0,0,0,.45), 0 0 0 1px rgba(0,0,0,.04);
+    position:relative;
+    background-image:
+      repeating-linear-gradient(rgba(0,0,0,0) 0, rgba(0,0,0,0) 27px, rgba(0,0,0,.025) 28px);
+  }
+  .book-page::before{
+    content:""; position:absolute; left:0; top:0; bottom:0; width:6px;
+    background:linear-gradient(180deg,var(--gold),var(--gold-dark));
+    border-radius:14px 0 0 14px;
+  }
+  @media (max-width:640px){ .book-page{padding:26px 20px 34px;} }
+
+  .chap-eyebrow{
+    font-size:12px; letter-spacing:2px; font-weight:800; color:var(--gold-dark);
+    text-transform:uppercase; margin-bottom:8px;
+  }
+  .chap-title{
+    font-family:Georgia,serif; font-size:clamp(24px,4vw,34px); font-weight:700; line-height:1.25;
+    margin:0 0 18px; color:var(--ink);
+  }
+  .chap-title em, .hl{ font-style:normal; color:var(--purple); }
+  .quote-box{
+    border-left:4px solid var(--purple);
+    background:#EFE9F8;
+    padding:14px 18px; border-radius:0 8px 8px 0; margin:0 0 22px;
+    font-style:italic; color:#3d3660; font-size:15px;
+  }
+  .sec-label{
+    font-size:12px; letter-spacing:1.5px; font-weight:800; color:var(--blue);
+    text-transform:uppercase; margin:26px 0 10px;
+  }
+  .book-page p{ line-height:1.85; font-size:16px; margin:0 0 16px; color:var(--ink); }
+  .book-page b, .book-page strong{ color:#1b1710; }
+  hr.divider{ border:none; border-top:1px solid var(--paper-line); margin:26px 0; }
+
+  .action-item{ display:flex; gap:12px; margin-bottom:14px; }
+  .action-num{
+    flex:none; width:26px; height:26px; border-radius:50%;
+    background:linear-gradient(135deg,var(--blue),var(--purple));
+    color:#fff; font-size:12px; font-weight:800; display:flex; align-items:center; justify-content:center;
+  }
+  .action-item p{ margin:0; }
+
+  .box{ border-radius:10px; padding:16px 18px; margin:18px 0; font-size:15px; line-height:1.7; }
+  .box-title{ font-weight:800; font-size:13px; letter-spacing:.5px; margin-bottom:6px; display:block; }
+  .box.warn{ background:#FBEAE7; border:1px solid #EFC3BA; }
+  .box.warn .box-title{ color:#C0392B; }
+  .box.today{ background:#E7F5EC; border:1px solid #BFE3CC; }
+  .box.today .box-title{ color:#1E8449; }
+  .box.remember{ background:#EFEBFA; border:1px solid #D6CBF2; }
+  .box.remember .box-title{ color:var(--purple); }
+
+  .hero-cover{ text-align:center; padding:20px 10px 6px; }
+  .hero-cover .tag{ font-size:12px; letter-spacing:3px; color:var(--gold-dark); font-weight:800; }
+  .hero-cover h1{ font-family:Georgia,serif; font-size:clamp(26px,5vw,40px); margin:14px 0; color:var(--ink); }
+  .hero-cover .sub{ color:var(--ink-soft); font-style:italic; margin-bottom:20px; }
+  .cover-badge{
+    display:inline-block; margin:14px auto 0; padding:14px 22px; border-radius:12px;
+    background:#EFEBFA; border:1px solid #D6CBF2; color:#3d3660; text-align:left; max-width:480px;
+  }
+
+  table.toc{ width:100%; border-collapse:collapse; font-size:15px; }
+  table.toc td{ padding:10px 6px; border-bottom:1px solid var(--paper-line); vertical-align:top; }
+  table.toc td.n{ width:34px; font-weight:800; color:var(--purple); }
+
+  .roadmap-block{ border-radius:10px; overflow:hidden; margin-bottom:16px; border:1px solid var(--paper-line); }
+  .roadmap-head{ background:linear-gradient(135deg,#161F52,#0A0F2E); color:#fff; padding:10px 16px; font-weight:800; font-size:13px; letter-spacing:1px; }
+  .roadmap-head small{ display:block; font-weight:400; opacity:.75; letter-spacing:0; margin-top:2px;}
+  .roadmap-body{ padding:12px 18px; background:#fff; }
+  .roadmap-body li{ margin-bottom:8px; line-height:1.6; }
+
+  .checklist li{ margin-bottom:12px; line-height:1.7; }
+  .checklist b{ color:var(--purple); }
+
+  .hookrow{ margin-bottom:14px; padding-bottom:14px; border-bottom:1px solid var(--paper-line); }
+  .hookrow b{ color:var(--purple); }
+  .hookrow .use{ display:block; font-size:13px; color:var(--ink-soft); margin-top:4px; }
+
+  .tracker{ display:grid; grid-template-columns:repeat(5,1fr); gap:8px; margin:16px 0; }
+  .tracker .d{
+    aspect-ratio:1; border-radius:8px; display:flex; align-items:center; justify-content:center;
+    background:#fff; border:1px solid var(--paper-line); font-size:13px; color:var(--ink-soft); cursor:pointer; user-select:none;
+  }
+  .tracker .d.done{ background:linear-gradient(135deg,var(--blue),var(--purple)); color:#fff; border-color:transparent; font-weight:800; }
+
+  /* reading highlight */
+  .tts-block.reading{
+    background:linear-gradient(90deg,rgba(145,71,255,.14),rgba(47,132,255,.07));
+    border-radius:6px; box-shadow:inset 3px 0 0 var(--purple); padding-left:10px; margin-left:-10px;
+  }
+
+  /* ---------- BOTTOM NAV ---------- */
+  .bottombar{
+    position:fixed; left:0; right:0; bottom:0; z-index:40;
+    background:linear-gradient(0deg,#060919,#0A0F2Ecc 80%, transparent);
+    padding:14px 16px 18px;
+  }
+  .bottombar-inner{ max-width:1000px; margin:0 auto; display:flex; align-items:center; gap:10px; }
+  .nav-btn{
+    flex:none; padding:10px 16px; border-radius:24px; border:1px solid rgba(255,255,255,.18);
+    background:rgba(255,255,255,.06); color:#fff; font-size:13px; font-weight:700; cursor:pointer; white-space:nowrap;
+  }
+  .nav-btn:hover{ background:linear-gradient(135deg,var(--blue),var(--purple)); border-color:transparent; }
+  .nav-btn:disabled{ opacity:.35; cursor:default; }
+  .nav-btn:disabled:hover{ background:rgba(255,255,255,.06); }
+  .chap-slider{ flex:1; }
+  input[type=range].chap-range{ width:100%; accent-color:var(--gold); }
+  .chap-of{ font-size:12px; color:#b7bde8; text-align:center; margin-top:2px; }
+
+  /* ---------- SIDE DRAWER (chapter list) ---------- */
+  .drawer-backdrop{ position:fixed; inset:0; background:rgba(0,0,0,.55); z-index:60; display:none; }
+  .drawer-backdrop.show{ display:block; }
+  .drawer{
+    position:fixed; top:0; right:-320px; width:300px; height:100%; z-index:61;
+    background:#0A0F2E; border-left:1px solid rgba(229,176,77,.3);
+    transition:right .25s; overflow-y:auto; padding:18px 16px 40px;
+  }
+  .drawer.show{ right:0; }
+  .drawer h3{ font-family:Georgia,serif; color:var(--gold); font-size:16px; margin:4px 0 14px; }
+  .drawer-item{
+    display:flex; align-items:center; gap:10px; padding:10px 10px; border-radius:8px; cursor:pointer; font-size:14px;
+    color:#dfe3ff; margin-bottom:2px;
+  }
+  .drawer-item:hover{ background:rgba(255,255,255,.06); }
+  .drawer-item.current{ background:linear-gradient(135deg,rgba(47,132,255,.25),rgba(145,71,255,.25)); color:#fff; font-weight:700; }
+  .drawer-item .chk{ flex:none; width:18px; height:18px; border-radius:50%; border:1px solid rgba(255,255,255,.3); font-size:11px; display:flex; align-items:center; justify-content:center; }
+  .drawer-item.read .chk{ background:var(--gold); border-color:var(--gold); color:#241F16; }
+  .drawer-close{ float:right; background:none; border:none; color:#b7bde8; font-size:20px; cursor:pointer; }
+  .voice-note{ font-size:11px; color:#8891c9; margin-top:16px; line-height:1.6; }
+
+  ::selection{ background:rgba(145,71,255,.35); }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="home-link" href="/" title="Về trang chủ">← Trang chủ</a>
+  <span class="brand">TƯ DUY FACEBOOK ĐỂ KIẾM TIỀN</span>
+  <div class="controls">
+    <button class="ctrl-btn" id="btnPlay" title="Nghe chương này">🎧</button>
+    <select class="rate-select" id="rateSelect" title="Tốc độ đọc">
+      <option value="0.8">0.8×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.2">1.2×</option>
+      <option value="1.5">1.5×</option>
+      <option value="2">2×</option>
+    </select>
+    <div class="vol-wrap" title="Âm lượng">
+      🔊 <input type="range" id="volRange" min="0" max="1" step="0.05" value="1">
+    </div>
+    <select class="rate-select" id="voiceSelect" title="Chọn giọng đọc" style="display:none;max-width:150px;"></select>
+    <span id="voiceWarn" class="ctrl-btn" style="display:none;width:auto;border-radius:20px;padding:0 12px;font-size:12px;background:#5a2e2e;border-color:#a44;" title="Máy chưa có giọng tiếng Việt — bấm để xem cách cài">⚠ Chưa có giọng Việt</span>
+    <button class="ctrl-btn" id="btnMenu" title="Danh sách chương">☰</button>
+    <button class="ctrl-btn" id="btnFull" title="Toàn màn hình">⛶</button>
+  </div>
+</div>
+
+<div class="drawer-backdrop" id="voiceHelpBackdrop"></div>
+<div style="display:none; position:fixed; z-index:80; top:50%; left:50%; transform:translate(-50%,-50%); background:#0A0F2E; border:1px solid rgba(229,176,77,.4); border-radius:14px; padding:22px 24px; max-width:420px; color:#fff;" id="voiceHelpModal">
+  <h3 style="font-family:Georgia,serif; color:var(--gold); margin-top:0;">Cài giọng đọc tiếng Việt</h3>
+  <p style="font-size:14px; line-height:1.7; color:#dfe3ff;">Trình duyệt của bạn đang đọc bằng giọng mặc định (có thể không phải tiếng Việt) vì máy chưa cài giọng đọc tiếng Việt hệ thống.</p>
+  <p style="font-size:14px; line-height:1.7; color:#dfe3ff;"><b>Windows 10/11:</b> Settings → Time & Language → Speech → mục "Manage voices" → Add voices → chọn <b>Vietnamese (Việt Nam)</b> → tải về. Sau đó tải lại trang này.</p>
+  <p style="font-size:14px; line-height:1.7; color:#dfe3ff;"><b>macOS:</b> System Settings → Accessibility → Spoken Content → System voice → tải giọng "Linh" (Vietnamese).</p>
+  <p style="font-size:14px; line-height:1.7; color:#dfe3ff;"><b>Điện thoại Android/Chrome:</b> thường đã có sẵn giọng "Tiếng Việt" — chọn trong ô chọn giọng ở thanh công cụ.</p>
+  <button id="voiceHelpClose" style="margin-top:10px; padding:10px 20px; border-radius:20px; border:none; background:linear-gradient(135deg,#2F84FF,#9147FF); color:#fff; font-weight:700; cursor:pointer;">Đã hiểu</button>
+</div>
+
+<div class="layout">
+  <div class="progress-top">
+    <span id="progressLabel">Chương 1/22</span>
+    <div class="progress-bar-track"><div class="progress-bar-fill" id="progressFill"></div></div>
+    <span id="progressPct">0%</span>
+  </div>
+
+  <div class="book-page" id="bookPage"><!-- chapter content injected here --></div>
+
+  <div style="text-align:center; margin-top:22px;">
+    <button class="nav-btn" id="btnMarkDone" style="background:linear-gradient(135deg,#27ae60,#1e8449); border:none;">✓ Đã đọc xong chương này</button>
+  </div>
+</div>
+
+<div class="bottombar">
+  <div class="bottombar-inner">
+    <button class="nav-btn" id="btnCover">⏮ Bìa</button>
+    <button class="nav-btn" id="btnPrev">← Quay lại</button>
+    <div class="chap-slider">
+      <input type="range" id="chapRange" class="chap-range" min="0" max="21" value="0" step="1">
+      <div class="chap-of" id="chapOf"></div>
+    </div>
+    <button class="nav-btn" id="btnNext">Tiếp →</button>
+  </div>
+</div>
+
+<div class="drawer-backdrop" id="drawerBackdrop"></div>
+<div class="drawer" id="drawer">
+  <button class="drawer-close" id="drawerClose">✕</button>
+  <h3>Mục lục</h3>
+  <div id="drawerList"></div>
+  <div class="voice-note">Giọng đọc dùng công nghệ Text-to-Speech có sẵn trong trình duyệt của bạn. Để có giọng tiếng Việt tốt nhất, khuyên dùng Chrome hoặc Edge trên máy tính.</div>
+</div>
+
+<script>
+/* ================= NỘI DUNG SÁCH ================= */
+function box(type,title,html){
+  return `<div class="box ${type}"><span class="box-title">${title}</span>${html}</div>`;
+}
+function actions(list){
+  return list.map((a,i)=>`
+    <div class="action-item tts-block">
+      <div class="action-num">${String(i+1).padStart(2,'0')}</div>
+      <p><b>${a.lead}</b> ${a.text}</p>
+    </div>`).join('');
+}
+function tuduyChapter(o){
+  return `
+    <div class="chap-eyebrow">Tư duy ${o.num}</div>
+    <h1 class="chap-title tts-block">${o.title}</h1>
+    <div class="quote-box tts-block">${o.quote}</div>
+    <div class="sec-label">Câu chuyện</div>
+    ${o.story.map(p=>`<p class="tts-block">${p}</p>`).join('')}
+    <hr class="divider">
+    <div class="sec-label">Tư duy ${o.num} — Hành động</div>
+    <p class="tts-block" style="font-weight:700;font-size:18px;color:#1b1710;">Áp dụng ngay vào kênh của bạn</p>
+    ${actions(o.actions)}
+    ${box('warn','⚠ Sai lầm thường gặp', `<p class="tts-block" style="margin:0;">${o.mistake}</p>`)}
+    ${box('today','✓ Hành động ngay hôm nay', `<p class="tts-block" style="margin:0;">${o.today}</p>`)}
+    ${box('remember','★ Ghi nhớ', `<p class="tts-block" style="margin:0;">1 hành động nhỏ làm hôm nay > 10 ý tưởng lớn để ngày mai. Bắt đầu trước, hoàn thiện sau.</p>`)}
+  `;
+}
+
+const tuduyData = [
+{num:'01', title:'Facebook ưu tiên <span class="hl">GIỮ NGƯỜI XEM</span>, không ưu tiên nhiều follow',
+ quote:'10.000 follow nhưng không ai xem hết bài — thua một tài khoản 500 follow mà người ta đọc từng chữ.',
+ story:[
+  'Mình có một người bạn. Chạy quảng cáo kéo follow suốt 2 năm, lên được 12k follow. Mỗi bài đăng — reach 300. Đúng rồi, bạn đọc không nhầm đâu. <b>12k follow, reach 300.</b>',
+  'Lúc đầu mình cũng bán tín bán nghi. Đến lúc tự mình test — mình mới tỉnh ra. Facebook không quan tâm bạn có bao nhiêu người theo dõi. Facebook chỉ quan tâm: <i>bài của bạn có giữ người ở lại được không?</i>',
+  'Họ đo cái này bằng <b>dwell time</b> — thời gian người xem dừng lại ở bài của bạn. 3 giây, 5 giây, 30 giây. Con số đó là vé thông hành để bài của bạn được đẩy đi xa. Vậy nên: đừng đuổi theo follow. Đuổi theo <i>thời gian người ta ở lại với bạn</i>.'
+ ],
+ actions:[
+  {lead:'Hook 3 giây đầu tiên là tất cả.', text:'Dòng đầu bài phải là một câu khiến người ta KHÔNG THỂ lướt qua. Ví dụ: "Mình mất 47 triệu trong 3 tháng để học được điều này" thay vì "Chào mọi người, hôm nay mình chia sẻ...".'},
+  {lead:'Viết bài dài, có cấu trúc dòng trống.', text:'Mỗi 2–3 dòng xuống hàng 1 lần. Tránh đoạn văn 10 dòng dính nhau — mắt mỏi, người ta bỏ qua. Mắt dễ đọc → ở lại lâu hơn.'},
+  {lead:'Thêm câu hỏi giữa bài.', text:'"Bạn có từng như vậy chưa?" — câu hỏi làm não người ta dừng lại để suy nghĩ. Dừng lại = dwell time tăng. Đặt ít nhất 1 câu hỏi ở giữa, 1 câu hỏi ở cuối.'},
+  {lead:'Bỏ câu kết "cảm ơn, hope it helps".', text:'Thay bằng câu hỏi mở buộc người đọc phải comment. Một comment = người đọc mất thêm 30 giây ở trang của bạn.'},
+  {lead:'Dùng số ở đầu bài.', text:'"3 điều mình ước mình biết sớm hơn..." hay "7 sai lầm mình đã mắc khi bắt đầu...". Não người thích danh sách có con số cụ thể — họ sẽ ở lại để đếm cho đủ.'},
+  {lead:'Test 3 hook mỗi tuần.', text:'Viết 3 câu mở cho cùng 1 bài. Đăng 3 ngày khác nhau (với nội dung khác). Sau 7 ngày, nhìn reach — hook nào giữ người tốt nhất sẽ lộ ra. Lưu thành template.'},
+  {lead:'Đo dwell time qua Insights.', text:'Vào Meta Business Suite → Content → Posts. So sánh thời gian xem trung bình. Bài nào > 15 giây là có tín hiệu. < 5 giây là hook đầu flop.'}
+ ],
+ mistake:'Đừng viết hook kiểu "Chào cả nhà!" hay "Hôm nay mình muốn chia sẻ với mọi người..." — đây là cấu trúc thuyết minh, không phải móc câu. Facebook sẽ nhìn thấy không ai dừng lại ở 3 giây đầu và ngắt reach ngay.',
+ today:'Mở 3 bài đăng gần đây nhất của bạn. Đọc lại dòng đầu tiên. Nếu dòng đó không khiến chính bạn dừng lại — viết lại. Viết đến khi bạn muốn đọc tiếp mới thôi.'
+},
+{num:'02', title:'Một video viral có thể <span class="hl">CỨU SỐNG</span> cả tài khoản flop',
+ quote:'Bạn không cần 100 bài hay. Bạn cần 1 bài đúng. Bài đúng đó sẽ kéo cả 99 bài còn lại lên theo.',
+ story:[
+  'Hồi mới viết, mình đăng 60 bài liên tiếp. Tương tác lẹt đẹt, 10–20 like. Mình tủi thân sắp bỏ cuộc.',
+  'Cho đến một đêm, mình đăng một bài đúng khoảnh khắc mình chạnh lòng nhất — câu chuyện của mình khi bỏ công việc ổn định để làm AI. Bài đó đạt <b>3.000 like, 800 comment, 200 share trong 48 tiếng</b>.',
+  'Điều bất ngờ hơn nữa là: từ bài đó, <b>tất cả những bài cũ của mình đều được đẩy lại</b>. Một bài 6 tháng trước chỉ có 12 like — tự dưng lên 400 like. Mình mới hiểu: thuật toán Facebook hoạt động theo đợt. <b>Một bài nổ = cả tài khoản nổ.</b>',
+  'Vậy nên: đừng sợ đăng bài flop. Mỗi bài flop là một lần bạn học được một điều không nên làm. Bạn chỉ cần sống đủ lâu để tìm được bài đúng đó.'
+ ],
+ actions:[
+  {lead:'Đặt mục tiêu số lượng trước, chất lượng sau.', text:'Viết 30 bài trong 30 ngày. Trong 30 bài đó chắc chắn sẽ có bài phát nổ. Quan trọng là đủ số lần bóp cò để tìm ra.'},
+  {lead:'Sau khi 1 bài nổ, kiểm toán ngay.', text:'Hook gì? Chủ đề gì? Cảm xúc gì? Giờ đăng nào? Lưu thành template, viết lại 3 bài khác theo công thức đó trong 7 ngày kế tiếp.'},
+  {lead:'Tránh ngồi đợi bài nổ.', text:'Đăng đều mỗi ngày. Tần suất tạo ra cơ hội. Bạn không có bài nổ — không phải vì bạn dở, mà vì bạn chưa đăng đủ bài.'},
+  {lead:'Khi 1 bài nổ, đưa ngay offer.', text:'Đó là lúc reach đang ở đỉnh. Pin bài đó lên profile. Comment tự rẽ nhánh sang dịch vụ của bạn. Đừng để đợt reach này trôi qua tay.'},
+  {lead:'Reup bài nổ sau 60 ngày.', text:'Đổi hook, giữ thân bài, chỉnh mở bài. Khán giả mới chưa thấy. Khán giả cũ đã quên. Facebook coi như nội dung mới.'},
+  {lead:'Ghi nhật ký reach mỗi tuần.', text:'Một bảng Excel: ngày đăng — hook — chủ đề — cảm xúc — reach — comment. Sau 4 tuần, bạn sẽ nhìn ra mô-típ bài nổ. Có dữ liệu rồi, bạn ngưng đoán mò.'},
+  {lead:'Boost nhẹ 1 bài nổ.', text:'Sau 24h, nếu reach organic tốt, bỏ 100–300k boost để đẩy thêm 1 vòng. Facebook nhìn tín hiệu tốt sẽ đẩy thêm reach miễn phí.'}
+ ],
+ mistake:'Sau khi flop 5–10 bài, nhiều người đổi ngách hoàn toàn — từ mỹ phẩm sang nhân sự, từ AI sang kiếm tiền online. Sai lầm cực lớn. Bạn phải cố gắng ít nhất 60 bài trong 1 ngách trước khi phán quyết.',
+ today:'Cam kết với bản thân: trong 30 ngày tới bạn sẽ đăng ít nhất 30 bài. Viết con số đó ra giấy, dán lên tường. Không đuổi kết quả — đuổi số bài.'
+},
+{num:'03', title:'Facebook đánh giá cả <span class="hl">HÀNH VI</span> tài khoản — spam, copy, bán liên tục sẽ bị <span class="hl">GIẢM REACH</span>',
+ quote:'Mỗi tài khoản có một điểm số vô hình. Điểm thấp = người xem tự rơi, dù bạn viết đỉnh cỡ nào.',
+ story:[
+  'Mình có người học viên là chủ shop mỹ phẩm. Ngày đăng 5 bài bán hàng, 2 bài copy lại của đối thủ, comment spam dưới 30 bài người lạ.',
+  'Sau 3 tháng, từ 8k follow chỉ còn reach 50–100 mỗi bài. Chị hỏi mình "Facebook ghét chị hả em?". Mình nói không — Facebook chỉ đang chấm điểm hành vi của chị thôi.',
+  'Mình ép chị dừng hết: không spam, không copy, giảm bài bán xuống 1/tuần. Thay vào đó đăng 4 bài giá trị. Sau 6 tuần, reach quay lại 1.500–2.000.',
+  'Bài học: Facebook không phạt bạn công khai. Họ chỉ bóp reach âm thầm. Và bạn sẽ không bao giờ nhận được một cái email "bạn đã bị phạt". Bạn chỉ thấy reach rơi — mà không hiểu vì sao.'
+ ],
+ actions:[
+  {lead:'Quy tắc 4-1.', text:'Cứ 4 bài giá trị mới được 1 bài bán hàng. Giá trị = kiến thức, câu chuyện, cảm hứng, giải trí. Spam bán liên tục — Facebook ghét nhất.'},
+  {lead:'Không bao giờ copy nguyên văn bài người khác.', text:'Nếu muốn mượn ý, viết lại bằng ngôn ngữ của mình, bổ sung trải nghiệm cá nhân. Facebook có AI nhận diện nội dung trùng — bị bóp không tha.'},
+  {lead:'Đừng spam comment rải dịch vụ/website.', text:'Comment dạng "Hàng đẹp quá, inbox em nha" ở 50 bài người lạ mỗi ngày — tài khoản bị gắn cờ không sớm thì muộn.'},
+  {lead:'Giữ tần suất đăng ổn định.', text:'1–2 bài/ngày đều hơn 10 bài 1 ngày rồi im lặng 2 tuần. Thuật toán thích tài khoản có nhịp.'},
+  {lead:'Trả lời hết comment trong 2 tiếng đầu.', text:'Reply nhanh → Facebook hiểu bài đang nóng → đẩy reach. Đừng để comment chờ 6 tiếng — đợt reach trong 2h đầu trôi qua.'},
+  {lead:'Đa dạng định dạng.', text:'Tuần này 3 bài văn, 2 reels, 1 carousel ảnh, 1 livestream. Facebook đánh giá cao tài khoản dùng đủ tính năng của họ.'},
+  {lead:'Tránh gắn link ngoài vào bài.', text:'Nếu cần, đặt link ở comment đầu tiên. Facebook ghét bài kéo người xem ra khỏi nền tảng.'}
+ ],
+ mistake:'Khi reach rơi, phản xạ của nhiều người là "đăng nhiều hơn". Sai đủ đường. Khi reach rơi, phải dừng lại, kiểm toán hành vi 30 ngày qua, dọn dẹp tất cả dấu hiệu spam. Rồi mới đăng tiếp.',
+ today:'Mở trang cá nhân, lướt lại 14 bài gần nhất. Đếm có bao nhiêu bài bán hàng / bao nhiêu bài giá trị. Nếu tỷ lệ bán hàng > 30%, bạn đang tự tắt mình.'
+},
+{num:'04', title:'<span class="hl">COMMENT TRANH LUẬN</span> mạnh đôi khi <span class="hl">GIÚP VIRAL</span> hơn cả nội dung',
+ quote:'Bài không ai cãi = bài chết. Một comment tranh luận bằng 10 like im lặng.',
+ story:[
+  'Mình đã từng viết một bài: "AI sẽ thay thế 80% nhân sự bán hàng online trong 3 năm tới."',
+  '40% comment phản đối gay gắt. "Láo, AI sao bằng con người." "Em PR cho khóa học à?". 30% đồng tình, 30% vào tranh luận. Kết quả: bài <b>1.200 comment, reach 80k</b>.',
+  'Mấy bài sau đó mình viết "AI giúp bạn làm việc nhanh hơn" — câu mà ai cũng đồng ý. Reach 600. Đủ hiểu vấn đề.',
+  'Quan trọng: tranh luận phải lành mạnh. Bạn nêu quan điểm của mình — không xúc phạm cá nhân, không đụng vào chính trị, tôn giáo. Tranh luận về quan điểm nghề, cách làm, tư duy. Thứ đó gần như luôn có người phản biện.'
+ ],
+ actions:[
+  {lead:'Viết câu khơi đụng ý kiến số đông.', text:'"Học đại học 4 năm không bằng 6 tháng làm AI tự do." "Không cần vốn vẫn kinh doanh online được." Quan điểm có mùi vị — người ta mới muốn comment.'},
+  {lead:'Tránh câu vô thưởng vô phạt.', text:'"Chăm chỉ sẽ thành công", "Hôm nay là một ngày đẹp" — đúng mà nhạt. Không ai muốn comment vì không có gì để cãi.'},
+  {lead:'Đặt câu hỏi gây phân cực.', text:'"Theo bạn: tiếng Anh hay AI quan trọng hơn trong 5 năm tới?". Đóng khung 2 lựa chọn — người ta bỏ phiếu, khích nhau tranh luận.'},
+  {lead:'Viết comment chính mình ở dưới bài.', text:'"Mình biết sẽ có nhiều bạn không đồng ý. Mình đang chờ nghe lý lẽ của các bạn." Khiến người ta thấy bạn dám đứng vững với quan điểm của mình.'},
+  {lead:'Reply vào các comment phản biện mạnh nhất đầu tiên.', text:'Đừng né tránh. Từ tốn, có lý lẽ. Cuộc đối thoại hai chiều tạo ra thêm 50–100 sub-comment — máu thịt của viral.'},
+  {lead:'Sau bài tranh luận, đăng bài tiếp theo củng cố luận điểm.', text:'Lần này bạn thêm số liệu, bằng chứng, case study. Người ta sẽ quay lại — vui vì họ đúng, bực vì họ sai.'},
+  {lead:'Đặt giới hạn cho mình.', text:'1–2 bài phân cực/tuần. Đăng nhiều quá thành người ồn ào — mất uy tín. Còn lại vẫn phải là kiến thức, câu chuyện, giá trị.'}
+ ],
+ mistake:'Nhiều người viết quan điểm mạnh rồi xóa comment tiêu cực. Sai. Comment tiêu cực giữ bài sống. Bạn chỉ xóa comment chửi tục, công kích cá nhân. Còn phản biện quan điểm — giữ lại, reply bình tĩnh.',
+ today:'Viết 3 câu status đụng ý kiến số đông trong ngành của bạn. Chọn câu làm bạn hơi sợ nhất — câu đó có tiềm năng nhất. Đăng tuần này.'
+},
+{num:'05', title:'Nội dung dạng <span class="hl">SERIES / HÀNH TRÌNH</span> được Facebook đẩy rất mạnh',
+ quote:'Một bài đơn lẻ — người ta xem rồi quên. Một series — người ta bật thông báo chờ bài tiếp theo.',
+ story:[
+  'Mình có một series tên "30 ngày học AI từ con số 0". Mỗi ngày 1 bài, đánh số #1 đến #30. Tuần đầu, reach bình thường 1.000–1.500. Tuần thứ hai bắt đầu vào nhịp — reach vọt lên 4.000–6.000.',
+  'Đến ngày thứ 18, một bài đạt reach 35k một cách vô lý. Mình mới hiểu: thuật toán Facebook có cả một lớp ưu tiên <b>tài khoản có dòng nội dung liên tục, có chủ đề</b> — vì nó góp phần giữ người xem ở lại nền tảng.',
+  'Và hay nhất: ở bài số 25, mình mở bán khóa học. <b>1.300 đơn hàng trong 3 ngày.</b> Vì sao? Vì 25 ngày trước đó, mình đã dạy miễn phí cho họ mỗi ngày. Đến lúc mình mở cửa, họ vào không cần mình thuyết phục.'
+ ],
+ actions:[
+  {lead:'Chọn chủ đề series.', text:'Nên là vấn đề người ta đau liên tục trong 7–30 ngày. Ví dụ: "30 ngày giảm cân", "14 ngày xây kênh Facebook", "7 ngày viết caption bán hàng".'},
+  {lead:'Đánh số và đặt tên thống nhất.', text:'"Ngày 01/14: ...", "Ngày 02/14: ...". Người xem sẽ cảm được lộ trình. Họ sẽ tự nhảy vào profile xem bài trước — tăng dwell time cực mạnh.'},
+  {lead:'Chuẩn bị ít nhất 5 bài đầu trước khi bắt đầu.', text:'Đừng viết tới đâu đăng tới đó. Bỏ cuộc giữa series là cái chết tồi tệ nhất cho người xem — và cho reach của bạn.'},
+  {lead:'Mỗi bài kết bằng teaser ngày mai.', text:'"Ngày mai mình sẽ chỉ bạn cách X. Đừng bỏ lỡ." Người ta bật thông báo trang cá nhân của bạn.'},
+  {lead:'Đăng đúng giờ mỗi ngày.', text:'Huấn luyện khán giả có một cuộc hẹn: 8h sáng / 9h tối. Họ lướt Facebook vào giờ đó để tìm bạn.'},
+  {lead:'Ở bài số cuối, mở offer.', text:'Đây là lúc người xem nóng nhất. Họ đã đi với bạn hết hành trình. Muốn đi tiếp — móc ví tự nhiên. Không cần nài ép.'},
+  {lead:'Sau khi kết thúc series, tổng hợp thành album highlight.', text:'Pin lên profile. Người mới vào có thể đọc lại từ đầu. Vậy là tài sản của series tiếp tục sinh lời cho bạn.'}
+ ],
+ mistake:'Sai lầm thường gặp: làm series 7 ngày rồi nghỉ. Mới đủ cho thuật toán nhận ra nhịp — bạn lại dừng. Cần tối thiểu 14 ngày. Tốt nhất là 30 ngày.',
+ today:'Chọn 1 vấn đề bạn biết rõ nhất — đủ viết 14 bài. Đặt tên series. Viết 5 bài đầu trước khi đăng bài số 1.'
+},
+{num:'06', title:'Video quá <span class="hl">HOÀN HẢO</span> dễ mất cảm giác <span class="hl">THẬT</span> — giảm giữ chân',
+ quote:'Trong thời đại AI tạo nội dung hàng loạt, cái hiếm nhất là con người thật. Người xem bỏ qua video studio vì nó giống quảng cáo.',
+ story:[
+  'Mình đã từng tốn 8 triệu thuê studio quay 5 video giới thiệu dịch vụ. Ánh sáng đẹp, micro xịn, bối cảnh xanh chuyên nghiệp. Reach 200/video. Mình trắng tay.',
+  'Một tối khác, mình ngồi ăn mì gói, môi không son, tóc chưa gội, cầm điện thoại quay 1 video kể về việc mình suýt bỏ cuộc với AI. <b>Reach 47k. Comment 600.</b>',
+  'Mình mất 2 tuần để chấp nhận sự thật phi lý này: <b>người xem gần như nhìn được khoảnh khắc bạn đang diễn</b>. Mà một khi họ nhìn ra bạn diễn, họ không tin nữa.',
+  'Cuộc chơi bây giờ là cuộc chơi của <i>người thật</i>. Thì bạn có rất nhiều quyền tham gia — vì bạn có một cái mà studio không có: con người bạn.'
+ ],
+ actions:[
+  {lead:'Quay trực tiếp bằng điện thoại.', text:'Camera trước, giữ ngang mắt, ở trong phòng, ánh sáng tự nhiên. Không cần stabilizer. Rung tay chút là đẹp.'},
+  {lead:'Bắt đầu bằng cử chỉ / hành động, đừng bắt đầu bằng "Xin chào mọi người".', text:'Ví dụ: chỉ vào màn hình laptop, mở cửa hàng, cầm sản phẩm. Hình ảnh động = giữ mắt.'},
+  {lead:'Sai sót có lợi.', text:'Đừng quay lại khi bạn nói vấp, lỡ nhịp, cười hì. Những chi tiết đó chứng minh bạn là người thật — và khán giả yêu điều đó.'},
+  {lead:'Quay trong bối cảnh đời thường.', text:'Phòng khách nhà bạn, quán cà phê quen, bàn làm việc bừa bộn. Studio trắng bóc — người xem thấy bạn đang bán khóa học, lướt qua.'},
+  {lead:'Sử dụng âm thanh gốc, không nhạc nền.', text:'Tiếng bạn thở, tiếng bàn phím, tiếng xe ngoài đường. Chính những chi tiết đó tạo cảm giác thật. Nhạc nền sáo rỗng loại vô hồn.'},
+  {lead:'Viết caption trước khi quay.', text:'Biết bạn sẽ nói câu mở, câu kết. Phần giữa để cảm xúc dẫn dắt. Viết script từng câu = diễn như robot.'},
+  {lead:'Quay 3 take, chọn take 1.', text:'Thường take đầu tự nhiên nhất. Từ take 2 trở đi bạn bắt đầu diễn. Nếu không ưng take 1, nghỉ 30 phút rồi quay lại.'}
+ ],
+ mistake:'Sai lầm cực lớn là tốn tiền thuê đội ngũ quay phim, làm visual cầu kỳ trong giai đoạn đầu. Đợi đến khi kênh có 100k follow thật sự và bạn có ngân sách mới tính chuyện nâng cấp sản xuất.',
+ today:'Quay 1 video 60 giây bằng điện thoại, nói 1 câu chuyện làm bạn thay đổi về nghề của mình. Đừng quay lại. Đăng như vậy.'
+},
+{num:'07', title:'Nội dung không tạo <span class="hl">CẢM XÚC</span> rất khó viral dù <span class="hl">KIẾN THỨC HAY</span>',
+ quote:'Người ta share vì cảm thấy cái gì đó — không phải vì hiểu cái gì đó. Kiến thức thua cảm xúc 10–1.',
+ story:[
+  'Mình đã viết một bài 2.000 chữ giải thích tại sao prompt engineering quan trọng. Rất đầy đủ. 47 like.',
+  'Một bài khác: "Mình ngồi khóc trong WC lúc 2h sáng vì không viết được 1 câu prompt cho ra hồn. Rồi mình đứng dậy, mở laptop, viết lại. 47 lần. Đến sáng, mình có câu prompt đầu tiên trong đời mang lại kết quả đúng." <b>3.000 like, 800 share.</b>',
+  'Cùng chủ đề. Cùng thông điệp. Cái khác duy nhất: bài 2 có cảm xúc. Có con người. Có nước mắt. Người xem gặp vào, họ nhớ đến chính họ — cũng đã ngồi khóc vì một cái gì đó không làm được.',
+  'Lúc đó mình mới tin: <b>không phải người ta thiếu kiến thức — người ta thiếu cảm hứng để bắt đầu</b>. Mà cảm hứng đến từ câu chuyện, không phải từ bullet point.'
+ ],
+ actions:[
+  {lead:'Viết theo công thức vấp ngã → chuyển mình → tỉnh ngộ.', text:'Bắt đầu bằng một khoảnh khắc tồi tệ nhất. Kết bằng bài học bạn rút ra. Người xem yêu công thức này.'},
+  {lead:'Sử dụng chi tiết 5 giác quan.', text:'"Tay mình run", "đồng hồ gõ 2h47 phút", "mồ hôi lạnh trên trán". Càng cụ thể càng sống động. Tránh tính từ chung chung "mình rất buồn".'},
+  {lead:'Nói về tiền cụ thể.', text:'"Mất 47 triệu", "lỗ 200 triệu", "đơn đầu tiên 350k". Con số tạo cảm giác thật. "Mất nhiều tiền" — chả ai tin.'},
+  {lead:'Đặt tên nhân vật.', text:'"Chị Tú", "em Minh", "anh khách tên Hùng". Tên tạo cảm giác câu chuyện có thật. "Một khách hàng của mình" — nhạt nhẽo.'},
+  {lead:'Mở đầu bài bằng câu thoại.', text:'"«Em định bỏ nghề rồi chị» — em Ân nhắn cho mình lúc 11h đêm." Câu thoại đưa người xem vào ngay giữa cảnh.'},
+  {lead:'Kết bài bằng một bài học chân thật, không sáo rỗng.', text:'Thay vì "Chúc bạn thành công" — viết "Nếu bạn cũng đang ngồi đâu đó muốn bỏ cuộc, mình không nói bạn sắp giàu. Mình chỉ nói: đừng bỏ tối nay."'},
+  {lead:'Đừng cố tô vẽ bản thân.', text:'Người xem yêu người yếu đuối vùng dậy — không yêu người sinh ra đã giỏi. Kể điểm thấp của bạn. Tiền bạn sẽ đến từ điểm thấp đó.'}
+ ],
+ mistake:'Viết kiểu "Hôm nay mình chia sẻ 5 bí quyết..." — khô như ngói. Cùng 5 bí quyết, hãy bọc trong 1 câu chuyện: "Mình mất 6 tháng và 47 triệu để rút ra 5 bí quyết này...". Cùng nội dung. Reach khác nhau 10 lần.',
+ today:'Viết 1 bài theo công thức: mở bằng câu thoại → kể vấp ngã → chuyển mình → bài học. Yêu cầu: có ít nhất 1 con số tiền cụ thể, 1 chi tiết 5 giác quan.'
+},
+{num:'08', title:'Facebook đánh giá cực cao việc người xem <span class="hl">QUAY LẠI TÌM BẠN</span>',
+ quote:'Like dễ kiếm. Search tên bạn một lần nữa — mới là vàng. Mỗi lần có người gõ tên bạn lên Facebook, bạn được cộng điểm mạnh.',
+ story:[
+  'Mình có 1 fan ruột. Anh ấy inbox mình sau 8 tháng theo dõi: "Em ơi anh tìm em bằng cách gõ «Nhung Tech AI» lên Facebook mỗi thứ hai để đọc bài đầu tuần của em". Mình mới hiểu hành vi <i>search tên</i> là dấu hiệu vàng nhất.',
+  'Facebook biết điều này. Mỗi lần có người gõ tên bạn, đó là tín hiệu mạnh: người xem chủ động muốn nội dung của bạn. <b>Một fan trung thành kiểu đó bằng 100 follower thụ động.</b>',
+  'Mình đã dành 6 tháng của một năm viết để người ta nhớ tên mình. Không viết để like. <b>Viết để người ta gõ tên tìm lại.</b> Đó là 2 cuộc chơi khác nhau.'
+ ],
+ actions:[
+  {lead:'Viết về 1 đám đông nhỏ lặp lại.', text:'Mọi bài đều hướng đến cùng 1 nhóm đối tượng (ví dụ: người kinh doanh online U40). Trong vòng 2 tháng, họ sẽ cảm được "bạn viết cho tôi".'},
+  {lead:'Xây "thương hiệu câu".', text:'Mỗi bài có 1 câu mở ký hiệu. Ví dụ của mình: "Mình ngồi với 1 khách hàng hôm qua...". Sau vài tháng, người xem nhìn câu mở là biết bài của bạn.'},
+  {lead:'Đặt biệt danh / signature.', text:'"Nhung Tech AI — tôi chia sẻ AI cho người thật". Kết bài dán câu này. Lặp lại 100 lần. Người xem ghi nhớ vào não.'},
+  {lead:'Đăng ảnh mặt rõ ở nhiều bài khác nhau.', text:'Người xem cần nhìn thấy mặt bạn nhiều lần để nhớ. Đừng đăng toàn ảnh quote và graphic.'},
+  {lead:'Tôn vinh độc giả của mình.', text:'"Hôm qua chị Tươi comment bài mình một câu làm mình suy nghĩ cả tối." Họ cảm thấy được nhớ. Họ quay lại thường xuyên.'},
+  {lead:'Tổ chức đăng vào giờ cố định.', text:'8h sáng thứ hai. 9h tối thứ tư. Người xem huấn luyện được. Họ sẽ mở Facebook vào giờ đó — gõ tên bạn nếu không thấy bài trên newsfeed.'},
+  {lead:'Nói đi nói lại 1 quan điểm cốt lõi.', text:'Ví dụ của mình: "AI cho người thật, không cho dev". Mỗi bài quay quanh câu đó. Sau 3 tháng, người ta nhắc mình = nhắc câu đó.'}
+ ],
+ mistake:'Đừng cố chiều tất cả đám đông. Một kênh cố viết cho tất cả mọi người cuối cùng không ai nhớ. Tập trung vào 1 nhóm 500–1000 người và phục vụ họ đến cùng — hơn là 10.000 follow nhạt.',
+ today:'Viết 1 câu mô tả độc giả của bạn: "Mình viết cho [đối tượng] đang [vấn đề] muốn [kết quả]". Dán câu đó vào info trang. Kiểm tra mỗi bài: có viết cho họ không?'
+},
+{num:'09', title:'<span class="hl">ĐÚNG CẢM XÚC</span> người xem còn quan trọng hơn đúng giờ đăng',
+ quote:'Đúng giờ, sai cảm xúc = flop. Đúng cảm xúc, sai giờ = vẫn nổ. Đừng nhìn bảng analytics, hãy nhìn khán giả của bạn.',
+ story:[
+  'Sáng 8h thứ hai. Ai cũng bảo là giờ vàng. Mình đăng 1 bài kiến thức về prompt. Reach 600. Nhạt, đổ công vô ích.',
+  'Tối chủ nhật 11h, mình đăng 1 bài trắc ẩn về việc sợ bắt đầu tuần mới. <b>Reach 28k.</b>',
+  'Sự khác biệt không ở giờ đăng. Ở cảm xúc. Chủ nhật tối 11h — đám đông đang lo lắng về tuần mới. Cảm xúc của họ và bài của mình khớp nhau. Cảm giác <i>tôi được hiểu</i> — mạnh hơn mọi giờ đăng vàng.',
+  'Vậy nên: đừng đăng theo lịch — đăng theo nhịp cảm xúc của khán giả.'
+ ],
+ actions:[
+  {lead:'Map cảm xúc theo ngày trong tuần.', text:'Thứ 2 sáng: mệt. Thứ 6 chiều: nhẹ nhõm. Chủ nhật tối: lo âu. Viết bài khớp với cảm xúc đó, không ngược.'},
+  {lead:'Đăng bài động viên tối chủ nhật 21–23h.', text:'Khán giả đang lo lắng tuần mới. Bài động viên đúng lúc = người ta save, share.'},
+  {lead:'Đăng bài thật lòng vào thứ 6 tối.', text:'Cuối tuần — người ta thư giãn, mở lòng. Chia sẻ tâm sự, kể chuyện cá nhân — reach cao hơn ngày thường.'},
+  {lead:'Tránh đăng bài bán hàng vào thứ 2 sáng.', text:'Ai cũng bận rộn, căng thẳng. Đụng vào bài bán của bạn là họ skip. Đăng bài kiến thức, khơi dậy tư duy.'},
+  {lead:'Tung bài bán hàng vào giữa tuần (thứ 3, thứ 4).', text:'Khán giả đã vào nhịp công việc. Họ cởi mở với việc móc ví hơn.'},
+  {lead:'Đăng bài tranh luận vào thứ bảy sáng.', text:'Cuối tuần, người ta rảnh, muốn cãi. Bài phân cực đăng vào giờ này — comment vụt reach.'},
+  {lead:'Đăng bài nhẹ nhàng vào ngày lễ.', text:'Đừng bán. Đừng dạy. Kể 1 chuyện mỉm cười. Mọi người nhớ và cảm mến bạn thêm.'}
+ ],
+ mistake:'Đừng tin mù quáng vào bảng giờ vàng trong Insights. Đó chỉ là giờ khán giả online — không phải giờ họ sẵn sàng đọc bài bạn. Cảm xúc > giờ đăng.',
+ today:'Nhìn 5 bài reach cao nhất của bạn. Đăng vào thứ mấy, giờ nào, cảm xúc gì? Viết thành bảng cảm xúc của riêng bạn. Đó là bản đồ tiền của bạn.'
+},
+{num:'10', title:'Người kiếm tiền mạnh <span class="hl">BÁN NIỀM TIN, GÓC NHÌN, CÂU CHUYỆN</span> — rồi mới bán sản phẩm',
+ quote:'Bán sản phẩm trực tiếp — người ta so giá. Bán niềm tin — người ta trả giá của bạn mà không hỏi vì sao.',
+ story:[
+  'Cùng 1 nhãn hiệu mỹ phẩm, có 2 cách bán. Cách 1: đăng ảnh sản phẩm, giá 350k, freeship. Cách 2: kể câu chuyện bạn đã từng bị mụn nặng, tự ti, trốn tránh đám đông — và bạn dùng sản phẩm này thế nào. <b>Cách 2 bán đơn giá 700k vẫn hết hàng.</b>',
+  'Sự khác: cách 1 bán <i>sản phẩm</i>. Cách 2 bán <i>niềm tin rằng cuộc đời tôi có thể thay đổi</i>. Món cách 2 đắt gấp đôi — vẫn bán chạy hơn.',
+  'Mình nhớ hồi mình mới bán dịch vụ AI, giá 800k. Khách hỏi "Sao đắt vậy em?". Mình cảm giác mình không xứng đáng. Một năm sau, mình bán cùng dịch vụ giá 8 triệu, không ai hỏi giá — chỉ hỏi "em còn nhận không?". Mình không đổi sản phẩm. <b>Mình đổi câu chuyện.</b>',
+  'Đừng bán thứ bạn có. Bán thứ bạn là. Thứ bạn là — không ai sao chép được.'
+ ],
+ actions:[
+  {lead:'Viết manifesto nghề.', text:'1 bài dài kể vì sao bạn làm nghề này, điều gì làm bạn nổi giận, bạn muốn thay đổi điều gì. Đó là bài bán mạnh nhất cả năm.'},
+  {lead:'4 loại bài đan xen.', text:'25% bán niềm tin (manifesto, quan điểm). 25% bán góc nhìn (cách bạn thấy vấn đề). 25% bán câu chuyện (case khách hàng). 25% bán sản phẩm / dịch vụ.'},
+  {lead:'Gắn sản phẩm vào một lực phản diện.', text:'Bạn không bán khóa học — bạn chống nạn lừa đảo khóa online. Không bán mỹ phẩm — chống tiêu chuẩn sắc đẹp phi thực. Có kẻ thù — có đồng minh.'},
+  {lead:'Khi bán, kể câu chuyện khách hàng trước.', text:'Khách tên gì, trước khi gặp bạn họ ở đâu, sau khi dùng sản phẩm họ đến đâu. Kết bài mới đặt link chốt đơn.'},
+  {lead:'Bán trong mọi bài, không chỉ bài có offer.', text:'Mỗi bài kể chuyện đều ngầm chứng minh: tôi hiểu vấn đề, tôi có giải pháp. Khi bài bán đến, khách đã tin từ 30 bài trước.'},
+  {lead:'Tăng giá, đừng giảm giá.', text:'Khuyến mãi phá niềm tin. Khi bạn giảm 50% — khách hiểu sản phẩm của bạn đáng 50% giá gốc. Kiểm soát giá = kiểm soát niềm tin.'},
+  {lead:'Thể hiện sự bận rộn.', text:'"Tuần này mình chỉ nhận 5 khách", "Lịch hẹn tháng sau đã đầy". Sự hiếm khiến sản phẩm có giá.'},
+  {lead:'Đặt bậc giá.', text:'Thấp: ebook 99k. Trung: khóa online 990k. Cao: coaching 9.9 triệu. Cao hơn: package 49 triệu. Mỗi bậc nuôi bậc trên — Money Model của Hormozi.'}
+ ],
+ mistake:'Sai lầm chuỗi: viết 30 bài kiến thức rồi mới viết 1 bài bán lộ liễu. Khách sốc — "Ủa, em bán hàng à?". Phải luôn có dấu vết nghề của bạn trong mỗi bài: chữ ký, tag dịch vụ, comment tự giới thiệu.',
+ today:'Viết 1 câu manifesto: "Sao mình không thể để [một vấn đề] xảy ra nữa?". Đó là gốc. Mọi sản phẩm, mọi bài đăng sẽ nảy từ câu đó.'
+}
+];
+
+/* -------- Static (non tư-duy) chapter HTML -------- */
+const coverHTML = `
+  <div class="hero-cover">
+    <div class="tag tts-block">SẢN PHẨM SỐ — BẢN QUYỀN NHUNG TECH AI</div>
+    <h1 class="tts-block">Tư Duy Facebook Để Kiếm Tiền</h1>
+    <p class="sub tts-block">10 tư duy đột phá cho người kinh doanh online<br>Dành cho người mới bắt đầu kiếm tiền trên Facebook</p>
+    <div class="cover-badge tts-block">
+      <b>★ Cam kết chuyển hóa</b><br>
+      Đọc trong 60 phút. Áp dụng đúng trong 30 ngày. Reach, tương tác và đơn hàng của bạn sẽ không còn như cũ — vì bạn không còn chơi sai luật chơi.
+    </div>
+    <p style="margin-top:26px; font-weight:800;" class="tts-block">NHUNG TECH AI</p>
+    <p style="margin-top:-14px; color:var(--ink-soft);" class="tts-block">Startup AI</p>
+  </div>`;
+
+const hookHTML = `
+  <div class="chap-eyebrow">Hook — Đọc trước khi bắt đầu</div>
+  <h1 class="chap-title tts-block">Đăng bài như đốt tiền, hay đăng bài như in tiền?</h1>
+  <p class="tts-block">Nếu bạn đã đăng hàng trăm bài trên Facebook mà vẫn đếm reach bằng đầu ngón tay, vẫn chưa có đơn nào từ đó — thì vấn đề không nằm ở việc bạn lười. Mà là bạn đang chơi sai cuộc chơi.</p>
+  <p class="tts-block">Cuốn sách này không dạy bạn đăng bài đẹp hơn. Nó dạy bạn hiểu Facebook đang muốn gì, để mỗi bài bạn đăng đều là một bước dịch chuyển dòng tiền về phía bạn.</p>
+  <p class="tts-block">10 tư duy. 1 lộ trình 90 ngày. 3 bonus công cụ thực chiến. Đủ để bạn dừng việc đăng bài như đốt tiền — và bắt đầu đăng bài như in tiền.</p>`;
+
+const promiseHTML = `
+  <div class="chap-eyebrow">Lời hứa chuyển hóa — Trái tim của cuốn sách</div>
+  <h1 class="chap-title tts-block">Bạn của 30 ngày sau sẽ khác bạn của hôm nay</h1>
+  <p class="tts-block">Mình không hứa bạn giàu sau 1 đêm. Mình hứa điều thực tế hơn — và giá trị hơn: <b>làm đúng và đủ trong 30 ngày, bạn sẽ chuyển hóa từ người đăng bài theo cảm tính thành người vận hành kênh theo hệ thống.</b></p>
+  <div class="sec-label">✗ Trước khi đọc</div>
+  <ul class="tts-block"><li>Đăng bài theo cảm hứng, reach vài chục — vài trăm</li><li>Không hiểu vì sao bài flop, vì sao reach rơi</li><li>Bán hàng lộ liễu, khách lướt qua, so giá từng nghìn</li><li>Chạy theo follow ảo, đổi ngách liên tục</li><li>Không có dữ liệu — chỉ có đoán mò</li></ul>
+  <div class="sec-label">✓ Sau 30 ngày áp dụng</div>
+  <ul class="tts-block"><li>Biết chính xác vì sao mỗi bài nổ hoặc flop</li><li>Có bảng dữ liệu riêng: hook nào, giờ nào, cảm xúc nào ra tiền</li><li>Có ít nhất 1 series đang chạy và khán giả chờ bài của bạn</li><li>Có bài bán hàng đầu tiên bán bằng niềm tin — không cần giảm giá</li><li>Có đơn hàng / inbox hỏi mua đầu tiên từ nội dung organic</li></ul>
+  ${box('remember','★ Cam kết 3 điều của Nhung Tech AI', `
+    <p class="tts-block"><b>Cam kết 1 — Không lý thuyết suông.</b> Mọi tư duy đều kèm hành động cụ thể làm được ngay hôm nay, kèm sai lầm thường gặp để bạn không phải trả giá như mình.</p>
+    <p class="tts-block"><b>Cam kết 2 — Đo được bằng con số.</b> Sau 30 ngày làm đúng, reach trung bình và tương tác của bạn tăng rõ rệt so với 30 ngày trước đó — bạn tự kiểm chứng bằng bảng theo dõi ở cuối sách.</p>
+    <p class="tts-block" style="margin:0;"><b>Cam kết 3 — Đồng hành đến cùng.</b> Làm đúng 30 ngày mà chưa thấy chuyển biến? Inbox "Nhung Tech AI" kèm bảng theo dõi của bạn — mình sẽ trực tiếp xem và chỉ ra điểm nghẽn, miễn phí.</p>
+  `)}`;
+
+const tocHTML = `
+  <div class="chap-eyebrow">Mục lục</div>
+  <h1 class="chap-title tts-block">10 tư duy đột phá</h1>
+  <table class="toc">
+    <tr><td class="n">01</td><td>Facebook ưu tiên khả năng giữ người xem, không ưu tiên nhiều follow</td></tr>
+    <tr><td class="n">02</td><td>Một video viral có thể cứu sống cả tài khoản flop</td></tr>
+    <tr><td class="n">03</td><td>Facebook đánh giá cả hành vi tài khoản: spam, copy, đăng bán quá nhiều sẽ giảm reach</td></tr>
+    <tr><td class="n">04</td><td>Comment tranh luận mạnh đôi khi giúp viral hơn cả nội dung</td></tr>
+    <tr><td class="n">05</td><td>Nội dung dạng series / hành trình được Facebook đẩy rất mạnh</td></tr>
+    <tr><td class="n">06</td><td>Video quá hoàn hảo dễ mất cảm giác thật — giảm giữ chân</td></tr>
+    <tr><td class="n">07</td><td>Nội dung không tạo cảm xúc rất khó viral dù kiến thức hay</td></tr>
+    <tr><td class="n">08</td><td>Facebook đánh giá cực cao việc người xem quay lại tìm bạn</td></tr>
+    <tr><td class="n">09</td><td>Đúng cảm xúc người xem còn quan trọng hơn đúng giờ đăng</td></tr>
+    <tr><td class="n">10</td><td>Người kiếm tiền mạnh bán niềm tin, góc nhìn, câu chuyện và cảm xúc trước khi bán sản phẩm</td></tr>
+  </table>
+  <div class="sec-label">Bonus thực chiến — Phiên bản 2.0</div>
+  <table class="toc">
+    <tr><td class="n">B1</td><td>Lộ trình 9 tuần + Kế hoạch 90 ngày chi tiết từng giai đoạn</td></tr>
+    <tr><td class="n">B2</td><td>Checklist 10 điểm kiểm tra trước khi bấm Đăng</td></tr>
+    <tr><td class="n">B3</td><td>20 công thức hook 3 giây — điền vào chỗ trống là dùng được</td></tr>
+    <tr><td class="n">B4</td><td>Bản cam kết & bảng theo dõi 30 ngày chuyển hóa</td></tr>
+  </table>`;
+
+const introHTML = `
+  <div class="chap-eyebrow">Giới thiệu tác giả</div>
+  <h1 class="chap-title tts-block">Xin chào, mình là Nhung Tech AI</h1>
+  <p class="tts-block" style="font-style:italic;color:var(--ink-soft);">Startup AI · Tư vấn ứng dụng AI cho kinh doanh</p>
+  <p class="tts-block">Mình là <b>Nhung Tech AI</b> — một startup trong lĩnh vực AI.</p>
+  <p class="tts-block">Mình có niềm đam mê đặc biệt với việc ứng dụng AI vào kinh doanh, xây dựng các mô hình tạo thu nhập hiệu quả từ công nghệ này.</p>
+  <p class="tts-block">Mình tin rằng: AI không phải là câu chuyện của người giỏi công nghệ. AI là công cụ của người biết dùng đúng cách. Và Facebook — với hơn 70 triệu người dùng tại Việt Nam — là sân chơi dễ tiếp cận nhất để bạn biến kiến thức và câu chuyện của mình thành tiền.</p>
+  <p class="tts-block">Nếu bạn đang trong giai đoạn bắt đầu, thì tài liệu này sẽ là một nguồn hướng dẫn cực kỳ hữu ích dành cho bạn.</p>
+  <p class="tts-block">Mình không viết cuốn này để bạn thán phục mình. Mình viết để bạn đóng sách lại, mở Facebook lên, và bắt đầu làm khác đi ngay hôm nay. Đồng hành cùng mình nha.</p>
+  <div class="quote-box tts-block">"Kênh của bạn không cần bạn giỏi hơn người khác. Nó chỉ cần bạn kiên trì đúng cách hơn hôm qua." — Nhung Tech AI</div>`;
+
+const prefaceHTML = `
+  <div class="chap-eyebrow">Lời tựa</div>
+  <h1 class="chap-title tts-block">Vì sao là cuốn sách này?</h1>
+  <p class="tts-block"><b>Cuốn sách này khác gì với hàng trăm khóa học content trên thị trường?</b></p>
+  <p class="tts-block">Khác ở chỗ: đây không phải mẹo vặt. Đây là một hệ thống.</p>
+  <p class="tts-block">Mỗi tư duy trong cuốn sách này là một đòn bẩy. Một đòn bẩy có thể tăng kết quả của bạn lên 2 lần. Mười đòn bẩy lồng vào nhau tạo ra hiệu ứng nhân — không phải hiệu ứng cộng.</p>
+  <p class="tts-block">Alex Hormozi từng viết: <i>2 lần giá trị mỗi khách × 2 lần số lượng khách × 2 lần tốc độ = 8 lần tăng trưởng</i>. Mình đang dựng cho bạn một đường cong tương tự cho Facebook.</p>
+  <p class="tts-block">Bạn sẽ đọc cuốn này trong 60 phút. Nhưng bạn sẽ sống với nó ít nhất 90 ngày. Mỗi bước đều có phần <b>Hành động ngay hôm nay</b> và phần <b>Sai lầm thường gặp</b> — đừng đọc lướt qua. Đó là chỗ tạo ra tiền.</p>
+  ${box('remember','★ Cam kết của mình', `<p class="tts-block" style="margin:0;">Nếu bạn làm đúng 10 bước trong 30 ngày, reach, tương tác và đơn hàng của bạn sẽ không còn như cũ. Không phải vì bạn viết hay hơn. Mà vì bạn đang chơi đúng luật chơi. Và nếu làm đúng mà chưa chuyển biến — mình sẽ trực tiếp xem bảng theo dõi của bạn và chỉ ra điểm nghẽn.</p>`)}
+  <p class="tts-block" style="font-weight:700;">Sẵn sàng chưa? Lật qua trang.</p>`;
+
+const roadmapHTML = `
+  <div class="chap-eyebrow">Tổng kết & hướng dẫn áp dụng</div>
+  <h1 class="chap-title tts-block">Lộ trình 90 ngày xây kênh Facebook</h1>
+  <p class="tts-block">Bạn vừa đi qua 10 tư duy. Mỗi tư duy là một đòn bẩy — nhưng bạn sẽ quên hết nếu không có lộ trình áp dụng. Đây là bản đồ mình đã dùng để đi từ 0 đến kênh có dòng tiền.</p>
+
+  <div class="roadmap-block">
+    <div class="roadmap-head tts-block">NGÀY 1–7 · AUDIT — KHÔNG ĐĂNG BÀI GÌ MỚI</div>
+    <ul class="roadmap-body tts-block">
+      <li>Viết ra 1 câu: <i>Tôi viết cho [đối tượng] đang [vấn đề] muốn [kết quả]</i>. Cắt trang cá nhân, info, cả bản thân theo câu đó.</li>
+      <li>Đọc 20 bài đăng gần nhất. Đếm: bao nhiêu bài bán? bao nhiêu bài giá trị? Tỷ lệ bán > 30% — bạn đang tự phá reach.</li>
+      <li>Xóa / ẩn các bài copy y nguyên từ người khác. Facebook nhớ dấu vết đó cả năm.</li>
+      <li>Dừng hết hành vi spam: comment dưới nhóm kéo follow, inbox hàng loạt, tự tiếp thị dưới bài người lạ.</li>
+      <li>Lập 1 file Google Sheet với 6 cột: Ngày, Hook, Chủ đề, Cảm xúc, Reach, Comment. Đây là bảng điều khiển của bạn.</li>
+    </ul>
+  </div>
+  <div class="roadmap-block">
+    <div class="roadmap-head tts-block">NGÀY 8–30 · BẮT NHỊP — ĐĂNG 1 BÀI/NGÀY</div>
+    <ul class="roadmap-body tts-block">
+      <li>Quay 1 video selfie 60 giây giới thiệu lại bản thân. Đây là bài đầu tiên của giai đoạn mới.</li>
+      <li>Đăng đúng 1 bài/ngày. Không nhiều hơn. Không ít hơn.</li>
+      <li>Cấu trúc tuần: 3 bài cảm xúc/câu chuyện, 2 bài kiến thức, 1 bài tranh luận, 1 bài bán hàng / dịch vụ.</li>
+      <li>Mỗi bài phải có hook 3 giây đầu khiến chính bạn dừng lại. Test 3 hook trước khi chọn (dùng Bonus B3).</li>
+      <li>Mỗi bài phải kết bằng 1 câu hỏi mở, không kết bằng "cảm ơn".</li>
+      <li>Reply hết comment trong 2 tiếng đầu. Người xem chờ bạn.</li>
+      <li>Hẹn lịch đăng cố định: 8h sáng hoặc 21h tối. Khán giả huấn luyện được.</li>
+      <li>Mỗi Chủ nhật, mở file Sheet, tìm 3 bài reach cao nhất. Viết 3 bài mới theo đúng công thức đó cho tuần sau.</li>
+    </ul>
+  </div>
+  <div class="roadmap-block">
+    <div class="roadmap-head tts-block">NGÀY 31–60 · LÊN NÒNG — SERIES + OFFER THỬ</div>
+    <ul class="roadmap-body tts-block">
+      <li>Chạy 1 series 14 ngày theo ngách chính của bạn. Đánh số từ 01/14 đến 14/14. Viết 5 bài đầu trước khi bắt đầu.</li>
+      <li>Vào bài 12/14, mở offer thử giá 99k–299k (sản phẩm thấp): một ebook, một bộ template, một mini course.</li>
+      <li>Vào bài 14/14, mở offer chính: khóa online, coaching, hoặc dịch vụ chính của bạn.</li>
+      <li>Lúc đó, viết 2 bài phân cực trong tuần để bắt tranh luận. Reach bật lên = người xem mới vào offer.</li>
+    </ul>
+  </div>
+  <div class="roadmap-block">
+    <div class="roadmap-head tts-block">NGÀY 61–90 · SCALE — HỆ THỐNG ĐỀU ĐẶN</div>
+    <ul class="roadmap-body tts-block">
+      <li>Đo: comment / inbox hỏi mua / đơn thực. Mục tiêu: ít nhất 3–5 đơn lớn hoặc 30 đơn nhỏ.</li>
+      <li>Nếu ít đơn — không đổi ngách. Đổi câu chuyện. Viết thêm manifesto. Củng cố niềm tin.</li>
+      <li>Phân lại thời gian: 70% sáng tạo (viết bài), 20% tương tác (reply, comment), 10% đo lường (file Sheet).</li>
+      <li>Bắc 3 cấp offer: thấp (99k–500k), trung (1–10 triệu), cao (10–50 triệu). Mỗi cấp có câu chuyện dẫn dắt riêng.</li>
+      <li>Reup bài nổ của 60 ngày trước với hook mới. Facebook coi như bài mới.</li>
+      <li>Mở chuỗi livestream có chủ đề, lịch cố định. Livestream là cơ hội bán mạnh nhất Facebook đang ưu tiên.</li>
+      <li>Kết nối với 5–10 người cùng ngách. Comment vào bài nhau (không spam). Facebook đẩy reach cộng hưởng.</li>
+      <li>Mỗi tháng, tổng kết: thu nhập từ Facebook, tỷ lệ chuyển đổi, top 3 bài hiệu quả nhất. Tối ưu vòng lặp.</li>
+    </ul>
+  </div>
+  <div class="quote-box tts-block">"Không ai xây kênh trong 1 đêm. Nhưng ai cũng có thể xây kênh trong 90 ngày — nếu làm đúng việc mỗi ngày." — Nhung Tech AI</div>`;
+
+const bonusB2HTML = `
+  <div class="chap-eyebrow">Bonus B2 — Công cụ thực chiến</div>
+  <h1 class="chap-title tts-block">Checklist 10 điểm trước khi bấm Đăng</h1>
+  <p class="tts-block">Chụp màn hình trang này để cạnh bàn làm việc. Bài nào đạt đủ 10/10 mới được bấm Đăng. Kỷ luật nhỏ này là thứ tách người có reach khỏi người than reach.</p>
+  <ol class="checklist tts-block">
+    <li><b>Hook 3 giây:</b> Dòng đầu có khiến chính bạn dừng lại không? Nếu bạn còn lưỡng lự — người lạ sẽ lướt qua.</li>
+    <li><b>Đúng độc giả:</b> Bài này viết cho đúng 1 nhóm người bạn đã định nghĩa chưa, hay viết cho "tất cả mọi người"?</li>
+    <li><b>Cảm xúc:</b> Bài có ít nhất 1 khoảnh khắc cảm xúc thật (vấp ngã, con số tiền, chi tiết 5 giác quan) không?</li>
+    <li><b>Cấu trúc dễ đọc:</b> Mỗi 2–3 dòng đã xuống hàng chưa? Có đoạn nào dày quá 4 dòng không?</li>
+    <li><b>Câu hỏi giữ chân:</b> Có ít nhất 1 câu hỏi ở giữa bài và 1 câu hỏi mở ở cuối bài chưa?</li>
+    <li><b>Không kết "cảm ơn":</b> Câu cuối có buộc người đọc phải comment không, hay chỉ chào tạm biệt?</li>
+    <li><b>Tỷ lệ 4-1:</b> Trong 5 bài gần nhất (tính cả bài này), có quá 1 bài bán hàng không?</li>
+    <li><b>Link ngoài:</b> Bài có gắn link ra ngoài Facebook không? Nếu có — chuyển xuống comment đầu tiên.</li>
+    <li><b>Giờ + cảm xúc:</b> Giờ đăng có khớp với cảm xúc khán giả hôm nay không?</li>
+    <li><b>Sẵn sàng trực chiến:</b> Bạn có rảnh 2 tiếng sau khi đăng để reply toàn bộ comment không? Nếu không — hẹn giờ đăng lại.</li>
+  </ol>
+  ${box('today','✓ Quy tắc vàng', `<p class="tts-block" style="margin:0;">Bài đạt 8–9/10: sửa cho đủ rồi đăng. Bài dưới 7/10: đừng tiếc — viết lại từ hook. Một bài flop không chỉ mất 1 bài, nó còn kéo điểm tài khoản của bạn xuống.</p>`)}`;
+
+const bonusB3HTML = `
+  <div class="chap-eyebrow">Bonus B3 — Công cụ thực chiến</div>
+  <h1 class="chap-title tts-block">20 công thức hook 3 giây</h1>
+  <p class="tts-block">Điền vào chỗ trống [ ] bằng chất liệu thật của bạn. Quy tắc: mỗi bài test 3 hook, chọn hook khiến chính bạn muốn đọc tiếp nhất.</p>
+  ${[
+    ['Con số + mất mát','"Mình mất [số tiền] trong [thời gian] để học được điều này."','Bài kể vấp ngã, bài kinh nghiệm'],
+    ['Kết quả ngược đời','"[Kết quả lớn] mà không cần [thứ ai cũng nghĩ là bắt buộc]."','Bài kiến thức, phá định kiến'],
+    ['Câu thoại','"«[Câu nói của nhân vật]» — [ai] nhắn cho mình lúc [thời điểm]."','Bài câu chuyện khách hàng'],
+    ['Thú nhận','"Mình đã sai suốt [thời gian] về [chủ đề]. Hôm nay mình sửa lại."','Bài quan điểm, xây niềm tin'],
+    ['Danh sách số lẻ','"7 sai lầm mình đã mắc khi [việc gì đó] — số 5 đau nhất."','Bài kiến thức tổng hợp'],
+    ['Cảnh báo','"Nếu bạn đang [hành vi phổ biến], dừng lại 1 phút đọc bài này."','Bài sửa sai lầm phổ biến'],
+    ['So sánh sốc','"[A] 12k follow reach 300. [B] 500 follow reach 5k. Khác nhau ở 1 chỗ."','Bài phân tích tư duy'],
+    ['Trước – Sau','"3 tháng trước: [tình trạng tệ]. Hôm nay: [kết quả]. Đây là những gì đã thay đổi."','Bài hành trình, series'],
+    ['Ngược số đông','"Mọi người bảo phải [X]. Mình làm ngược lại — và [kết quả]."','Bài phân cực, tranh luận'],
+    ['Bí mật nghề','"Điều mà không ai trong ngành [nghề] nói với bạn:"','Bài góc nhìn insider'],
+    ['Câu hỏi phân cực','"Theo bạn: [lựa chọn A] hay [lựa chọn B] quan trọng hơn trong 5 năm tới?"','Bài kéo comment tranh luận'],
+    ['Khoảnh khắc thấp nhất','"[Giờ khuya], mình ngồi [chi tiết cụ thể], tự hỏi có nên bỏ cuộc."','Bài cảm xúc, kết nối'],
+    ['Đếm ngược','"Ngày [x]/[tổng] của hành trình [tên series]: hôm nay mình [việc gì]."','Bài series hàng ngày'],
+    ['Lời hứa thời gian','"Đọc bài này mất 2 phút. Áp dụng được ngay tối nay."','Bài hướng dẫn nhanh'],
+    ['Case bằng chứng','"[Tên khách] từ [tình trạng cũ] đến [kết quả mới] trong [thời gian]. Cách làm:"','Bài bán hàng bằng câu chuyện'],
+    ['Tự vấn','"Bạn có từng đăng bài xong cứ 5 phút mở điện thoại xem có ai like chưa?"','Bài đồng cảm, giữ chân'],
+    ['Con số vô lý','"1 bài viết. 1.300 đơn hàng. 3 ngày. Không chạy quảng cáo."','Bài kết quả, mở offer'],
+    ['Nếu... thì đừng','"Nếu bạn chỉ đọc mà không làm — đừng đọc tiếp bài này."','Bài thử thách hành động'],
+    ['Xin lỗi ngược','"Bài này sẽ làm nhiều người khó chịu. Nhưng mình vẫn phải viết."','Bài quan điểm mạnh'],
+    ['Món quà','"Mình tặng bạn thứ mình từng phải trả [số tiền] để học: [chủ đề]."','Bài giá trị, kéo save/share']
+  ].map((h,i)=>`<div class="hookrow tts-block"><b>${i+1}. ${h[0]}</b> — ${h[1]}<span class="use">Dùng cho: ${h[2]}</span></div>`).join('')}
+  ${box('remember','★ Cách dùng đúng', `<p class="tts-block" style="margin:0;">Hook chỉ là lời hứa. Thân bài phải trả đủ lời hứa đó — nếu không, người đọc mất niềm tin và lần sau sẽ lướt qua bạn ngay. Hook mạnh + thân bài rỗng = tự phá thương hiệu.</p>`)}`;
+
+const bonusB4HTML = `
+  <div class="chap-eyebrow">Bonus B4 — Bản cam kết chuyển hóa</div>
+  <h1 class="chap-title tts-block">Cam kết 30 ngày của bạn</h1>
+  <p class="tts-block">Người viết cam kết ra giấy và theo dõi mỗi ngày có tỷ lệ hoàn thành cao hơn hẳn người chỉ "ghi nhớ trong đầu". Đây là hợp đồng của bạn — với chính bạn.</p>
+  ${box('remember','Tôi cam kết — trong 30 ngày tới', `
+    <ul style="margin:6px 0 0;">
+      <li class="tts-block">Đăng đủ <b>30 bài</b> — mỗi ngày 1 bài, không viện lý do.</li>
+      <li class="tts-block">Mỗi bài qua đủ <b>checklist 10 điểm</b> trước khi bấm Đăng.</li>
+      <li class="tts-block">Ghi <b>nhật ký reach</b> vào file Sheet mỗi tối, tổng kết mỗi Chủ nhật.</li>
+      <li class="tts-block">Không đổi ngách, không so sánh với người khác, không bỏ giữa chừng.</li>
+    </ul>`)}
+  <div class="sec-label">Bảng theo dõi 30 ngày — bấm vào từng ngày sau khi đăng bài</div>
+  <div class="tracker" id="tracker30"></div>
+  <p class="tts-block" style="font-style:italic; color:var(--ink-soft);">Hoàn thành 30/30 ô mà kênh chưa chuyển biến? Chụp lại tiến độ này, inbox "Nhung Tech AI" — mình giữ đúng Cam kết 3: trực tiếp xem và chỉ ra điểm nghẽn cho bạn, miễn phí.</p>`;
+
+const thanksHTML = `
+  <div class="hero-cover">
+    <h1 class="tts-block">Cảm ơn bạn</h1>
+    <p class="sub tts-block">đã đầu tư vào cuốn sách này — và quan trọng hơn, đầu tư vào phiên bản mới của chính bạn.</p>
+    <div class="quote-box tts-block" style="text-align:left;">"You cannot lose if you do not quit." — Alex Hormozi</div>
+    <div class="sec-label" style="text-align:left;">Kết nối với Nhung Tech AI</div>
+    <p class="tts-block" style="text-align:left;"><b>Facebook</b> — Nhung Tech AI (tìm kiếm trực tiếp trên Facebook)<br><b>Dịch vụ</b> — Landing page · Ebook · Ảnh/Video AI · Coaching ChatGPT, Notion</p>
+    ${box('remember','★ Nhung Tech AI có thể đồng hành cùng bạn', `
+      <ul style="margin:6px 0 0; text-align:left;">
+        <li class="tts-block"><b>Landing page</b> — Trang bán hàng chuyên nghiệp, đặt được đơn ngay</li>
+        <li class="tts-block"><b>Ebook & sản phẩm số</b> — Đóng gói kiến thức của bạn thành sản phẩm bán được</li>
+        <li class="tts-block"><b>Ảnh & video AI</b> — Hình ảnh thương hiệu chuyên nghiệp, tiết kiệm 90% chi phí</li>
+        <li class="tts-block"><b>Coaching ChatGPT, Notion</b> — Học dùng AI để làm việc nhanh gấp 10 lần</li>
+        <li class="tts-block"><b>Xây thương hiệu cá nhân</b> — Biến trang Facebook thành kênh kiếm tiền bền vững</li>
+      </ul>`)}
+    <p style="margin-top:20px;"><a href="/" class="tts-block" style="display:inline-block; padding:12px 28px; border-radius:30px; background:linear-gradient(135deg,#2F84FF,#9147FF); color:#fff; text-decoration:none; font-weight:800;">← Về trang chủ Nhung Tech AI</a></p>
+  </div>`;
+
+/* -------- Assemble full chapter list -------- */
+const chapters = [
+  {title:'Bìa sách', html:coverHTML},
+  {title:'Hook mở đầu', html:hookHTML},
+  {title:'Lời hứa chuyển hóa', html:promiseHTML},
+  {title:'Mục lục', html:tocHTML},
+  {title:'Giới thiệu tác giả', html:introHTML},
+  {title:'Lời tựa', html:prefaceHTML},
+  ...tuduyData.map(t=>({title:`Tư duy ${t.num}`, html:tuduyChapter(t)})),
+  {title:'Lộ trình 90 ngày', html:roadmapHTML},
+  {title:'Bonus: Checklist 10 điểm', html:bonusB2HTML},
+  {title:'Bonus: 20 công thức hook', html:bonusB3HTML},
+  {title:'Bonus: Cam kết 30 ngày', html:bonusB4HTML},
+  {title:'Cảm ơn & kết nối', html:thanksHTML}
+];
+
+/* ================= APP LOGIC ================= */
+const STORAGE_KEY = 'ntai_docsach_progress_v1';
+const TRACKER_KEY = 'ntai_docsach_tracker_v1';
+let current = 0;
+let readSet = new Set(JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'));
+let trackerDone = new Set(JSON.parse(localStorage.getItem(TRACKER_KEY) || '[]'));
+
+const bookPage = document.getElementById('bookPage');
+const chapRange = document.getElementById('chapRange');
+const chapOf = document.getElementById('chapOf');
+const progressFill = document.getElementById('progressFill');
+const progressLabel = document.getElementById('progressLabel');
+const progressPct = document.getElementById('progressPct');
+const drawerList = document.getElementById('drawerList');
+
+chapRange.max = chapters.length - 1;
+
+function saveProgress(){ localStorage.setItem(STORAGE_KEY, JSON.stringify([...readSet])); }
+function saveTracker(){ localStorage.setItem(TRACKER_KEY, JSON.stringify([...trackerDone])); }
+
+function renderTrackerIfPresent(){
+  const t = document.getElementById('tracker30');
+  if(!t) return;
+  t.innerHTML='';
+  for(let i=1;i<=30;i++){
+    const d = document.createElement('div');
+    d.className = 'd' + (trackerDone.has(i) ? ' done' : '');
+    d.textContent = i;
+    d.onclick = () => {
+      if(trackerDone.has(i)) trackerDone.delete(i); else trackerDone.add(i);
+      saveTracker(); renderTrackerIfPresent();
+    };
+    t.appendChild(d);
+  }
+}
+
+function renderDrawer(){
+  drawerList.innerHTML = chapters.map((c,i)=>`
+    <div class="drawer-item ${i===current?'current':''}" data-i="${i}">
+      <div class="chk">${readSet.has(i)?'✓':''}</div>
+      <div>${c.title}</div>
+    </div>`).join('');
+  drawerList.querySelectorAll('.drawer-item').forEach(el=>{
+    el.addEventListener('click', ()=>{ goTo(parseInt(el.dataset.i)); closeDrawer(); });
+  });
+}
+
+function goTo(i){
+  stopSpeech();
+  current = Math.max(0, Math.min(chapters.length-1, i));
+  bookPage.innerHTML = chapters[current].html;
+  chapRange.value = current;
+  chapOf.textContent = `${chapters[current].title} · ${current+1}/${chapters.length}`;
+  progressLabel.textContent = `${chapters[current].title}`;
+  const pct = Math.round(((current+1)/chapters.length)*100);
+  progressFill.style.width = pct + '%';
+  progressPct.textContent = pct + '%';
+  document.getElementById('btnPrev').disabled = current===0;
+  document.getElementById('btnNext').disabled = current===chapters.length-1;
+  window.scrollTo({top:0, behavior:'instant'});
+  renderTrackerIfPresent();
+  renderDrawer();
+  location.hash = 'c' + current;
+}
+
+document.getElementById('btnPrev').onclick = ()=>goTo(current-1);
+document.getElementById('btnNext').onclick = ()=>goTo(current+1);
+document.getElementById('btnCover').onclick = ()=>goTo(0);
+chapRange.oninput = (e)=>goTo(parseInt(e.target.value));
+
+document.getElementById('btnMarkDone').onclick = ()=>{
+  readSet.add(current); saveProgress(); renderDrawer();
+  const btn = document.getElementById('btnMarkDone');
+  btn.textContent = '✓ Đã đánh dấu hoàn thành!';
+  setTimeout(()=>{ btn.textContent = '✓ Đã đọc xong chương này'; }, 1800);
+};
+
+/* ---- Drawer open/close ---- */
+const drawer = document.getElementById('drawer');
+const drawerBackdrop = document.getElementById('drawerBackdrop');
+function openDrawer(){ drawer.classList.add('show'); drawerBackdrop.classList.add('show'); }
+function closeDrawer(){ drawer.classList.remove('show'); drawerBackdrop.classList.remove('show'); }
+document.getElementById('btnMenu').onclick = openDrawer;
+document.getElementById('drawerClose').onclick = closeDrawer;
+drawerBackdrop.onclick = closeDrawer;
+
+/* ---- Fullscreen ---- */
+document.getElementById('btnFull').onclick = ()=>{
+  if(!document.fullscreenElement){ document.documentElement.requestFullscreen?.(); }
+  else{ document.exitFullscreen?.(); }
+};
+
+/* ================= TEXT-TO-SPEECH (TIẾNG VIỆT) ================= */
+const synth = window.speechSynthesis;
+let speaking = false;
+let blocks = [];
+let blockIndex = 0;
+let viVoices = [];
+let chosenVoice = null;
+const voiceSelect = document.getElementById('voiceSelect');
+const voiceWarn = document.getElementById('voiceWarn');
+
+function isVietnameseVoice(v){
+  const lang = (v.lang || '').toLowerCase();
+  const name = (v.name || '').toLowerCase();
+  return lang.startsWith('vi') || lang.includes('vn') ||
+         name.includes('viet') || name.includes('việt') ||
+         name.includes('hoaimy') || name.includes('namminh');
+}
+
+function pickVoice(){
+  const voices = synth.getVoices();
+  if(!voices || !voices.length) return;
+  viVoices = voices.filter(isVietnameseVoice);
+
+  if(viVoices.length){
+    voiceWarn.style.display = 'none';
+    voiceSelect.style.display = '';
+    voiceSelect.innerHTML = viVoices.map((v,i)=>`<option value="${i}">🇻🇳 ${v.name}</option>`).join('');
+    chosenVoice = viVoices[0];
+  } else {
+    voiceSelect.style.display = 'none';
+    voiceWarn.style.display = 'flex';
+    chosenVoice = null;
+  }
+}
+if(synth){
+  pickVoice();
+  synth.onvoiceschanged = pickVoice;
+  // Một số trình duyệt (Chrome) nạp danh sách giọng bất đồng bộ chậm hơn sự kiện trên.
+  setTimeout(pickVoice, 300);
+  setTimeout(pickVoice, 1200);
+}
+voiceSelect.onchange = ()=>{ chosenVoice = viVoices[parseInt(voiceSelect.value)] || null; };
+
+const voiceHelpModal = document.getElementById('voiceHelpModal');
+const voiceHelpBackdrop = document.getElementById('voiceHelpBackdrop');
+voiceWarn.onclick = ()=>{ voiceHelpModal.style.display = 'block'; voiceHelpBackdrop.classList.add('show'); };
+document.getElementById('voiceHelpClose').onclick = ()=>{ voiceHelpModal.style.display = 'none'; voiceHelpBackdrop.classList.remove('show'); };
+voiceHelpBackdrop.onclick = ()=>{ voiceHelpModal.style.display = 'none'; voiceHelpBackdrop.classList.remove('show'); };
+
+function getRate(){ return parseFloat(document.getElementById('rateSelect').value); }
+function getVol(){ return parseFloat(document.getElementById('volRange').value); }
+
+function clearHighlight(){
+  document.querySelectorAll('.tts-block.reading').forEach(el=>el.classList.remove('reading'));
+}
+
+function speakNextBlock(){
+  clearHighlight();
+  if(blockIndex >= blocks.length){
+    speaking = false;
+    document.getElementById('btnPlay').classList.remove('active');
+    document.getElementById('btnPlay').textContent = '🎧';
+    return;
+  }
+  const el = blocks[blockIndex];
+  el.classList.add('reading');
+  el.scrollIntoView({behavior:'smooth', block:'center'});
+  const text = el.innerText.trim();
+  if(!text){ blockIndex++; speakNextBlock(); return; }
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'vi-VN';
+  if(chosenVoice) u.voice = chosenVoice;
+  u.rate = getRate();
+  u.volume = getVol();
+  u.onend = ()=>{ blockIndex++; if(speaking) speakNextBlock(); };
+  u.onerror = ()=>{ blockIndex++; if(speaking) speakNextBlock(); };
+  synth.speak(u);
+}
+
+function startSpeech(){
+  if(!synth){ alert('Trình duyệt của bạn không hỗ trợ giọng đọc. Hãy thử Chrome hoặc Edge.'); return; }
+  stopSpeech();
+  blocks = Array.from(bookPage.querySelectorAll('.tts-block'));
+  blockIndex = 0;
+  speaking = true;
+  document.getElementById('btnPlay').classList.add('active');
+  document.getElementById('btnPlay').textContent = '⏸';
+  speakNextBlock();
+}
+function stopSpeech(){
+  speaking = false;
+  if(synth) synth.cancel();
+  clearHighlight();
+  document.getElementById('btnPlay').classList.remove('active');
+  document.getElementById('btnPlay').textContent = '🎧';
+}
+document.getElementById('btnPlay').onclick = ()=>{
+  if(speaking){ stopSpeech(); } else { startSpeech(); }
+};
+document.getElementById('rateSelect').onchange = ()=>{
+  if(speaking){ const wasIdx = blockIndex; stopSpeech(); blockIndex = wasIdx; speaking = true; document.getElementById('btnPlay').classList.add('active'); document.getElementById('btnPlay').textContent='⏸'; speakNextBlock(); }
+};
+
+/* ---- init ---- */
+(function init(){
+  const hashMatch = location.hash.match(/^#c(\d+)$/);
+  const start = hashMatch ? parseInt(hashMatch[1]) : 0;
+  goTo(isNaN(start) ? 0 : start);
+})();
+</script>
+</body>
+</html>
