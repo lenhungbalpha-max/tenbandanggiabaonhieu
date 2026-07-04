@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tên Bạn Đáng Giá Bao Nhiêu? — Đọc Sách | Nhung Tech AI</title>
+<meta name="description" content="Đọc online: Tên Bạn Đáng Giá Bao Nhiêu? — 8 Trụ Cột + 8 Sự Vi Diệu xây dựng nhân hiệu cá nhân. Có giọng đọc, có cam kết chuyển hóa 90 ngày.">
+<style>
+  :root{
+    --navy-deep:#060919;
+    --navy:#0A0F2E;
+    --navy-mid:#161F52;
+    --blue:#2F84FF;
+    --purple:#9147FF;
+    --gold:#E5B04D;
+    --gold-dark:#C6923A;
+    --paper:#F7F2E7;
+    --paper-line:#E7DCC4;
+    --ink:#241F16;
+    --ink-soft:#5b5342;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;
+    background:linear-gradient(160deg,var(--navy-deep),var(--navy) 60%,var(--navy-mid));
+    color:#fff;
+    min-height:100vh;
+  }
+  a{color:inherit;}
+
+  /* ---------- TOP BAR ---------- */
+  .topbar{
+    position:sticky; top:0; z-index:40;
+    display:flex; align-items:center; justify-content:space-between;
+    gap:10px; padding:10px 16px;
+    background:linear-gradient(135deg,#161F52,#060919);
+    border-bottom:1px solid rgba(229,176,77,.25);
+  }
+  .topbar .home-link{
+    display:flex; align-items:center; gap:8px;
+    font-size:14px; font-weight:600; color:#cfd6ff; text-decoration:none;
+    white-space:nowrap;
+  }
+  .topbar .home-link:hover{color:var(--gold);}
+  .brand{
+    font-family:Georgia,serif; font-style:italic; color:var(--gold);
+    font-size:14px; display:none;
+  }
+  .controls{
+    display:flex; align-items:center; gap:8px; flex-wrap:wrap; justify-content:flex-end;
+  }
+  .ctrl-btn{
+    display:flex; align-items:center; justify-content:center;
+    width:38px; height:38px; border-radius:50%;
+    background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15);
+    color:#fff; cursor:pointer; font-size:16px; transition:.15s;
+  }
+  .ctrl-btn:hover{background:linear-gradient(135deg,var(--blue),var(--purple)); border-color:transparent;}
+  .ctrl-btn.active{background:linear-gradient(135deg,var(--blue),var(--purple)); border-color:transparent;}
+  select.rate-select{
+    background:rgba(255,255,255,.08); color:#fff; border:1px solid rgba(255,255,255,.15);
+    border-radius:20px; padding:8px 10px; font-size:13px; cursor:pointer;
+  }
+  .vol-wrap{display:flex; align-items:center; gap:6px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); border-radius:20px; padding:6px 12px;}
+  .vol-wrap input[type=range]{width:70px; accent-color:var(--gold);}
+
+  /* ---------- LAYOUT ---------- */
+  .layout{ max-width:1000px; margin:0 auto; padding:22px 16px 140px; }
+  .progress-top{
+    display:flex; align-items:center; gap:10px; margin-bottom:14px; font-size:12px; color:#b7bde8;
+  }
+  .progress-bar-track{ flex:1; height:6px; border-radius:6px; background:rgba(255,255,255,.12); overflow:hidden; }
+  .progress-bar-fill{ height:100%; background:linear-gradient(90deg,var(--gold-dark),var(--gold)); width:0%; transition:width .3s; }
+
+  .book-page{
+    background:var(--paper);
+    color:var(--ink);
+    border-radius:14px;
+    padding:36px 40px 46px;
+    box-shadow:0 20px 60px rgba(0,0,0,.45), 0 0 0 1px rgba(0,0,0,.04);
+    position:relative;
+    background-image:
+      repeating-linear-gradient(rgba(0,0,0,0) 0, rgba(0,0,0,0) 27px, rgba(0,0,0,.025) 28px);
+  }
+  .book-page::before{
+    content:""; position:absolute; left:0; top:0; bottom:0; width:6px;
+    background:linear-gradient(180deg,var(--gold),var(--gold-dark));
+    border-radius:14px 0 0 14px;
+  }
+  @media (max-width:640px){ .book-page{padding:26px 20px 34px;} }
+
+  .chap-eyebrow{
+    font-size:12px; letter-spacing:2px; font-weight:800; color:var(--gold-dark);
+    text-transform:uppercase; margin-bottom:8px;
+  }
+  .chap-title{
+    font-family:Georgia,serif; font-size:clamp(24px,4vw,34px); font-weight:700; line-height:1.25;
+    margin:0 0 18px; color:var(--ink);
+  }
+  .chap-title em, .hl{ font-style:normal; color:var(--purple); }
+  .quote-box{
+    border-left:4px solid var(--gold-dark);
+    background:#F3EBD8;
+    padding:14px 18px; border-radius:0 8px 8px 0; margin:0 0 22px;
+    font-style:italic; color:#4a3d20; font-size:15px;
+  }
+  .sec-label{
+    font-size:12px; letter-spacing:1.5px; font-weight:800; color:var(--blue);
+    text-transform:uppercase; margin:26px 0 10px;
+  }
+  .book-page p{ line-height:1.85; font-size:16px; margin:0 0 16px; color:var(--ink); }
+  .book-page b, .book-page strong{ color:#1b1710; }
+  .book-page ul, .book-page ol{ padding-left:22px; }
+  .book-page li{ line-height:1.75; font-size:15.5px; margin-bottom:8px; }
+  hr.divider{ border:none; border-top:1px solid var(--paper-line); margin:26px 0; }
+
+  .action-item{ display:flex; gap:12px; margin-bottom:14px; }
+  .action-num{
+    flex:none; width:26px; height:26px; border-radius:50%;
+    background:linear-gradient(135deg,var(--gold-dark),var(--gold));
+    color:#241F16; font-size:12px; font-weight:800; display:flex; align-items:center; justify-content:center;
+  }
+  .action-item p{ margin:0; }
+
+  .box{ border-radius:10px; padding:16px 18px; margin:18px 0; font-size:15px; line-height:1.7; }
+  .box-title{ font-weight:800; font-size:13px; letter-spacing:.5px; margin-bottom:6px; display:block; }
+  .box.warn{ background:#FBEAE7; border:1px solid #EFC3BA; }
+  .box.warn .box-title{ color:#C0392B; }
+  .box.today{ background:#E7F5EC; border:1px solid #BFE3CC; }
+  .box.today .box-title{ color:#1E8449; }
+  .box.remember{ background:#FBF3DF; border:1px solid #EAD9A8; }
+  .box.remember .box-title{ color:var(--gold-dark); }
+
+  .hero-cover{ text-align:center; padding:20px 10px 6px; }
+  .hero-cover .tag{ font-size:12px; letter-spacing:3px; color:var(--gold-dark); font-weight:800; }
+  .hero-cover h1{ font-family:Georgia,serif; font-size:clamp(26px,5vw,40px); margin:14px 0; color:var(--ink); }
+  .hero-cover .sub{ color:var(--ink-soft); font-style:italic; margin-bottom:20px; }
+  .cover-badge{
+    display:inline-block; margin:14px auto 0; padding:14px 22px; border-radius:12px;
+    background:#FBF3DF; border:1px solid #EAD9A8; color:#4a3d20; text-align:left; max-width:520px;
+  }
+
+  table.toc{ width:100%; border-collapse:collapse; font-size:15px; }
+  table.toc td{ padding:10px 6px; border-bottom:1px solid var(--paper-line); vertical-align:top; }
+  table.toc td.n{ width:34px; font-weight:800; color:var(--gold-dark); }
+
+  .roadmap-block{ border-radius:10px; overflow:hidden; margin-bottom:16px; border:1px solid var(--paper-line); }
+  .roadmap-head{ background:linear-gradient(135deg,#161F52,#0A0F2E); color:#fff; padding:10px 16px; font-weight:800; font-size:13px; letter-spacing:1px; }
+  .roadmap-head small{ display:block; font-weight:400; opacity:.75; letter-spacing:0; margin-top:2px;}
+  .roadmap-body{ padding:12px 18px; background:#fff; }
+  .roadmap-body li{ margin-bottom:8px; line-height:1.6; }
+
+  .checklist li{ margin-bottom:12px; line-height:1.7; }
+  .checklist b{ color:var(--gold-dark); }
+
+  .hookrow{ margin-bottom:14px; padding-bottom:14px; border-bottom:1px solid var(--paper-line); }
+  .hookrow b{ color:var(--gold-dark); }
+  .hookrow .use{ display:block; font-size:13px; color:var(--ink-soft); margin-top:4px; }
+
+  .tracker{ display:grid; grid-template-columns:repeat(10,1fr); gap:6px; margin:16px 0; }
+  @media (max-width:640px){ .tracker{ grid-template-columns:repeat(6,1fr); } }
+  .tracker .d{
+    aspect-ratio:1; border-radius:6px; display:flex; align-items:center; justify-content:center;
+    background:#fff; border:1px solid var(--paper-line); font-size:11px; color:var(--ink-soft); cursor:pointer; user-select:none;
+  }
+  .tracker .d.done{ background:linear-gradient(135deg,var(--gold-dark),var(--gold)); color:#241F16; border-color:transparent; font-weight:800; }
+
+  .stat-row{ display:flex; gap:14px; flex-wrap:wrap; margin:20px 0; }
+  .stat-box{ flex:1; min-width:130px; text-align:center; background:#fff; border:1px solid var(--paper-line); border-radius:10px; padding:16px 10px; }
+  .stat-num{ font-size:26px; font-weight:800; color:var(--gold-dark); }
+  .stat-label{ font-size:12px; color:var(--ink-soft); margin-top:4px; }
+
+  .twocol{ display:grid; grid-template-columns:1fr 1fr; gap:0 28px; }
+  @media (max-width:640px){ .twocol{ grid-template-columns:1fr; } }
+
+  .infocard{ padding:12px 0; border-bottom:1px solid var(--paper-line); }
+  .infocard b{ color:var(--gold-dark); }
+  .infocard:last-child{ border-bottom:none; }
+
+  .qacard{ padding:14px 0; border-bottom:1px solid var(--paper-line); }
+  .qacard .q{ font-weight:800; color:var(--gold-dark); margin-bottom:6px; }
+  .qacard:last-child{ border-bottom:none; }
+
+  .paincard{ display:flex; gap:10px; align-items:flex-start; padding:9px 0; border-bottom:1px solid var(--paper-line); font-size:14.5px; line-height:1.6; }
+  .paincard:last-child{ border-bottom:none; }
+  .paincard .ic{ flex:none; }
+
+  .cbox-item{ display:flex; gap:10px; align-items:flex-start; padding:10px 0; border-bottom:1px solid var(--paper-line); }
+  .cbox-item:last-child{ border-bottom:none; }
+  .cbox-item input[type=checkbox]{ width:20px; height:20px; flex:none; margin-top:2px; accent-color:var(--gold-dark); cursor:pointer; }
+  .cbox-item label{ font-size:15px; line-height:1.6; cursor:pointer; }
+  .cbox-item.checked label{ color:var(--ink-soft); text-decoration:line-through; }
+  .cbox-progress{ font-size:13px; color:var(--gold-dark); margin:4px 0 14px; font-weight:800; }
+
+  .slider-row{ margin-bottom:18px; }
+  .slider-row .lbl{ display:flex; justify-content:space-between; font-size:14.5px; font-weight:700; margin-bottom:6px; }
+  .slider-row .lbl span.val{ color:var(--gold-dark); font-weight:800; }
+  input[type=range].pillar-slider{ width:100%; accent-color:var(--gold-dark); }
+
+  .commit-field{ margin-bottom:14px; }
+  .commit-field label{ display:block; font-size:12.5px; font-weight:800; color:var(--gold-dark); margin-bottom:4px; text-transform:uppercase; letter-spacing:.4px; }
+  .commit-field input[type=text], .commit-field input[type=number], .commit-field input[type=date]{
+    width:100%; padding:10px 12px; border:1px solid var(--paper-line); border-radius:8px; font-size:15px; font-family:inherit; background:#fff; color:var(--ink);
+  }
+  .commit-save-note{ font-size:12px; color:#1E8449; font-weight:700; margin-top:8px; min-height:16px; }
+
+  /* reading highlight */
+  .tts-block.reading{
+    background:linear-gradient(90deg,rgba(229,176,77,.22),rgba(47,132,255,.06));
+    border-radius:6px; box-shadow:inset 3px 0 0 var(--gold-dark); padding-left:10px; margin-left:-10px;
+  }
+
+  /* ---------- BOTTOM NAV ---------- */
+  .bottombar{
+    position:fixed; left:0; right:0; bottom:0; z-index:40;
+    background:linear-gradient(0deg,#060919,#0A0F2Ecc 80%, transparent);
+    padding:14px 16px 18px;
+  }
+  .bottombar-inner{ max-width:1000px; margin:0 auto; display:flex; align-items:center; gap:10px; }
+  .nav-btn{
+    flex:none; padding:10px 16px; border-radius:24px; border:1px solid rgba(255,255,255,.18);
+    background:rgba(255,255,255,.06); color:#fff; font-size:13px; font-weight:700; cursor:pointer; white-space:nowrap;
+  }
+  .nav-btn:hover{ background:linear-gradient(135deg,var(--blue),var(--purple)); border-color:transparent; }
+  .nav-btn:disabled{ opacity:.35; cursor:default; }
+  .nav-btn:disabled:hover{ background:rgba(255,255,255,.06); }
+  .chap-slider{ flex:1; }
+  input[type=range].chap-range{ width:100%; accent-color:var(--gold); }
+  .chap-of{ font-size:12px; color:#b7bde8; text-align:center; margin-top:2px; }
+
+  /* ---------- SIDE DRAWER (chapter list) ---------- */
+  .drawer-backdrop{ position:fixed; inset:0; background:rgba(0,0,0,.55); z-index:60; display:none; }
+  .drawer-backdrop.show{ display:block; }
+  .drawer{
+    position:fixed; top:0; right:-320px; width:300px; height:100%; z-index:61;
+    background:#0A0F2E; border-left:1px solid rgba(229,176,77,.3);
+    transition:right .25s; overflow-y:auto; padding:18px 16px 40px;
+  }
+  .drawer.show{ right:0; }
+  .drawer h3{ font-family:Georgia,serif; color:var(--gold); font-size:16px; margin:4px 0 14px; }
+  .drawer-item{
+    display:flex; align-items:center; gap:10px; padding:10px 10px; border-radius:8px; cursor:pointer; font-size:14px;
+    color:#dfe3ff; margin-bottom:2px;
+  }
+  .drawer-item:hover{ background:rgba(255,255,255,.06); }
+  .drawer-item.current{ background:linear-gradient(135deg,rgba(229,176,77,.28),rgba(198,146,58,.22)); color:#fff; font-weight:700; }
+  .drawer-item .chk{ flex:none; width:18px; height:18px; border-radius:50%; border:1px solid rgba(255,255,255,.3); font-size:11px; display:flex; align-items:center; justify-content:center; }
+  .drawer-item.read .chk{ background:var(--gold); border-color:var(--gold); color:#241F16; }
+  .drawer-close{ float:right; background:none; border:none; color:#b7bde8; font-size:20px; cursor:pointer; }
+  .voice-note{ font-size:11px; color:#8891c9; margin-top:16px; line-height:1.6; }
+
+  ::selection{ background:rgba(229,176,77,.35); }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="home-link" href="/" title="Về trang chủ">← Trang chủ</a>
+  <span class="brand">TÊN BẠN ĐÁNG GIÁ BAO NHIÊU?</span>
+  <div class="controls">
+    <button class="ctrl-btn" id="btnPlay" title="Nghe chương này">🎧</button>
+    <select class="rate-select" id="rateSelect" title="Tốc độ đọc">
+      <option value="0.8">0.8×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.2">1.2×</option>
+      <option value="1.5">1.5×</option>
+      <option value="2">2×</option>
+    </select>
+    <div class="vol-wrap" title="Âm lượng">
+      🔊 <input type="range" id="volRange" min="0" max="1" step="0.05" value="1">
+    </div>
+    <select class="rate-select" id="voiceSelect" title="Chọn giọng đọc" style="display:none;max-width:150px;"></select>
+    <span id="voiceWarn" class="ctrl-btn" style="display:none;width:auto;border-radius:20px;padding:0 12px;font-size:12px;background:#5a2e2e;border-color:#a44;" title="Máy chưa có giọng tiếng Việt — bấm để xem cách cài">⚠ Chưa có giọng Việt</span>
+    <button class="ctrl-btn" id="btnMenu" title="Danh sách chương">☰</button>
+    <button class="ctrl-btn" id="btnFull" title="Toàn màn hình">⛶</button>
+  </div>
+</div>
+
+<div class="drawer-backdrop" id="voiceHelpBackdrop"></div>
+<div style="display:none; position:fixed; z-index:80; top:50%; left:50%; transform:translate(-50%,-50%); background:#0A0F2E; border:1px solid rgba(229,176,77,.4); border-radius:14px; padding:22px 24px; max-width:420px; color:#fff;" id="voiceHelpModal">
+  <h3 style="font-family:Georgia,serif; color:var(--gold); margin-top:0;">Cài giọng đọc tiếng Việt</h3>
+  <p style="font-size:14px; line-height:1.7; color:#dfe3ff;">Trình duyệt của bạn đang đọc bằng giọng mặc định (có thể không phải tiếng Việt) vì máy chưa cài giọng đọc tiếng Việt hệ thống.</p>
+  <p style="font-size:14px; line-height:1.7; color:#dfe3ff;"><b>Windows 10/11:</b> Settings → Time & Language → Speech → mục "Manage voices" → Add voices → chọn <b>Vietnamese (Việt Nam)</b> → tải về. Sau đó tải lại trang này.</p>
+  <p style="font-size:14px; line-height:1.7; color:#dfe3ff;"><b>macOS:</b> System Settings → Accessibility → Spoken Content → System voice → tải giọng "Linh" (Vietnamese).</p>
+  <p style="font-size:14px; line-height:1.7; color:#dfe3ff;"><b>Điện thoại Android/Chrome:</b> thường đã có sẵn giọng "Tiếng Việt" — chọn trong ô chọn giọng ở thanh công cụ.</p>
+  <button id="voiceHelpClose" style="margin-top:10px; padding:10px 20px; border-radius:20px; border:none; background:linear-gradient(135deg,#2F84FF,#9147FF); color:#fff; font-weight:700; cursor:pointer;">Đã hiểu</button>
+</div>
+
+<div class="layout">
+  <div class="progress-top">
+    <span id="progressLabel">Chương 1</span>
+    <div class="progress-bar-track"><div class="progress-bar-fill" id="progressFill"></div></div>
+    <span id="progressPct">0%</span>
+  </div>
+
+  <div class="book-page" id="bookPage"><!-- chapter content injected here --></div>
+
+  <div style="text-align:center; margin-top:22px;">
+    <button class="nav-btn" id="btnMarkDone" style="background:linear-gradient(135deg,#27ae60,#1e8449); border:none;">✓ Đã đọc xong chương này</button>
+  </div>
+</div>
+
+<div class="bottombar">
+  <div class="bottombar-inner">
+    <button class="nav-btn" id="btnCover">⏮ Bìa</button>
+    <button class="nav-btn" id="btnPrev">← Quay lại</button>
+    <div class="chap-slider">
+      <input type="range" id="chapRange" class="chap-range" min="0" max="21" value="0" step="1">
+      <div class="chap-of" id="chapOf"></div>
+    </div>
+    <button class="nav-btn" id="btnNext">Tiếp →</button>
+  </div>
+</div>
+
+<div class="drawer-backdrop" id="drawerBackdrop"></div>
+<div class="drawer" id="drawer">
+  <button class="drawer-close" id="drawerClose">✕</button>
+  <h3>Mục lục</h3>
+  <div id="drawerList"></div>
+  <div class="voice-note">Giọng đọc dùng công nghệ Text-to-Speech có sẵn trong trình duyệt của bạn. Để có giọng tiếng Việt tốt nhất, khuyên dùng Chrome hoặc Edge trên máy tính.</div>
+</div>
+
+<script>
+/* ================= HELPERS ================= */
+function box(type,title,html){
+  return `<div class="box ${type}"><span class="box-title">${title}</span>${html}</div>`;
+}
+function actions(list){
+  return list.map((a,i)=>`
+    <div class="action-item tts-block">
+      <div class="action-num">${String(i+1).padStart(2,'0')}</div>
+      <p><b>${a.lead}</b> ${a.text}</p>
+    </div>`).join('');
+}
+
+/* ================= TRỤ CỘT (8 nền tảng) ================= */
+function pillarChapter(o){
+  return `
+    <div class="chap-eyebrow">Trụ cột ${o.num} · Nền tảng</div>
+    <h1 class="chap-title tts-block">${o.title}</h1>
+    <div class="quote-box tts-block">${o.quote}</div>
+    <div class="sec-label">Câu chuyện</div>
+    ${o.story.map(p=>`<p class="tts-block">${p}</p>`).join('')}
+    <hr class="divider">
+    <div class="sec-label">Trụ cột ${o.num} — Hành động</div>
+    <p class="tts-block" style="font-weight:700;font-size:18px;color:#1b1710;">Áp dụng ngay để xây nền vững chắc</p>
+    ${actions(o.actions)}
+    ${box('warn','⚠ Sai lầm thường gặp', `<p class="tts-block" style="margin:0;">${o.mistake}</p>`)}
+    ${box('today','✓ Hành động ngay hôm nay', `<p class="tts-block" style="margin:0;">${o.today}</p>`)}
+    ${box('remember','★ Ghi nhớ', `<p class="tts-block" style="margin:0;">${o.remember}</p>`)}
+  `;
+}
+
+const pillarData = [
+{num:'01', title:'NĂNG LỰC — <span class="hl">Giỏi Thật</span>, Tạo Kết Quả Thật',
+ quote:'"Bạn không cần bằng cấp để là chuyên gia — bạn chỉ cần kết quả thật." — Brendon Burchard. Nhân hiệu xây trên nền rỗng sẽ sụp đổ nhanh chóng.',
+ story:[
+  'Mình từng gặp một bạn trẻ xây kênh dạy "làm giàu online" chỉ sau 2 tháng tự học, tài khoản lên 5.000 follow nhờ content bắt trend. Nhưng khi có học viên hỏi sâu một câu về vận hành thực tế — bạn ấy lúng túng. Tháng sau, kênh mất 80% tương tác, học viên đòi hoàn tiền hàng loạt.',
+  'Mình cũng từng đứng ở ranh giới đó. Khi mới bắt đầu với AI, mình có kiến thức lý thuyết nhưng chưa có kết quả thật của chính mình. Mình dành 6 tháng chỉ làm — không đăng bài, không PR — để tạo ra 3 kết quả đo được cho chính dự án của mình trước khi dám nói "mình giúp được người khác".',
+  'Năng lực thật không cần bạn biết tất cả. Nó chỉ cần bạn biết <b>SÂU hơn</b> người bạn đang phục vụ, và có bằng chứng bạn đã làm được điều đó — không phải nghe nói, không phải học lý thuyết suông.'
+ ],
+ actions:[
+  {lead:'Kiến thức chuyên sâu.', text:'Không cần biết tất cả, chỉ cần biết sâu hơn 95% người trong ngách của bạn. Viết ra 1 chủ đề bạn tự tin có thể giải thích rõ hơn hầu hết mọi người.'},
+  {lead:'Kinh nghiệm thực chiến.', text:'Liệt kê 3 lần bạn đã thất bại và bài học rút ra. Đây là chất liệu không ai copy được vì đó là cuộc đời bạn.'},
+  {lead:'Kết quả đo được.', text:'Với mỗi kỹ năng bạn định dạy/bán, phải có ít nhất 1 con số cụ thể đi kèm (doanh thu tăng bao nhiêu %, thời gian rút ngắn bao lâu).'},
+  {lead:'Dùng AI để tăng tốc năng lực 10 lần.', text:'Dùng ChatGPT với prompt: "Tổng hợp 20 xu hướng mới nhất trong [lĩnh vực] năm 2025" để rút ngắn 10 giờ nghiên cứu còn 10 phút.'},
+  {lead:'Đầu tư học liên tục.', text:'Trích tối thiểu 20% thu nhập để tái đầu tư vào năng lực (khóa học, mentor, công cụ) — người dừng học là người dừng tăng giá được.'}
+ ],
+ mistake:'Nhiều người xây nhân hiệu trước, đi tìm năng lực sau — quảng cáo bản thân dữ dội trong khi chưa có 1 kết quả thật nào. Khi khách hỏi sâu, sự thật lộ ra và niềm tin sụp đổ ngay lập tức, khó gây dựng lại.',
+ today:'Lấy giấy bút, viết ra 3 kết quả cụ thể nhất bạn đã đạt được — kèm con số rõ ràng, theo công thức: "Trước khi tôi [làm X], tôi/khách đang gặp [vấn đề Y]. Sau khi áp dụng, đạt [kết quả Z] trong [thời gian]." Đây là nền tảng của mọi nội dung nhân hiệu sau này.',
+ remember:'Năng lực thật là viên đá đầu tiên — không gì thay thế được. Mọi trụ cột phía sau đều sụp nếu viên đá này rỗng.'
+},
+{num:'02', title:'ĐỊNH VỊ — <span class="hl">Rõ Tệp</span>, Rõ Chuyên Môn',
+ quote:'Sai lầm số 1 của người mới: muốn phục vụ tất cả mọi người. Kết quả là không ai nhớ đến bạn. Định vị càng hẹp = thu hút càng mạnh.',
+ story:[
+  'Mình từng tư vấn cho một bạn làm dịch vụ chạy quảng cáo, bio ghi "Tôi giúp mọi người kinh doanh online hiệu quả hơn". Sau 1 năm, 300 follow, không ai nhớ bạn làm gì. Mình hỏi: "Bạn giỏi nhất mảng nào?" Bạn trả lời "Facebook Ads nói chung". Đó chính là vấn đề — nói chung nghĩa là không ai nhớ bạn cụ thể làm gì.',
+  'Mình yêu cầu bạn thu hẹp lại: "Tôi giúp shop mỹ phẩm nhỏ dưới 10 nhân sự chạy quảng cáo Facebook với ngân sách dưới 5 triệu/tháng vẫn ra đơn đều". Chỉ sau 2 tháng đổi định vị này, bạn nhận được 4 khách hàng chủ động tìm đến — nhiều hơn cả năm trước cộng lại.',
+  'Thị trường không thiếu chuyên gia. Thị trường thiếu chuyên gia mà khách hàng <b>NHỚ ĐƯỢC</b> là ai, làm gì, cho ai. Định vị hẹp không làm bạn nhỏ đi — nó làm bạn RÕ hơn, và rõ là thứ khiến người ta nhớ và giới thiệu.'
+ ],
+ actions:[
+  {lead:'Xác định Customer cụ thể.', text:'Viết chi tiết chân dung khách lý tưởng: tuổi, nghề, thu nhập, vấn đề cụ thể họ đang gặp, khao khát lớn nhất.'},
+  {lead:'Xác định Competency.', text:'Liệt kê điều bạn làm tốt hơn 95% người cùng ngành, dù chỉ là 1 kỹ năng hẹp.'},
+  {lead:'Tìm Connection — điểm vàng.', text:'Nơi chuyên môn của bạn giải quyết đúng vấn đề của khách theo cách khác biệt nhất so với đối thủ.'},
+  {lead:'Viết câu định vị theo công thức.', text:'"Tôi giúp [ai cụ thể] đạt [kết quả đo được] bằng [phương pháp đặc trưng] mà không cần [nỗi lo lớn nhất của họ]."'},
+  {lead:'Test định vị với người thật.', text:'Đọc câu định vị cho 5 người thân nghe, hỏi họ có hiểu ngay bạn làm gì không. Nếu không — viết lại.'}
+ ],
+ mistake:'Sợ thu hẹp định vị vì nghĩ sẽ "mất khách" — trong khi sự thật ngược lại: cố phục vụ tất cả mọi người khiến không ai nhớ đến bạn, và bạn phải cạnh tranh với toàn bộ thị trường thay vì làm chủ 1 ngách.',
+ today:'Điền vào công thức định vị ở trên, hỏi 5 người thân đọc xong có hiểu ngay không. Sau đó đặt câu này làm BIO đầu tiên trên tất cả nền tảng mạng xã hội ngay hôm nay.',
+ remember:'Người nào cũng phục vụ = không ai nhớ đến bạn. Định vị hẹp hơn 3 lần nữa — đó là nơi tiền bắt đầu chảy về.'
+},
+{num:'03', title:'KHÁC BIỆT — Phương Pháp Riêng, Dấu Ấn <span class="hl">Không Ai Copy</span>',
+ quote:'Câu hỏi không phải "Bạn dạy gì?" — mà là "Bạn dạy theo cách nào không ai khác làm được?" Đó là nguồn gốc của sự khác biệt thật sự và bền vững.',
+ story:[
+  'Thị trường content marketing tại Việt Nam có hàng nghìn người dạy cùng 1 kiến thức: viết content thu hút, chạy ads, xây kênh. Nhưng người ta nhớ được rất ít cái tên — vì hầu hết dạy giống hệt nhau, chỉ khác giọng nói.',
+  'Mình đặt tên cho quy trình mình hay dùng là "Ma trận 4C" (Credibility – Connection – Community – Commercial). Một cái tên đơn giản, nhưng từ ngày có tên, học viên không còn nói "cách làm content của Nhung" mà nói "áp dụng Ma trận 4C" — tên phương pháp lan xa hơn cả tên mình.',
+  'Khác biệt không đến từ việc phát minh ra thứ chưa ai từng nghĩ tới. Nó đến từ việc bạn dám có <b>quan điểm riêng</b>, đặt tên cho cách làm của mình, và kể câu chuyện không ai có thể sao chép — vì đó là cuộc đời bạn.'
+ ],
+ actions:[
+  {lead:'Tìm 1 quan điểm ngược chiều số đông.', text:'Điều 80% người trong ngành tin là đúng nhưng bạn tin ngược lại (có cơ sở). Đây là nam châm hút đúng người cùng tần số.'},
+  {lead:'Đặt tên cho phương pháp của bạn.', text:'Dù chỉ là quy trình 3-4 bước bạn hay làm, hãy đặt tên riêng: "Công thức X của [Tên bạn]". Người ta mua PHƯƠNG PHÁP có tên, không mua thông tin chung chung có thể tự Google.'},
+  {lead:'Kể câu chuyện thất bại → bước ngoặt → thành công.', text:'Đây là tài sản độc quyền 100%, không ai copy được vì đó là cuộc đời thật của bạn.'},
+  {lead:'Chọn phong cách nhận diện riêng.', text:'2-3 màu chủ đạo, cách nói chuyện, cách trình bày nhất quán trên mọi nền tảng để tạo "vibe" nhận ra ngay dù không thấy tên.'},
+  {lead:'Bảo vệ sự khác biệt.', text:'Mỗi khi thấy mình đang làm giống một ai đó, dừng lại và hỏi: "Cách của TÔI ở đâu trong này?"'}
+ ],
+ mistake:'Copy y chang người đã thành công — cùng kiểu content, cùng câu chữ, cùng bố cục. Người xem tinh ý sẽ nhận ra ngay bạn là bản sao, và bản sao không bao giờ được trả giá cao bằng bản gốc.',
+ today:'Nghĩ ra 1 quan điểm ngược chiều bạn thực sự tin. Đặt tên cho quy trình đặc trưng của bạn theo công thức "Công thức X của [Tên bạn]". Chọn 2-3 màu chủ đạo áp dụng ngay từ bài đăng tiếp theo.',
+ remember:'Kiến thức ai cũng copy được. Cuộc đời bạn, giọng nói của bạn, và cái tên bạn đặt cho phương pháp của mình — không ai copy được.'
+},
+{num:'04', title:'GIÁ TRỊ CỐT LÕI — Bạn <span class="hl">Đại Diện</span> Cho Điều Gì?',
+ quote:'Khi nghe tên bạn — hình ảnh gì xuất hiện đầu tiên trong tâm trí người khác? Câu trả lời đó chính là giá trị cốt lõi — "thương hiệu vô hình" mạnh nhất bạn có thể xây.',
+ story:[
+  'Nike không bán giày. Nike bán tinh thần "Just Do It" — vượt giới hạn bản thân. Vì vậy dù đổi mẫu giày liên tục suốt hàng chục năm, người ta vẫn trung thành với Nike.',
+  'Mình từng hỏi 10 học viên cũ: "Khi nhắc đến Nhung Tech AI, em nghĩ đến điều gì đầu tiên?" Câu trả lời lặp lại nhiều nhất: "AI khuếch đại người giỏi thật — không thay thế người có giá trị thật." Đó chính xác là điều mình muốn đại diện — và mình không phát minh ra câu trả lời đó, học viên tự nói ra vì mình đã lặp lại nó nhất quán qua hàng trăm bài viết.',
+  'Giá trị cốt lõi không phải slogan bạn nghĩ ra trong 5 phút. Nó là niềm tin bạn <b>sẵn sàng giữ vững dù bị phản đối</b> — và lặp lại nó đủ nhiều để nó trở thành thứ người khác tự động gắn với tên bạn.'
+ ],
+ actions:[
+  {lead:'Trả lời câu hỏi chức năng.', text:'Bạn giúp khách hàng đạt được kết quả cụ thể gì? Đây là lý do họ trả tiền cho bạn.'},
+  {lead:'Trả lời câu hỏi niềm tin.', text:'Điều gì bạn tin chắc chắn dù bị phản đối vẫn giữ vững? Đây là lý do họ yêu mến và trung thành với bạn.'},
+  {lead:'Viết công thức giá trị cốt lõi.', text:'"[Tên bạn] = người đại diện cho ___ và giúp ___ đạt được ___."'},
+  {lead:'Dán công thức ở nơi bạn nhìn thấy mỗi ngày.', text:'Màn hình máy tính, sổ tay — để không lạc hướng khi ra quyết định nội dung/sản phẩm.'},
+  {lead:'Lặp lại giá trị cốt lõi thường xuyên.', text:'Xuất hiện trong ít nhất 1/5 số bài đăng — sự lặp lại nhất quán là thứ khắc tên bạn vào tâm trí người khác.'}
+ ],
+ mistake:'Thay đổi giá trị cốt lõi liên tục theo trend hoặc theo cảm hứng nhất thời — khiến khán giả không bao giờ hiểu rõ bạn thực sự đại diện cho điều gì, và không thể tin tưởng lâu dài.',
+ today:'Viết câu trả lời cho: Bạn giúp ai làm gì? Bạn tin điều gì? Bạn đại diện cho gì? Gộp lại thành 1 câu, dán lên màn hình làm việc.',
+ remember:'Sản phẩm có thể lỗi thời. Giá trị cốt lõi — nếu đủ nhất quán — sẽ không bao giờ lỗi thời.'
+},
+{num:'05', title:'NIỀM TIN — Bằng Chứng Thật, <span class="hl">Uy Tín</span> Không Chối Cãi',
+ quote:'Niềm tin được xây bằng bằng chứng, không bằng lời hứa đẹp. Đây là trụ cột quyết định tỷ lệ chuyển đổi từ người xem → người mua → người giới thiệu thêm khách mới.',
+ story:[
+  'Một học viên của mình có kiến thức rất tốt nhưng chưa từng công khai 1 case study nào. Bài viết hay, nhưng chuyển đổi gần như bằng 0 — vì không ai có bằng chứng để tin.',
+  'Mình yêu cầu bạn làm 1 việc đơn giản: xin 5 khách hàng cũ viết 2-3 dòng cảm nhận kèm kết quả cụ thể, có tên thật, có ảnh. Chỉ sau khi đăng 5 testimonial đó, tỷ lệ chuyển đổi từ inbox tăng gấp 3 lần — dù nội dung bài viết không đổi gì cả.',
+  'Niềm tin được xây theo tầng: <b>tự chứng minh</b> bằng kết quả của chính mình, rồi đến <b>bằng chứng từ khách hàng</b>, rồi đến <b>sự công nhận từ bên thứ ba</b>. Càng nhiều tầng, niềm tin càng khó lay chuyển.'
+ ],
+ actions:[
+  {lead:'Tầng 1 — Tự chứng minh.', text:'Công khai kết quả CHÍNH BẠN đã đạt được trước khi dạy người khác. "Tôi đã làm được điều này TRƯỚC KHI dạy bạn."'},
+  {lead:'Tầng 2 — Case study khách hàng.', text:'Xin testimonial theo format: Ảnh + Tên thật + Vấn đề ban đầu → Kết quả cụ thể (kèm số liệu).'},
+  {lead:'Tầng 3 — Bên thứ ba.', text:'Tìm cơ hội xuất hiện trên podcast, hợp tác với tên tuổi lớn hơn, được nhắc đến trên truyền thông.'},
+  {lead:'Tầng 4 — Chứng chỉ / Mentor.', text:'Công khai bạn học từ ai, được ai công nhận — tăng thêm uy tín học thuật.'},
+  {lead:'Biến việc xin testimonial thành thói quen hàng tuần.', text:'Nhắn tin ngay sau khi giúp một ai đó đạt kết quả, đừng đợi "khi nào rảnh".'}
+ ],
+ mistake:'Chờ đến khi "đủ giỏi" hoặc "đủ nổi tiếng" mới dám xin testimonial hoặc công khai kết quả — trong khi bằng chứng nhỏ nhất, sớm nhất, chính là viên gạch đầu tiên xây niềm tin.',
+ today:'Nhắn tin ngay cho 3 người bạn đã từng giúp đỡ, dù là miễn phí: "Bạn có thể chia sẻ 2-3 dòng về kết quả bạn đạt được không?" Đăng ngay 1 testimonial đầu tiên lên story hôm nay.',
+ remember:'Một testimonial thật đáng giá hơn 100 lời tự quảng cáo. Người ta tin người khác nói tốt về bạn — hơn tin chính bạn nói tốt về mình.'
+},
+{num:'06', title:'HỆ NỘI DUNG — Chiến Lược Truyền Thông <span class="hl">Có Cấu Trúc</span>',
+ quote:'Đăng content theo cảm hứng = đốt thời gian, kết quả không ổn định. Người xây nhân hiệu thật sự có HỆ THỐNG nội dung: biết đăng gì, tại sao, khi nào, theo tỷ lệ ra sao.',
+ story:[
+  'Một chủ shop online đăng bài rất chăm — gần như ngày nào cũng đăng — nhưng 90% là ảnh sản phẩm kèm giá. Follow tăng chậm, tương tác giảm dần, vì cả thuật toán lẫn người xem đều coi đó là "quảng cáo liên tục", không phải nội dung đáng theo dõi.',
+  'Mình hướng dẫn chị áp dụng ma trận 4C: 40% Credibility (case study, kiến thức chuyên sâu), 30% Connection (câu chuyện cá nhân, hậu trường), 20% Community (tips miễn phí, hướng dẫn), chỉ 10% Commercial (bán hàng trực tiếp). Sau 30 ngày đổi tỷ lệ này, dù đăng ÍT bài bán hàng hơn, doanh thu inbox tăng 40% — vì niềm tin đã được xây trước khi bán.',
+  'Nội dung không có cấu trúc là nội dung đốt thời gian. Nội dung có cấu trúc là <b>nội dung xây tài sản</b> — mỗi bài đăng đều phục vụ một mục tiêu rõ ràng trong hành trình biến người lạ thành khách hàng.'
+ ],
+ actions:[
+  {lead:'Áp dụng ma trận 4C.', text:'40% Credibility, 30% Connection, 20% Community, 10% Commercial. Đây là tỷ lệ cân bằng giữa xây niềm tin và chuyển đổi.'},
+  {lead:'Lập lịch nội dung 30 ngày trước.', text:'Dùng Google Sheet 3 cột: Ngày / Loại content (theo 4C) / Chủ đề cụ thể.'},
+  {lead:'Dùng AI lên ý tưởng nhanh.', text:'Prompt: "Tôi là [định vị]. Cho tôi 30 ý tưởng content theo ma trận 4C: 40% Credibility, 30% Connection, 20% Community, 10% Commercial."'},
+  {lead:'Cam kết đăng đúng lịch.', text:'Kỷ luật 30 ngày đầu quyết định 90% kết quả cả năm sau đó.'},
+  {lead:'Xem lại hiệu suất mỗi tuần.', text:'Bài nào tương tác cao nhất thuộc nhóm nào trong 4C? Nhân đôi loại nội dung đó cho tuần sau.'}
+ ],
+ mistake:'Đăng theo cảm hứng, hôm nào rảnh đăng nhiều, bận thì nghỉ cả tuần — thuật toán và cả khán giả đều đánh giá thấp tài khoản không có nhịp ổn định.',
+ today:'Mở Google Sheet, tạo lịch 30 ngày với 3 cột Ngày/Loại/Chủ đề. Dùng AI tạo 30 ý tưởng theo ma trận 4C ngay hôm nay và cam kết đăng đúng lịch từ ngày mai.',
+ remember:'Người xây nhân hiệu thật sự không đăng nhiều hơn — họ đăng ĐÚNG hơn, và ĐỀU hơn.'
+},
+{num:'07', title:'HỆ SẢN PHẨM & PHỄU — Cấu Trúc <span class="hl">Kiếm Tiền</span> Rõ Ràng',
+ quote:'Brendon Burchard gọi đây là "Money Map". Mọi chuyên gia thành công dùng cùng 1 cấu trúc: miễn phí → thấp → trung bình → cao cấp. Nhân hiệu mạnh khiến khách tự leo từng bậc.',
+ story:[
+  'Mình từng gặp một chuyên gia có 20.000 follow, được nhắc đến khắp nơi trong ngành — nhưng thu nhập từ nhân hiệu gần như bằng 0. Lý do: không hề có sản phẩm nào để bán, dù nhân hiệu đã đủ mạnh để bán được rất nhiều thứ.',
+  'Mọi chuyên gia thành công đều có đủ 4 tầng sản phẩm: miễn phí để thu hút, thấp để bắt đầu quan hệ mua bán, trung để tạo chuyển hóa thật sự, cao để mang lại kết quả đột phá.',
+  'Khi mình thiết kế đủ 4 tầng cho chính mình — ebook miễn phí, khóa low-ticket, mentoring nhóm nhỏ, coaching 1-1 — khách hàng tự động <b>"leo bậc thang"</b> từ tầng thấp lên tầng cao mà mình không cần thuyết phục nhiều, vì niềm tin đã được xây từ tầng dưới.'
+ ],
+ actions:[
+  {lead:'Xác định bạn đang có sản phẩm ở tầng nào.', text:'Miễn phí / Thấp (200k-2tr) / Trung (5-20tr) / Cao (50-200tr+). Tầng nào thiếu, thiết kế ngay tầng đó.'},
+  {lead:'Ưu tiên thiết kế 1 sản phẩm mid-ticket trước.', text:'1 vấn đề cụ thể → 4-6 buổi học/coaching → giá 5-10 triệu. Đây là tầng tạo dòng tiền ổn định nhanh nhất.'},
+  {lead:'Viết trang giới thiệu sản phẩm theo cấu trúc.', text:'Vấn đề → Giải pháp → Bằng chứng → Offer → CTA.'},
+  {lead:'Thiết kế lead magnet miễn phí chất lượng.', text:'Ebook/checklist/video ngắn giải quyết 1 vấn đề nhỏ, đủ tốt để người nhận thấy giá trị ngay và muốn tìm hiểu sản phẩm trả phí.'},
+  {lead:'Tạo lộ trình "leo bậc thang" rõ ràng.', text:'Mỗi sản phẩm kết thúc bằng gợi ý tự nhiên dẫn sang sản phẩm tầng tiếp theo.'}
+ ],
+ mistake:'Có nhân hiệu mạnh nhưng chỉ bán 1 sản phẩm duy nhất, hoặc không có sản phẩm nào — khiến sự tin tưởng đã xây dựng được không chuyển hóa thành doanh thu.',
+ today:'Xác định bạn đang thiếu tầng sản phẩm nào trong 4 tầng. Viết đề cương sơ bộ Vấn đề → Giải pháp → Bằng chứng → Offer → CTA cho sản phẩm mid-ticket đầu tiên ngay hôm nay.',
+ remember:'Nhân hiệu là cái phễu thu hút. Sản phẩm là cái máy in tiền. Có phễu mà không có máy in tiền — bạn chỉ đang nổi tiếng miễn phí.'
+},
+{num:'08', title:'ĐÒN BẨY ẢNH HƯỞNG — <span class="hl">Cộng Đồng</span> & Hệ Sinh Thái',
+ quote:'Đây là trụ cột biến nhân hiệu thành đế chế ảnh hưởng. Khi cộng đồng, đối tác, học viên tự lan tỏa thương hiệu của bạn — bạn đã đạt cấp độ nhân hiệu thật sự tự vận hành.',
+ story:[
+  'Mình từng nghĩ xây nhân hiệu là việc một mình gánh hết: tự viết content, tự chăm sóc khách, tự trả lời từng tin nhắn. Đến khi kiệt sức, mình mới hiểu: nhân hiệu bền vững không phải nhân hiệu một người gánh — mà là nhân hiệu có một cộng đồng cùng gánh với mình.',
+  'Mình lập 1 group Zalo miễn phí cho học viên cũ. Ban đầu chỉ 20 người. Sau 6 tháng, chính những thành viên cũ tự trả lời câu hỏi cho thành viên mới, tự chia sẻ kết quả của họ, tự giới thiệu bạn bè vào group — mà mình không cần làm gì thêm.',
+  'Đó là lúc nhân hiệu không còn chỉ là CỦA mình nữa — nó trở thành một <b>hệ sinh thái sống</b>, tự lan tỏa, tự bảo vệ, tự phát triển ngay cả khi mình không online.'
+ ],
+ actions:[
+  {lead:'Tạo 1 cộng đồng miễn phí ngay hôm nay.', text:'Group Zalo/Facebook quanh chủ đề bạn chuyên sâu. Đặt tên: "Cộng đồng [Chủ đề] cùng [Tên bạn]".'},
+  {lead:'Mời 20-50 người đầu tiên.', text:'Bạn bè, khách cũ, người quen trong ngành. Đừng chờ đông mới bắt đầu tương tác.'},
+  {lead:'Đăng 1 nội dung giá trị mỗi ngày trong 30 ngày đầu.', text:'Tạo thói quen cho cộng đồng, biến group thành nơi họ ghé mỗi ngày.'},
+  {lead:'Tìm 2-3 đối tác chiến lược.', text:'Cùng tệp khách, khác chuyên môn. Đề xuất hợp tác JV, affiliate, co-branding để mở rộng tệp khán giả nhanh hơn tự lực.'},
+  {lead:'Ứng dụng AI để duy trì ảnh hưởng không giới hạn thời gian.', text:'Chatbot trả lời câu hỏi thường gặp 24/7, email tự động nuôi dưỡng thành viên mới.'}
+ ],
+ mistake:'Xây nhân hiệu một mình đến kiệt sức mà không xây cộng đồng xung quanh — khiến ảnh hưởng luôn bị giới hạn bởi quỹ thời gian cá nhân của bạn.',
+ today:'Tạo ngay 1 group Zalo/Facebook miễn phí, mời 20 người đầu tiên là bạn bè và khách cũ. Đăng 1 nội dung giá trị đầu tiên ngay hôm nay để bắt đầu thói quen cho cộng đồng.',
+ remember:'Nhân hiệu cá nhân là điểm khởi đầu. Cộng đồng và hệ sinh thái xung quanh nó mới là thứ biến bạn thành đế chế ảnh hưởng thật sự.'
+}
+];
+
+/* ================= SỰ VI DIỆU (8 kết quả) ================= */
+function vidieuChapter(o){
+  return `
+    <div class="chap-eyebrow">Vi diệu ${o.num} · Kết quả</div>
+    <h1 class="chap-title tts-block">${o.title}</h1>
+    <div class="quote-box tts-block">${o.quote}</div>
+    <div class="sec-label">Vì sao đây là sự vi diệu?</div>
+    ${o.why.map(p=>`<p class="tts-block">${p}</p>`).join('')}
+    <hr class="divider">
+    <div class="sec-label">Vi diệu ${o.num} — Hành động</div>
+    ${actions(o.actions)}
+    ${box('remember','★ Ghi nhớ', `<p class="tts-block" style="margin:0;">${o.remember}</p>`)}
+  `;
+}
+
+const vidieuData = [
+{num:'01', title:'Tên Bạn Trở Thành <span class="hl">Tài Sản Bền Vững</span>',
+ quote:'Khi nhân hiệu đủ mạnh — tên bạn chính là thương hiệu. Không cần logo đẹp, không cần website hoành tráng. Chỉ cần nghe tên là biết ngay bạn làm gì, phục vụ ai, tạo giá trị gì.',
+ why:[
+  'Tài sản hữu hình (cửa hàng, máy móc, tồn kho) có thể mất giá theo thời gian hoặc gặp rủi ro — nhưng tên tuổi và uy tín bạn xây dựng không ai cướp được, và không bao giờ lỗi thời nếu bạn tiếp tục duy trì giá trị cốt lõi.',
+  'Nhân hiệu mạnh biến doanh nghiệp của bạn thành tài sản có thể bán, chuyển nhượng, hoặc licensing — một dạng tài sản tài chính thật sự chứ không chỉ là danh tiếng suông.',
+  'Trong kỷ nguyên AI, khi ai cũng có thể tạo ra nội dung hàng loạt, con người thật đằng sau một cái tên càng ngày càng có giá trị — vì đó là thứ duy nhất không AI nào thay thế được.'
+ ],
+ actions:[
+  {lead:'Kiểm tra nhận diện tên của bạn.', text:'Hỏi 10 người biết bạn: "Khi nghe tên mình, điều đầu tiên bạn nghĩ đến là gì?" Nếu câu trả lời không nhất quán, định vị của bạn chưa đủ rõ — cần củng cố ngay.'},
+  {lead:'Bảo vệ tài sản tên tuổi.', text:'Đăng ký/khóa username nhất quán trên các nền tảng chính để không ai sử dụng nhầm hoặc chiếm dụng tên thương hiệu của bạn.'},
+  {lead:'Kiên trì tối thiểu 6 tháng.', text:'Đầu tư xây dựng câu chuyện và kết quả gắn liền với tên bạn một cách nhất quán — đây là khoảng thời gian tối thiểu để một cái tên "đóng khung" trong trí nhớ đám đông.'}
+ ],
+ remember:'Logo có thể đổi, sản phẩm có thể đổi, nhưng một cái tên đủ uy tín sẽ đi theo bạn suốt sự nghiệp — đó là tài sản không ai đánh thuế, không ai tịch thu được.'
+},
+{num:'02', title:'Định Giá Cao Hơn <span class="hl">Một Cách Tự Nhiên</span>',
+ quote:'Cùng dịch vụ — người có nhân hiệu mạnh định giá gấp 3-10 lần và vẫn đắt hàng hơn. Khách hàng không mua giá rẻ nhất — họ mua từ người họ TIN TƯỞNG NHẤT.',
+ why:[
+  'Không có nhân hiệu, bạn buộc phải cạnh tranh bằng giá — margin mỏng dần, càng làm càng mệt, cuộc đua xuống đáy không có điểm dừng.',
+  'Có nhân hiệu mạnh, bạn cạnh tranh bằng giá trị — khách chủ động tìm đến, sẵn sàng trả giá cao hơn để được làm việc với người họ tin tưởng.',
+  'Cùng một lượng kiến thức, chuyên gia ẩn danh thu 500 nghìn/giờ tư vấn; chuyên gia có nhân hiệu mạnh thu 5-10 triệu/giờ — sự khác biệt duy nhất là <b>TÊN TUỔI</b>, không phải chuyên môn.'
+ ],
+ actions:[
+  {lead:'So sánh giá của bạn với top 3 chuyên gia mạnh nhất ngành.', text:'Nếu giá bạn thấp hơn 50% — đó là dấu hiệu nhân hiệu chưa phản ánh đúng giá trị thật.'},
+  {lead:'Tăng giá 20% cho sản phẩm/dịch vụ kế tiếp.', text:'Dùng chính số tiền chênh lệch đó để tái đầu tư vào xây nhân hiệu (testimonial, nội dung chất lượng, cộng đồng).'},
+  {lead:'Ngừng chào giá thấp để "câu khách".', text:'Thay vào đó, đầu tư thời gian xây niềm tin để khách chủ động chấp nhận mức giá xứng đáng.'}
+ ],
+ remember:'Tăng giá không phải hành động tham lam — đó là hành động buộc bạn phải xứng đáng hơn với mức giá đó, và là dấu hiệu nhân hiệu của bạn đang đi đúng hướng.'
+},
+{num:'03', title:'Niềm Tin Lớn — <span class="hl">Chi Phí Quảng Cáo Giảm</span>',
+ quote:'Doanh nghiệp không có nhân hiệu phải chi hàng chục triệu/tháng cho ads để thuyết phục người lạ. Nhân hiệu mạnh khiến người ta TIN TRƯỚC KHI thấy quảng cáo.',
+ why:[
+  'Chi phí ads ngày càng tăng — nhân hiệu mạnh là "bộ lọc tự nhiên" thay thế quảng cáo tốn kém, giúp bạn tiếp cận đúng người mà không cần trả tiền cho từng lượt xem.',
+  'Khách cũ giới thiệu khách mới — word of mouth từ nhân hiệu là kênh marketing miễn phí và hiệu quả nhất, không thuật toán nào có thể tắt được.',
+  'Tỷ lệ chuyển đổi từ người đã biết nhân hiệu của bạn cao hơn 3-5 lần so với traffic lạnh từ quảng cáo — email list và cộng đồng riêng là tài sản marketing không ai lấy đi được.'
+ ],
+ actions:[
+  {lead:'Tính tổng chi phí quảng cáo tháng vừa rồi.', text:'Nếu trên 5 triệu mà chưa có nhân hiệu rõ ràng — bạn đang rò rỉ tiền vào một cái phễu không giữ được khách lâu dài.'},
+  {lead:'Chuyển 30% ngân sách ads sang xây tài sản sở hữu.', text:'Lead magnet chất lượng, nuôi email list, sản xuất nội dung giá trị dài hạn.'},
+  {lead:'Đo tỷ lệ chuyển đổi.', text:'So sánh khách từ quảng cáo lạnh và khách đã biết nhân hiệu của bạn — con số chênh lệch này là bằng chứng thuyết phục nhất để đầu tư nhiều hơn vào nhân hiệu.'}
+ ],
+ remember:'Quảng cáo mua được sự chú ý tạm thời. Nhân hiệu mua được niềm tin lâu dài — và niềm tin mới là thứ ra đơn hàng.'
+},
+{num:'04', title:'Thu Hút Đúng <span class="hl">Tệp Khách Hàng Lý Tưởng</span>',
+ quote:'Nhân hiệu mạnh hoạt động như nam châm thông minh — kéo đúng người, đẩy sai người. Không cần tiếp cận 10.000 người ngẫu nhiên — chỉ cần 1.000 người đúng tệp.',
+ why:[
+  'Khách tự tìm đến vì nội dung của bạn đúng với điều họ đang tìm kiếm — không phải bạn chạy đuổi theo họ.',
+  'Không còn deal với khách mặc cả, khó tính, không tôn trọng — họ đã được lọc ra từ đầu bởi chính nhân hiệu của bạn.',
+  'Khách hàng lý tưởng trân trọng giá trị, sẵn lòng trả xứng đáng, và tự nguyện giới thiệu người khác cho bạn — một vòng lặp tăng trưởng tự nhiên không tốn thêm chi phí.'
+ ],
+ actions:[
+  {lead:'Viết chi tiết chân dung khách hàng lý tưởng.', text:'Tuổi, nghề, thu nhập, vấn đề lớn nhất, nỗi sợ, khao khát — càng cụ thể càng tốt.'},
+  {lead:'Kiểm tra mỗi bài viết trước khi đăng.', text:'Tự hỏi: "Người này có muốn đọc bài này không?" Nếu không chắc, bài đó chưa đủ đúng tệp.'},
+  {lead:'Chủ động lọc khách không phù hợp.', text:'Ngay từ đầu qua nội dung, mức giá, cách giao tiếp — thà ít khách đúng còn hơn nhiều khách sai khiến bạn kiệt sức.'}
+ ],
+ remember:'Bạn không cần được tất cả mọi người thích. Bạn chỉ cần được đúng người cần bạn tìm thấy và tin tưởng.'
+},
+{num:'05', title:'Tạo Dòng Tiền <span class="hl">Đều Đặn Và Bền Vững</span>',
+ quote:'Người không có nhân hiệu: doanh thu theo "tháng tốt/tháng xấu". Người có nhân hiệu: dòng tiền có hệ thống, có thể dự đoán theo tháng, quý, năm.',
+ why:[
+  'Recurring revenue (membership, subscription) khiến khách trả tiền đều hàng tháng vì tin tưởng BẠN, không phải vì khuyến mãi nhất thời.',
+  'Một khách hàng trung thành có thể mua nhiều sản phẩm theo thời gian — giá trị vòng đời khách hàng (LTV) tăng 3-5 lần so với bán 1 lần rồi thôi.',
+  'Khi ra mắt sản phẩm mới, cộng đồng đã xây sẵn sẽ mua ngay từ ngày đầu — không cần chạy quảng cáo để tìm khách từ đầu mỗi lần.'
+ ],
+ actions:[
+  {lead:'Thiết kế 1 sản phẩm định kỳ.', text:'Group premium (200-500 nghìn/tháng) — mục tiêu ban đầu chỉ cần 10 thành viên đầu tiên từ danh sách khách cũ.'},
+  {lead:'Xây danh sách khách cũ thành tài sản tái kích hoạt.', text:'Mỗi lần ra sản phẩm mới, liên hệ lại danh sách này trước khi tìm khách mới.'},
+  {lead:'Thiết kế ít nhất 1 sản phẩm passive income.', text:'Khóa học ghi hình sẵn, ebook, template — có thể bán 24/7 kể cả khi bạn không online.'}
+ ],
+ remember:'Doanh thu ổn định không đến từ việc bán nhiều hơn — nó đến từ việc xây được hệ thống khiến khách quay lại mà không cần bạn thuyết phục lại từ đầu mỗi lần.'
+},
+{num:'06', title:'Sức Ảnh Hưởng <span class="hl">Vượt Khỏi Sản Phẩm</span>',
+ quote:'Nhân hiệu đủ mạnh — bạn có thể ra mắt bất kỳ sản phẩm nào trong lĩnh vực và cộng đồng đón nhận ngay. Người ta mua vì tin BẠN — không vì tin sản phẩm cụ thể nào.',
+ why:[
+  'Elon Musk bán xe điện, tên lửa, AI, crypto — nhân hiệu mạnh cho phép bạn pivot không giới hạn trong hệ sinh thái của mình.',
+  'Đối tác chủ động tìm đến đề nghị hợp tác thay vì bạn phải đi chào hàng — nhân hiệu chính là bằng chứng xã hội (social proof) lớn nhất.',
+  'Bạn được mời nói chuyện, phỏng vấn, xuất hiện trên các kênh truyền thông khác mà không tốn thêm ngân sách quảng cáo.'
+ ],
+ actions:[
+  {lead:'Liệt kê 3 hướng mở rộng nhân hiệu trong 12 tháng tới.', text:'Sản phẩm mới / thị trường mới / kênh mới / đối tác mới.'},
+  {lead:'Đánh giá từng hướng.', text:'Với mỗi hướng, viết: "Nếu thêm [X] vào nhân hiệu hiện tại, điều tốt nhất có thể xảy ra là gì?" — xác định hướng đáng đầu tư nhất.'},
+  {lead:'Chủ động nhận lời mời chia sẻ, dù nhỏ.', text:'Podcast, livestream chung, bài viết khách mời — mỗi lần xuất hiện là một lần nhân hiệu được khuếch đại miễn phí.'}
+ ],
+ remember:'Đừng gắn chặt nhân hiệu của bạn với 1 sản phẩm duy nhất. Gắn nó với CON NGƯỜI và GIÁ TRỊ bạn đại diện — đó là thứ có thể mở rộng không giới hạn.'
+},
+{num:'07', title:'Tự Xây <span class="hl">Hệ Sinh Thái Riêng</span> Của Mình',
+ quote:'Đỉnh cao của nhân hiệu: không còn phụ thuộc vào nền tảng người khác. Bạn có "sân chơi" riêng — cộng đồng, nền tảng, sự kiện, hệ sinh thái xoay quanh nhân hiệu bạn.',
+ why:[
+  'Owned media (website, email list, podcast riêng) là kênh bạn thực sự SỞ HỮU — không phụ thuộc vào thuật toán Facebook, TikTok hay bất kỳ nền tảng nào có thể thay đổi luật chơi bất cứ lúc nào.',
+  'Một hệ sinh thái tự duy trì (Đào tạo → Cộng đồng → Sản phẩm → Đối tác → Tái đào tạo) tạo ra vòng lặp tăng trưởng không cần bạn liên tục bơm thêm công sức từ đầu.',
+  'Học viên/khách hàng cũ trở thành đại sứ thương hiệu tự nguyện — nhân hiệu lan tỏa mà không tốn thêm chi phí quảng cáo.'
+ ],
+ actions:[
+  {lead:'Bắt đầu xây Owned Media ngay hôm nay.', text:'Tạo danh sách email bằng công cụ miễn phí (MailChimp/Systeme.io), đổi 1 tài liệu miễn phí lấy email của người quan tâm.'},
+  {lead:'Đặt mục tiêu cụ thể.', text:'100 subscriber đầu tiên trong 30 ngày tới, thông qua lead magnet chất lượng và lời mời từ nội dung mạng xã hội.'},
+  {lead:'Duy trì gửi 1 email giá trị mỗi tuần.', text:'Đây là "đất riêng" của bạn — không nền tảng nào có thể lấy đi hay thay đổi thuật toán khiến bạn mất kết nối với khách hàng.'}
+ ],
+ remember:'Mạng xã hội là đất thuê — thuật toán thay đổi, tài khoản có thể bị khóa bất cứ lúc nào. Email list và cộng đồng riêng là đất bạn sở hữu vĩnh viễn.'
+},
+{num:'08', title:'Giá Trị Độc Bản — <span class="hl">Không Thể Sao Chép</span>',
+ quote:'Kỷ nguyên AI tạo được bất kỳ nội dung nào — CON NGƯỜI THẬT với câu chuyện thật là thứ DUY NHẤT không thể AI hóa hay thay thế.',
+ why:[
+  'AI có thể viết một bài blog hoàn chỉnh, nhưng không thể sống cuộc đời bạn và chia sẻ bài học xương máu với sự chân thật của người đã thực sự trải qua.',
+  'Khách hàng ngày càng khao khát kết nối với CON NGƯỜI THẬT — không phải nội dung do AI tạo hàng loạt vô hồn.',
+  'Nhân hiệu mạnh gắn liền với câu chuyện thật của bạn chính là "hào phòng thủ" rộng nhất trong thời đại AI — càng nhiều AI xuất hiện, con người thật càng nổi bật.'
+ ],
+ actions:[
+  {lead:'Viết Tuyên Ngôn Nhân Hiệu của riêng bạn.', text:'Bạn là ai? Từ đâu đến? Đã vượt qua điều gì? Giúp ai đạt được gì? — đây là thứ AI không thể tạo ra vì nó là chính bạn.'},
+  {lead:'Đăng tuyên ngôn công khai ngay hôm nay.', text:'Trên nền tảng chính của bạn — đây là một trong những bài đăng có sức ảnh hưởng nhân hiệu mạnh nhất bạn có thể viết.'},
+  {lead:'Dùng AI như công cụ khuếch đại, không thay thế.', text:'Viết nhanh hơn, thiết kế đẹp hơn — nhưng luôn giữ chất liệu cốt lõi (câu chuyện, trải nghiệm, quan điểm) là của chính bạn 100%.'}
+ ],
+ remember:'AI có thể sao chép văn phong. AI không thể sao chép cuộc đời bạn đã sống, những thất bại bạn đã vượt qua, và những con người bạn đã thực sự giúp đỡ.'
+}
+];
+
+/* ================= CÁC TRANG TĨNH ================= */
+const coverHTML = `
+  <div class="hero-cover">
+    <div class="tag tts-block">NHUNG TECH AI · BẢN QUYỀN 2025</div>
+    <h1 class="tts-block">Tên Bạn Đáng Giá Bao Nhiêu?</h1>
+    <p class="sub tts-block">Personal Brand = Tài Sản Vô Giá Số 1<br>Lộ trình 8 Trụ Cột + 8 Sự Vi Diệu xây dựng nhân hiệu cá nhân<br>cho người kinh doanh online trên nền tảng mạng xã hội</p>
+    <div class="cover-badge tts-block">
+      <b>★ Cam kết chuyển hóa</b><br>
+      Đọc trong 90 phút. Áp dụng đúng trong 90 ngày. Bạn sẽ tăng ít nhất 1-2 cấp độ nhân hiệu — từ người vô hình thành người có tên tuổi được nhớ đến, được tin tưởng, và được trả giá xứng đáng.
+    </div>
+    <p style="margin-top:26px; font-weight:800;" class="tts-block">NHUNG TECH AI</p>
+    <p style="margin-top:-14px; color:var(--ink-soft);" class="tts-block">AI Business Strategist · Personal Brand Architect</p>
+  </div>`;
+
+const promiseHTML = `
+  <div class="chap-eyebrow">Lời hứa chuyển hóa — Trái tim của cuốn sách</div>
+  <h1 class="chap-title tts-block">Bạn Của 90 Ngày Sau Sẽ Không Còn Là Người Vô Hình</h1>
+  <p class="tts-block">Mình sẽ không hứa bạn nổi tiếng sau một đêm, hay có 10.000 follow trong 7 ngày. Đó là lời hứa giả dối mà nhiều nơi vẫn bán cho bạn.</p>
+  <p class="tts-block">Mình hứa điều thật hơn, và giá trị hơn nhiều: <b>nếu bạn đọc hết cuốn sách này và áp dụng đúng thứ tự 8 Trụ Cột trong 90 ngày tới, bạn sẽ chuyển hóa từ một người "vô hình" trong ngành của mình thành một người có tên tuổi được nhận diện, được tin tưởng, và được trả giá xứng đáng với giá trị thật bạn tạo ra.</b></p>
+  <div class="sec-label">✗ Trước khi đọc</div>
+  <ul class="tts-block">
+    <li>Không ai nhớ bạn làm gì ngoài người thân quen</li>
+    <li>Đăng bài đều nhưng không ai phản hồi, không ai nhớ tên</li>
+    <li>Phải cạnh tranh bằng giá vì không có gì khác biệt</li>
+    <li>Khách mua 1 lần rồi biến mất, không quay lại</li>
+    <li>Doanh thu phụ thuộc hoàn toàn vào quảng cáo</li>
+  </ul>
+  <div class="sec-label">✓ Sau 90 ngày áp dụng đúng</div>
+  <ul class="tts-block">
+    <li>Có câu định vị rõ ràng khiến người lạ hiểu bạn làm gì trong 10 giây</li>
+    <li>Có ít nhất 10 bằng chứng / testimonial thật</li>
+    <li>Có ít nhất 1 sản phẩm đã bán thành công không cần giảm giá</li>
+    <li>Có cộng đồng riêng từ 100-150 người quan tâm thật sự</li>
+    <li>Có ít nhất 1 đối tác chiến lược cùng ngành</li>
+  </ul>
+  ${box('remember','★ 3 Cam kết của Nhung Tech AI', `
+    <p class="tts-block"><b>Cam kết 1 — Không lý thuyết suông.</b> Mọi trụ cột và sự vi diệu đều có phần Hành Động Ngay cụ thể, làm được trong ngày hôm nay, kèm sai lầm thường gặp để bạn không phải trả giá như người khác đã từng.</p>
+    <p class="tts-block"><b>Cam kết 2 — Đo được bằng con số.</b> Cuối sách có bảng chấm điểm 8 trụ cột và bảng cam kết 90 ngày để bạn tự đo tiến độ chuyển hóa của chính mình — không mơ hồ, không cảm tính.</p>
+    <p class="tts-block" style="margin:0;"><b>Cam kết 3 — Đồng hành đến cùng.</b> Áp dụng đúng 90 ngày mà chưa thấy chuyển biến rõ? Nhắn "Nhung Tech AI" kèm bảng cam kết của bạn — mình sẽ trực tiếp xem và chỉ ra điểm nghẽn, miễn phí.</p>
+  `)}
+  <p class="tts-block" style="font-weight:700;">Sẵn sàng chưa? Lật qua trang — hành trình chuyển hóa 90 ngày của bạn bắt đầu từ đây.</p>`;
+
+const hookHTML = `
+  <div class="chap-eyebrow">Lời mở đầu</div>
+  <h1 class="chap-title tts-block">Bạn Đang Bị Lãng Quên Mỗi Ngày Mà Không Hề Hay Biết</h1>
+  <div class="quote-box tts-block">Brendon Burchard trong cuốn "The Millionaire Messenger": "Mọi người đều có một thông điệp triệu đô có thể chia sẻ với thế giới — vấn đề là hầu hết chưa biết cách đóng gói và bán nó." Cuốn sách này giúp bạn làm đúng điều đó.</div>
+  <div class="sec-label">Nếu bạn là người mới bắt đầu</div>
+  <div class="paincard tts-block"><span class="ic">😕</span> Không ai biết bạn là ai ngoài bạn bè, người thân gần</div>
+  <div class="paincard tts-block"><span class="ic">📉</span> Đăng content cả tuần nhưng reach thấp, không ai mua</div>
+  <div class="paincard tts-block"><span class="ic">💸</span> Chạy ads tốn tiền, tắt ads là đơn hàng dừng ngay</div>
+  <div class="paincard tts-block"><span class="ic">😞</span> Thấy người khác thành công mà mình làm mãi không bứt phá</div>
+  <div class="sec-label">Nếu bạn đã kinh doanh online</div>
+  <div class="paincard tts-block"><span class="ic">🔄</span> Phụ thuộc hoàn toàn vào quảng cáo, margin ngày càng mỏng</div>
+  <div class="paincard tts-block"><span class="ic">😰</span> Cạnh tranh giá với hàng trăm người bán cùng sản phẩm</div>
+  <div class="paincard tts-block"><span class="ic">❓</span> Không biết mình khác gì đối thủ, khách không nhớ đến</div>
+  <div class="paincard tts-block"><span class="ic">↩️</span> Khách mua 1 lần rồi biến mất, không bao giờ quay lại</div>
+  <p class="tts-block" style="margin-top:20px; font-style:italic;">"Điểm chung của tất cả vấn đề này là gì? Bạn đang bán hàng — nhưng chưa xây NHÂN HIỆU. Nhân hiệu chính là thứ tạo sự khác biệt giữa người mãi không lên và người thu tiền tỷ từ cùng một thị trường." — Nhung Tech AI</p>
+  <div class="stat-row">
+    <div class="stat-box tts-block"><div class="stat-num">8×</div><div class="stat-label">Doanh thu cao hơn khi có nhân hiệu mạnh</div></div>
+    <div class="stat-box tts-block"><div class="stat-num">73%</div><div class="stat-label">Người mua ưu tiên từ người họ BIẾT và TIN</div></div>
+    <div class="stat-box tts-block"><div class="stat-num">∞</div><div class="stat-label">Giá trị nhân hiệu tích lũy không bao giờ mất</div></div>
+  </div>
+  <p class="tts-block" style="font-weight:700;">Cuốn sách này không dạy bạn đăng bài đẹp hơn. Nó dạy bạn xây một tài sản mà không ai — kể cả AI — có thể sao chép: chính TÊN TUỔI của bạn.</p>`;
+
+const tocHTML = `
+  <div class="chap-eyebrow">Mục lục</div>
+  <h1 class="chap-title tts-block">8 Trụ Cột + 8 Sự Vi Diệu</h1>
+  <table class="toc">
+    <tr><td class="n">01</td><td>Năng Lực — Giỏi thật, tạo kết quả thật</td></tr>
+    <tr><td class="n">02</td><td>Định Vị — Rõ tệp, rõ chuyên môn</td></tr>
+    <tr><td class="n">03</td><td>Khác Biệt — Phương pháp riêng, dấu ấn không ai copy</td></tr>
+    <tr><td class="n">04</td><td>Giá Trị Cốt Lõi — Bạn đại diện cho điều gì</td></tr>
+    <tr><td class="n">05</td><td>Niềm Tin — Case study, bằng chứng rõ ràng</td></tr>
+    <tr><td class="n">06</td><td>Hệ Nội Dung — Có cấu trúc, bền vững</td></tr>
+    <tr><td class="n">07</td><td>Hệ Sản Phẩm & Phễu — Kiếm tiền rõ ràng</td></tr>
+    <tr><td class="n">08</td><td>Đòn Bẩy Ảnh Hưởng — Cộng đồng, lan tỏa</td></tr>
+  </table>
+  <div class="sec-label">8 Sự Vi Diệu — Kết quả tất yếu</div>
+  <table class="toc">
+    <tr><td class="n">01</td><td>Tên bạn trở thành tài sản bền vững</td></tr>
+    <tr><td class="n">02</td><td>Định giá cao hơn một cách tự nhiên</td></tr>
+    <tr><td class="n">03</td><td>Niềm tin lớn — chi phí quảng cáo giảm</td></tr>
+    <tr><td class="n">04</td><td>Thu hút đúng tệp khách hàng lý tưởng</td></tr>
+    <tr><td class="n">05</td><td>Tạo dòng tiền đều đặn, bền vững</td></tr>
+    <tr><td class="n">06</td><td>Sức ảnh hưởng vượt khỏi sản phẩm</td></tr>
+    <tr><td class="n">07</td><td>Tự xây hệ sinh thái riêng của mình</td></tr>
+    <tr><td class="n">08</td><td>Giá trị độc bản — không thể sao chép</td></tr>
+  </table>
+  <div class="sec-label">Công cụ & Lộ trình thực chiến</div>
+  <table class="toc">
+    <tr><td class="n">★</td><td>Millionaire Messenger — 9 bước xây đế chế chuyên gia</td></tr>
+    <tr><td class="n">★</td><td>3 mô hình nhân hiệu thực tế tại Việt Nam</td></tr>
+    <tr><td class="n">★</td><td>Lộ trình chi tiết 90 ngày (30 / 60 / 90)</td></tr>
+    <tr><td class="n">★</td><td>AI Arsenal — Bộ công cụ xây nhân hiệu nhanh gấp 10 lần</td></tr>
+    <tr><td class="n">★</td><td>10 lỗi phổ biến & cách sửa ngay</td></tr>
+    <tr><td class="n">★</td><td>FAQ — Giải đáp thắc mắc thường gặp</td></tr>
+    <tr><td class="n">★</td><td>Checklist tối ưu profile trong 60 phút</td></tr>
+    <tr><td class="n">★</td><td>Cam kết 90 ngày của bạn — có bảng theo dõi</td></tr>
+  </table>`;
+
+const introHTML = `
+  <div class="chap-eyebrow">Về tác giả</div>
+  <h1 class="chap-title tts-block">Xin Chào — Mình Là Nhung Tech AI</h1>
+  <p class="tts-block" style="font-style:italic;color:var(--ink-soft);">AI Startup · Personal Brand Strategist</p>
+  <p class="tts-block">Xin chào bạn, mình là <b>Nhung Tech AI</b> — một startup trong lĩnh vực AI. Mình có niềm đam mê đặc biệt với việc <b>ứng dụng AI vào kinh doanh</b>, xây dựng các mô hình tạo thu nhập hiệu quả từ công nghệ này.</p>
+  <p class="tts-block">Trên hành trình đó, mình nhận ra: <b>Công nghệ AI giúp bạn làm nhanh hơn</b> — nhưng chính <b>nhân hiệu cá nhân mạnh</b> mới là thứ khiến người ta TIN và MUA từ bạn. Không có nhân hiệu, AI cũng vô dụng.</p>
+  <p class="tts-block">Cuốn sách này là hành trình mình muốn đồng hành cùng bạn — từng bước xây dựng một tên tuổi thật sự có giá trị trên thị trường. Mình không viết cuốn này để bạn thán phục mình. Mình viết để bạn đóng sách lại, mở mạng xã hội lên, và bắt đầu làm khác đi ngay hôm nay.</p>
+  <div class="quote-box tts-block">"Nhân hiệu của bạn không cần bạn giỏi hơn người khác. Nó chỉ cần bạn kiên trì đúng cách hơn hôm qua." — Nhung Tech AI</div>`;
+
+const diagnosisHTML = `
+  <div class="chap-eyebrow">Chẩn đoán</div>
+  <h1 class="chap-title tts-block">Nhân Hiệu Của Bạn Đang Ở Cấp Độ Nào?</h1>
+  <p class="tts-block">Trước khi bắt đầu hành trình — hãy biết mình đang đứng ở đâu. 4 cấp độ nhân hiệu dưới đây sẽ giúp bạn xác định vị trí và lộ trình phù hợp nhất.</p>
+  <div class="infocard tts-block"><b>Cấp 0 — Vô hình:</b> Không ai biết bạn là ai ngoài người thân. Profile mạng xã hội trống rỗng hoặc không rõ bạn làm gì. Doanh thu = 0 từ nhân hiệu.</div>
+  <div class="infocard tts-block"><b>Cấp 1 — Bắt đầu nhận diện:</b> Vài trăm người theo dõi, đăng content nhưng không có định hướng. Thi thoảng bán được nhờ may mắn, không có hệ thống.</div>
+  <div class="infocard tts-block"><b>Cấp 2 — Đang xây dựng:</b> Tệp khách hàng nhỏ biết đến bạn, có tương tác. Bán hàng ổn định nhưng chưa scale được, chưa có phễu hệ thống.</div>
+  <div class="infocard tts-block"><b>Cấp 3 — Nhân hiệu rõ ràng:</b> Nhắc đến lĩnh vực — nhiều người nghĩ đến bạn. Khách chủ động tìm. Định giá cao hơn tự nhiên không cần giải thích.</div>
+  <div class="infocard tts-block"><b>Cấp 4 — Đế chế nhân hiệu:</b> Tên bạn là tài sản. Hệ sinh thái xoay quanh nhân hiệu. Dòng tiền đa kênh tự động từ uy tín đã xây nhiều năm.</div>
+  ${box('remember','Bạn đang ở cấp mấy?', `<p class="tts-block" style="margin:0;">Cuốn sách này giúp bạn tăng ít nhất 1-2 cấp trong 90 ngày — nếu áp dụng đúng từng bước. Điều kiện duy nhất: kỷ luật thực hiện.</p>`)}
+  ${box('today','⚡ Hành động ngay — 3 phút', `
+    <ol style="margin:6px 0 0;">
+      <li class="tts-block">Mở Facebook/TikTok cá nhân ngay bây giờ</li>
+      <li class="tts-block">Hỏi thật: "Người lạ xem profile này có biết tôi làm gì không?"</li>
+      <li class="tts-block">Ghi ra: "Tôi đang ở Cấp ___ và muốn đạt Cấp ___ sau 90 ngày"</li>
+    </ol>`)}`;
+
+const overviewHTML = `
+  <div class="chap-eyebrow">Tổng quan</div>
+  <h1 class="chap-title tts-block">Framework Hoàn Chỉnh: 8 Trụ Cột + 8 Sự Vi Diệu</h1>
+  <p class="tts-block">Toàn bộ lộ trình xây dựng nhân hiệu được đặt trên 2 tầng chiến lược. Tầng 1: <b>8 Trụ Cột</b> — nền móng phải xây đúng thứ tự. Tầng 2: <b>8 Sự Vi Diệu</b> — kết quả tất yếu khi 8 Trụ Cột vững chắc.</p>
+  <div class="twocol">
+    <div>
+      <div class="sec-label">Tầng 1: 8 Trụ Cột (nền tảng)</div>
+      <div class="infocard tts-block"><b>1. Năng Lực</b> — Giỏi thật, tạo kết quả thật</div>
+      <div class="infocard tts-block"><b>2. Định Vị</b> — Rõ tệp, rõ chuyên môn</div>
+      <div class="infocard tts-block"><b>3. Khác Biệt</b> — Dấu ấn không ai copy được</div>
+      <div class="infocard tts-block"><b>4. Giá Trị Cốt Lõi</b> — Bạn đại diện cho gì</div>
+      <div class="infocard tts-block"><b>5. Niềm Tin</b> — Case study, bằng chứng rõ ràng</div>
+      <div class="infocard tts-block"><b>6. Hệ Nội Dung</b> — Có cấu trúc, bền vững</div>
+      <div class="infocard tts-block"><b>7. Hệ Sản Phẩm & Phễu</b> — Kiếm tiền rõ ràng</div>
+      <div class="infocard tts-block"><b>8. Đòn Bẩy Ảnh Hưởng</b> — Cộng đồng, lan tỏa</div>
+    </div>
+    <div>
+      <div class="sec-label">Tầng 2: 8 Sự Vi Diệu (kết quả)</div>
+      <div class="infocard tts-block">✦ Tên = tài sản bền vững, không ai cướp được</div>
+      <div class="infocard tts-block">✦ Định giá cao hơn một cách tự nhiên</div>
+      <div class="infocard tts-block">✦ Chi phí quảng cáo giảm mạnh, organic tăng</div>
+      <div class="infocard tts-block">✦ Thu hút đúng tệp khách hàng lý tưởng</div>
+      <div class="infocard tts-block">✦ Dòng tiền đều đặn, có thể dự đoán</div>
+      <div class="infocard tts-block">✦ Ảnh hưởng vượt khỏi ranh giới sản phẩm</div>
+      <div class="infocard tts-block">✦ Tự xây hệ sinh thái riêng độc lập</div>
+      <div class="infocard tts-block">✦ Giá trị độc bản không thể sao chép</div>
+    </div>
+  </div>
+  <div class="quote-box tts-block" style="margin-top:20px;">Đừng xây nhân hiệu theo kiểu ngẫu hứng. Hãy xây theo hệ thống — từng trụ cột vững chắc, từng bước rõ ràng. Đó là cách duy nhất để tên bạn thật sự có giá trị lâu dài. — Nhung Tech AI</div>`;
+
+const checkpointHTML = `
+  <div class="chap-eyebrow">Checkpoint</div>
+  <h1 class="chap-title tts-block">Bạn Đã Xây Được Bao Nhiêu Trụ Cột?</h1>
+  <p class="tts-block">Đây không phải bài kiểm tra — đây là GPS định vị bước tiếp theo của bạn. Kéo từng thanh trượt, chấm điểm thật lòng từ 1 đến 5 cho mỗi trụ cột. Điểm số được lưu lại trên máy của bạn.</p>
+  <div id="checkpointSliders"></div>
+  <div class="box remember" id="checkpointResult"><span class="box-title">★ Tổng điểm của bạn</span><p style="margin:0;" id="checkpointScoreText">Đang chờ bạn chấm điểm...</p></div>
+  <p class="tts-block" style="margin-top:16px; font-size:13px; color:var(--ink-soft);">Thang điểm: 0-15 → Ưu tiên Trụ cột 1-3 ngay | 16-25 → Đúng hướng, tăng tốc | 26-35 → Xuất sắc, nhân rộng | 36-40 → Đế chế nhân hiệu đang hình thành!</p>`;
+
+const goldenFormulaHTML = `
+  <div class="chap-eyebrow">Công thức vàng</div>
+  <h1 class="chap-title tts-block">Millionaire Messenger: 9 Bước Xây Đế Chế Chuyên Gia</h1>
+  <div class="quote-box tts-block">Brendon Burchard: "Hàng triệu người có kiến thức — nhưng chỉ một số ít biết ĐÓNG GÓI và KIẾM TIỀN từ nó." 9 bước này là con đường đó — được kiểm chứng bởi hàng triệu chuyên gia trên thế giới.</div>
+  <ol class="checklist tts-block">
+    <li><b>1. Chọn niche:</b> Đam mê + kiến thức + thị trường sẵn trả tiền.</li>
+    <li><b>2. Câu chuyện:</b> Hành trình "từ X đến Y" — nền tảng kết nối cảm xúc.</li>
+    <li><b>3. Chọn avatar:</b> Khách hàng cụ thể nhất có thể — không mơ hồ.</li>
+    <li><b>4. Đóng gói:</b> Framework riêng — đặt tên cho phương pháp của bạn.</li>
+    <li><b>5. Lead capture:</b> Landing page + freebie chất lượng thu hút.</li>
+    <li><b>6. Lead magnet:</b> Ebook/video/checklist miễn phí đổi lấy contact.</li>
+    <li><b>7. Launch sản phẩm đầu tiên:</b> Bán thật, lấy feedback, cải tiến.</li>
+    <li><b>8. Xây cộng đồng:</b> Nơi khách hàng kết nối xung quanh bạn.</li>
+    <li><b>9. Đối tác chiến lược:</b> JV, affiliate, speaking — nhân ảnh hưởng.</li>
+  </ol>
+  <div class="quote-box tts-block">"Bạn không cần hoàn hảo bước 1 mới làm bước 2. Hành động không hoàn hảo vẫn tốt hơn kế hoạch hoàn hảo mãi chưa thực hiện." — Brendon Burchard</div>
+  ${box('today','⚡ Xác định ngay', `<p class="tts-block" style="margin:0;">Bạn đang ở <b>bước nào</b>? Khoanh tròn ngay. Chỉ tập trung hoàn thành bước đó trước khi chuyển tiếp — đừng nhảy cóc.</p>`)}`;
+
+const caseStudyHTML = `
+  <div class="chap-eyebrow">Case study</div>
+  <h1 class="chap-title tts-block">3 Mô Hình Nhân Hiệu Thực Tế Từ Đầu Đến Tỷ Đồng</h1>
+  <p class="tts-block">Dưới đây là 3 mô hình xây nhân hiệu phổ biến nhất tại Việt Nam — mỗi mô hình có lộ trình, doanh thu và bài học thực tế khác nhau. Tìm mô hình phù hợp với bạn.</p>
+  <div class="roadmap-block">
+    <div class="roadmap-head tts-block">MÔ HÌNH 1 · GIÁO DỤC & ĐÀO TẠO</div>
+    <ul class="roadmap-body tts-block">
+      <li><b>Hành trình:</b> Bắt đầu từ 0 follower → đăng content kiến thức hàng ngày → xây email list → launch khoá học online đầu tiên → 3 tháng sau: 50 học viên × 2tr = <b>100tr/tháng</b>.</li>
+      <li><b>Bí quyết:</b> Chuyên sâu 1 chủ đề hẹp + case study học viên liên tục + community miễn phí + phễu webinar → mua khoá học.</li>
+    </ul>
+  </div>
+  <div class="roadmap-block">
+    <div class="roadmap-head tts-block">MÔ HÌNH 2 · COACHING & TƯ VẤN</div>
+    <ul class="roadmap-body tts-block">
+      <li><b>Hành trình:</b> Có kinh nghiệm ngành → build nhân hiệu chuyên gia → offer coaching 1-1 → 6 clients × 15tr/tháng = <b>90tr/tháng</b>.</li>
+      <li><b>Bí quyết:</b> Testimonial mạnh + định vị siêu hẹp + LinkedIn/Facebook chuyên nghiệp + cold outreach có nhân hiệu + giới thiệu từ client cũ.</li>
+    </ul>
+  </div>
+  <div class="roadmap-block">
+    <div class="roadmap-head tts-block">MÔ HÌNH 3 · BÁN HÀNG KÈM NHÂN HIỆU</div>
+    <ul class="roadmap-body tts-block">
+      <li><b>Hành trình:</b> Bán sản phẩm bình thường → xây nhân hiệu chuyên gia trong ngành → người ta mua vì TIN BẠN → doanh thu tăng 5× mà không tăng chi phí ads.</li>
+      <li><b>Bí quyết:</b> Live review + hậu trường thật + kể câu chuyện khách hàng + community người dùng → brand loyalty cao.</li>
+    </ul>
+  </div>
+  ${box('remember','Bài học chung', `<p class="tts-block" style="margin:0;">Cả 3 mô hình đều bắt đầu từ xây uy tín trước — bán hàng sau. Không ai thành công bằng cách bán hàng liên tục mà không có nhân hiệu bên dưới làm nền tảng.</p>`)}`;
+
+const roadmap30HTML = `
+  <div class="chap-eyebrow">Lộ trình · Ngày 1-30</div>
+  <h1 class="chap-title tts-block">30 Ngày Đầu: Đặt Nền Móng</h1>
+  <p class="tts-block">Nhiều người thất bại vì không có kế hoạch cụ thể theo ngày. Dưới đây là lịch trình chi tiết 30 ngày đầu — làm đúng trình tự này, sau 30 ngày bạn sẽ có nền móng vững chắc để bắt đầu kiếm tiền từ nhân hiệu.</p>
+  <div class="roadmap-block">
+    <div class="roadmap-head tts-block">TUẦN 1 (Ngày 1-7) · Xây nền tảng nhân hiệu</div>
+    <ul class="roadmap-body tts-block">
+      <li><b>Ngày 1-2:</b> Viết định vị theo công thức 3C (Customer – Competency – Connection). Chuẩn hóa BIO trên Facebook, Zalo, TikTok — nhất quán, rõ ràng, thu hút.</li>
+      <li><b>Ngày 3-4:</b> Chụp ảnh profile chuyên nghiệp (ánh sáng tự nhiên + trang phục gọn gàng là đủ). Cập nhật ảnh bìa có câu định vị rõ ràng.</li>
+      <li><b>Ngày 5-7:</b> Viết câu chuyện cá nhân: Trước → Bước ngoặt → Sau. Đăng lên Facebook — bài này quan trọng nhất bạn sẽ viết trong tuần này.</li>
+    </ul>
+  </div>
+  <div class="roadmap-block">
+    <div class="roadmap-head tts-block">TUẦN 2 (Ngày 8-14) · Khởi động hệ thống content</div>
+    <ul class="roadmap-body tts-block">
+      <li><b>Ngày 8-10:</b> Dùng AI lên kế hoạch 30 ngày content theo ma trận 4C. Bắt đầu đăng đúng lịch: 1 bài/ngày không nghỉ.</li>
+      <li><b>Ngày 11-14:</b> Quay 3 video ngắn (1-3 phút) về tips hữu ích trong lĩnh vực. Không cần hoàn hảo — cần THẬT và CÓ GIÁ TRỊ.</li>
+    </ul>
+  </div>
+  <div class="roadmap-block">
+    <div class="roadmap-head tts-block">TUẦN 3-4 (Ngày 15-30) · Thu hút & xây uy tín</div>
+    <ul class="roadmap-body tts-block">
+      <li><b>Ngày 15-20:</b> Tư vấn miễn phí cho 10 người đúng tệp. Giúp họ đạt kết quả nhỏ → xin testimonial thật sự.</li>
+      <li><b>Ngày 21-25:</b> Thu thập 5+ testimonial, đăng case study đầu tiên theo format Vấn đề → Kết quả.</li>
+      <li><b>Ngày 26-30:</b> Ra mắt lead magnet (ebook/checklist) và bắt đầu xây email list — mục tiêu 50 subscriber đầu.</li>
+    </ul>
+  </div>
+  ${box('remember','Milestone sau 30 ngày', `<p class="tts-block" style="margin:0;">Profile chuẩn hóa | 30 bài content đã đăng | 5+ testimonial | Email list 50 subscriber | Cộng đồng 50+ thành viên</p>`)}`;
+
+const roadmap60HTML = `
+  <div class="chap-eyebrow">Lộ trình · Ngày 31-60</div>
+  <h1 class="chap-title tts-block">Ngày 31-60: Xây Uy Tín</h1>
+  <p class="tts-block"><b>Mục tiêu giai đoạn này:</b> Người ta nghe tên bạn và biết ngay bạn chuyên về lĩnh vực nào. Uy tín bắt đầu đi trước bạn vào mỗi cuộc trò chuyện.</p>
+  <div class="roadmap-block">
+    <div class="roadmap-head tts-block">TỪ "NGƯỜI MỚI" SANG "CHUYÊN GIA ĐÁNG TIN CẬY"</div>
+    <ul class="roadmap-body tts-block">
+      <li><b>Ngày 31-35:</b> Phân tích 5 bài đăng tương tác cao nhất trong 30 ngày qua. Tìm pattern: loại content nào hoạt động tốt nhất? Nhân đôi loại đó.</li>
+      <li><b>Ngày 36-42:</b> Ra mắt mini webinar miễn phí (60-90 phút) về chủ đề bạn giỏi nhất. Mời từ community + email list. Target: 20-50 người tham dự.</li>
+      <li><b>Ngày 43-49:</b> Cuối webinar, offer sản phẩm low-ticket (200K-2tr). Target: 10% người tham dự mua = 2-5 người. Đây là lần đầu bán hàng có hệ thống.</li>
+      <li><b>Ngày 50-55:</b> Tạo 2-3 video "long-form" (10-20 phút) sâu về chuyên môn. Đăng lên YouTube. Content uy tín nhất — Google index được.</li>
+      <li><b>Ngày 56-60:</b> Liên hệ 3 người có nhân hiệu mạnh cùng ngành đề nghị hợp tác: "Tôi có [audience X], bạn có [sản phẩm Y] — mình làm gì cùng nhau được?"</li>
+    </ul>
+  </div>
+  ${box('remember','Milestone sau 60 ngày', `<p class="tts-block" style="margin:0;">500+ follower | 10+ testimonial | 1 sản phẩm đã bán thành công | Email list 100+ | Cộng đồng 150+ thành viên | 1 đối tác chiến lược</p>`)}`;
+
+const roadmap90HTML = `
+  <div class="chap-eyebrow">Lộ trình · Ngày 61-90</div>
+  <h1 class="chap-title tts-block">Ngày 61-90: Tạo Doanh Thu Hệ Thống</h1>
+  <div class="quote-box tts-block">Đây là giai đoạn nhiều người bỏ cuộc nhất — vì kết quả chưa rõ ràng trong khi nỗ lực đã bỏ ra rất nhiều. Nếu bạn vượt qua được giai đoạn này, nhân hiệu sẽ tự vận hành.</div>
+  <div class="roadmap-block">
+    <div class="roadmap-head tts-block">NHÂN HIỆU BẮT ĐẦU LÀM VIỆC THAY BẠN</div>
+    <ul class="roadmap-body tts-block">
+      <li><b>Ngày 61-65:</b> Launch sản phẩm mid-ticket đầu tiên (5-15tr). 5 ngày pre-launch content → 3 ngày mở đăng ký → 1 ngày last call. Gửi email cho list, đăng trên group, inbox khách cũ.</li>
+      <li><b>Ngày 66-70:</b> Thiết lập phễu tự động: Lead magnet → Landing page → Email sequence 7 ngày → Offer sản phẩm. Dùng Systeme.io miễn phí.</li>
+      <li><b>Ngày 71-77:</b> Mở rộng kênh thứ 2. Nếu đang dùng Facebook → bắt đầu TikTok hoặc YouTube. Dùng AI tái sử dụng content cũ — chỉ mất 5 phút/bài.</li>
+      <li><b>Ngày 78-85:</b> Ra mắt chương trình high-ticket đầu tiên (coaching 1-1 hoặc mentoring nhóm max 5 người). Giá 15-50tr. Chỉ bán cho khách cũ và cộng đồng.</li>
+      <li><b>Ngày 86-90:</b> Tổng kết 90 ngày. So sánh ngày 1 và lập kế hoạch 90 ngày tiếp theo. <b>Nhân hiệu là hành trình không bao giờ kết thúc.</b></li>
+    </ul>
+  </div>
+  <div class="stat-row">
+    <div class="stat-box tts-block"><div class="stat-num">1K+</div><div class="stat-label">Follower mục tiêu sau 90 ngày</div></div>
+    <div class="stat-box tts-block"><div class="stat-num">20+</div><div class="stat-label">Testimonial thật từ khách hàng/học viên</div></div>
+    <div class="stat-box tts-block"><div class="stat-num">50tr+</div><div class="stat-label">Doanh thu mục tiêu từ nhân hiệu trong 90 ngày</div></div>
+  </div>`;
+
+const aiArsenalHTML = `
+  <div class="chap-eyebrow">Bộ công cụ AI</div>
+  <h1 class="chap-title tts-block">AI Arsenal: Xây Nhân Hiệu Nhanh Gấp 10 Lần</h1>
+  <p class="tts-block"><b>Bí mật của nhân hiệu 2025:</b> Người thắng không phải người giỏi nhất — mà là người biết dùng AI để tạo KẾT QUẢ NHANH NHẤT và nhất quán nhất, ngày này qua ngày khác.</p>
+  <div class="twocol">
+    <div>
+      <div class="sec-label">AI cho Content Creation</div>
+      <div class="infocard tts-block"><b>ChatGPT / Claude (Free):</b> Viết caption, script video, email. Prompt: "Viết 10 caption Facebook về [chủ đề] cho [tệp khách]".</div>
+      <div class="infocard tts-block"><b>Canva AI (Free basic):</b> Thiết kế thumbnail, ảnh bìa, infographic — AI tạo layout đẹp trong 30 giây.</div>
+      <div class="infocard tts-block"><b>CapCut AI (Free):</b> Edit video ngắn tự động — AI caption, auto-cut, enhance audio ngay trên điện thoại.</div>
+      <div class="infocard tts-block"><b>Midjourney/DALL-E (Free trial):</b> Tạo ảnh minh họa độc đáo cho content, không cần mua ảnh stock.</div>
+    </div>
+    <div>
+      <div class="sec-label">AI cho Automation & Phễu</div>
+      <div class="infocard tts-block"><b>MailChimp (Free đến 500 subs):</b> Email marketing tự động, nurture lead, sequence 7 ngày.</div>
+      <div class="infocard tts-block"><b>Systeme.io (Free):</b> All-in-one: landing page + email + course + affiliate — thay thế nhiều tool đắt tiền.</div>
+      <div class="infocard tts-block"><b>ManyChat (Freemium):</b> Chatbot Facebook tự động — tăng tỷ lệ chuyển đổi 200-300%.</div>
+      <div class="infocard tts-block"><b>Perplexity AI (Free):</b> Research xu hướng, phân tích đối thủ, tìm pain point nhanh hơn Google 10×.</div>
+    </div>
+  </div>
+  ${box('today','⚡ Bắt đầu tuần này', `<p class="tts-block" style="margin:0;">Cài <b>ChatGPT + Canva + CapCut</b> trên điện thoại ngay hôm nay. Chỉ 3 công cụ này đủ để tạo content chuyên nghiệp mỗi ngày trong <b>dưới 30 phút/ngày.</b></p>`)}`;
+
+const mistakesHTML = `
+  <div class="chap-eyebrow">Cảnh báo</div>
+  <h1 class="chap-title tts-block">10 Lỗi Phổ Biến Khi Xây Nhân Hiệu</h1>
+  <p class="tts-block">Hầu hết người thất bại không phải vì thiếu kiến thức — mà vì mắc những lỗi rất cơ bản này. Đọc và đánh dấu những lỗi bạn đang mắc phải để sửa ngay.</p>
+  <div class="twocol">
+    <div>
+      <div class="infocard tts-block"><b>Lỗi 1 — Định vị quá rộng:</b> "Tôi giúp mọi người kinh doanh." Fix: hẹp hơn 3 lần nữa.</div>
+      <div class="infocard tts-block"><b>Lỗi 2 — Chỉ đăng bán hàng:</b> 80% bài là ads → follower bỏ. Fix: áp dụng ma trận 4C, max 10-20% commercial.</div>
+      <div class="infocard tts-block"><b>Lỗi 3 — Copy người khác:</b> Làm y chang người thành công. Fix: học từ họ nhưng lọc qua cá tính riêng.</div>
+      <div class="infocard tts-block"><b>Lỗi 4 — Không nhất quán:</b> Đăng 3 ngày nghỉ 2 tuần. Fix: 3 bài/tuần đều hơn 10 bài rồi im lặng.</div>
+      <div class="infocard tts-block"><b>Lỗi 5 — Sợ bày tỏ quan điểm:</b> Content an toàn → không ai nhớ. Fix: dám nói quan điểm riêng.</div>
+    </div>
+    <div>
+      <div class="infocard tts-block"><b>Lỗi 6 — Bỏ qua storytelling:</b> Chỉ share thông tin, không kể chuyện. Fix: mọi bài đều có yếu tố câu chuyện cá nhân.</div>
+      <div class="infocard tts-block"><b>Lỗi 7 — Không xây email list:</b> Phụ thuộc 100% mạng xã hội. Fix: bắt đầu build list từ hôm nay.</div>
+      <div class="infocard tts-block"><b>Lỗi 8 — Chưa có kết quả đã dạy:</b> Nói nhưng không có bằng chứng. Fix: chỉ dạy điều bạn TỰ LÀM được.</div>
+      <div class="infocard tts-block"><b>Lỗi 9 — Không đầu tư bản thân:</b> Ngại học thêm. Fix: tái đầu tư 20% thu nhập vào phát triển.</div>
+      <div class="infocard tts-block"><b>Lỗi 10 — Thiếu kiên nhẫn:</b> Kỳ vọng viral sau 2 tuần. Fix: nhân hiệu cần 3-6 tháng mới thấy kết quả rõ.</div>
+    </div>
+  </div>
+  ${box('today','⚡ Tự kiểm tra', `<p class="tts-block" style="margin:0;">Đánh dấu tất cả lỗi bạn đang mắc. Chọn <b>lỗi số 1 quan trọng nhất</b> và cam kết sửa trong tuần này.</p>`)}`;
+
+const faqHTML = `
+  <div class="chap-eyebrow">FAQ</div>
+  <h1 class="chap-title tts-block">Câu Hỏi Thường Gặp Khi Xây Nhân Hiệu Cá Nhân</h1>
+  <div class="qacard tts-block"><div class="q">? Tôi chưa có kết quả nổi bật, có xây nhân hiệu được không?</div><div>Được! Hãy bắt đầu bằng cách chia sẻ hành trình của bạn — kể cả khi đang ở điểm xuất phát. "Tôi đang học và áp dụng X, đây là những gì tôi đang làm..." — người ta theo dõi hành trình, không chỉ kết quả cuối.</div></div>
+  <div class="qacard tts-block"><div class="q">? Cần bao nhiêu tiền để bắt đầu xây nhân hiệu?</div><div>Gần như bằng 0. Facebook, TikTok, Zalo miễn phí. ChatGPT có bản free. Canva có bản free. MailChimp free đến 500 subs. Điều tốn nhất là <b>thời gian và kỷ luật</b> — không phải tiền.</div></div>
+  <div class="qacard tts-block"><div class="q">? Tôi là người hướng nội, ngại xuất hiện trước camera — có làm được không?</div><div>Hoàn toàn được! Nhiều chuyên gia thành công không cần camera: viết blog, podcast (chỉ giọng nói), newsletter, thiết kế infographic. Nhân hiệu không nhất thiết phải là "người hay nói".</div></div>
+  <div class="qacard tts-block"><div class="q">? Mất bao lâu để thấy kết quả từ nhân hiệu?</div><div><b>3-6 tháng</b> để thấy kết quả rõ ràng nếu làm đúng và nhất quán. Tháng 1-2: nền móng. Tháng 3-4: uy tín bắt đầu hình thành. Tháng 5-6: doanh thu từ nhân hiệu bắt đầu ổn định. Đừng kỳ vọng viral trong 2 tuần.</div></div>
+  <div class="qacard tts-block"><div class="q">? AI có thể thay thế nhân hiệu cá nhân không?</div><div>Ngược lại! Càng nhiều AI content — nhân hiệu cá nhân THẬT càng có giá trị hơn. Người ta ngày càng khao khát được kết nối với con người thật, không phải AI. Đây chính là lợi thế của bạn.</div></div>
+  <div class="qacard tts-block"><div class="q">? Tôi nên bắt đầu từ nền tảng nào: Facebook, TikTok hay YouTube?</div><div>Bắt đầu từ nơi khách hàng lý tưởng của bạn đang ở nhiều nhất. Nếu họ 25-45 tuổi kinh doanh → Facebook. Dưới 30 tuổi → TikTok. Muốn content sâu, lâu dài → YouTube. Chỉ chọn 1 nền tảng chính trước.</div></div>`;
+
+const checklistHTML = `
+  <div class="chap-eyebrow">Checklist tương tác</div>
+  <h1 class="chap-title tts-block">Tối Ưu Profile Ngay Trong 60 Phút</h1>
+  <p class="tts-block">Profile mạng xã hội là "cửa hàng số" của bạn. Người lạ quyết định follow hay không trong 3 giây đầu tiên. Click vào từng mục để đánh dấu khi hoàn thành — tiến độ được lưu lại trên máy của bạn.</p>
+  <div class="cbox-progress" id="checklistProgress">Đã hoàn thành 0/11 mục</div>
+  <div id="checklist60"></div>`;
+
+const commitmentHTML = `
+  <div class="chap-eyebrow">Kế hoạch cá nhân</div>
+  <h1 class="chap-title tts-block">Cam Kết 90 Ngày Của Tôi</h1>
+  <p class="tts-block">Nghiên cứu khoa học chứng minh: <b>người viết mục tiêu ra giấy có khả năng đạt được cao hơn 42%</b> so với người chỉ nghĩ trong đầu. Hãy điền vào bảng kế hoạch này ngay bây giờ — nội dung tự động lưu lại trên máy của bạn.</p>
+  <div id="commitForm"></div>
+  <div class="commit-save-note" id="commitSaveNote"></div>
+  <div class="quote-box tts-block">"Nhân hiệu không xây trong một ngày. Nhưng mỗi ngày bạn trì hoãn — một người khác đang xây tên tuổi trong lĩnh vực của bạn, chiếm vị trí đáng lẽ thuộc về bạn." — Nhung Tech AI</div>
+  <div class="sec-label">Bảng theo dõi 90 ngày — bấm vào từng ngày sau khi hoàn thành hành động</div>
+  <div class="tracker" id="tracker90"></div>
+  ${box('today','⚡ Ký tên cam kết ngay hôm nay', `<p class="tts-block" style="margin:0;">Điền đầy đủ bảng trên → <b>chụp ảnh lại</b> → đăng lên Facebook story để cam kết công khai với cộng đồng của bạn. Accountability là chìa khóa thành công.</p>`)}`;
+
+const closingHTML = `
+  <div class="chap-eyebrow">Lời kết</div>
+  <h1 class="chap-title tts-block">Tên Bạn Đáng Giá Rất Nhiều — Nhưng Chỉ Khi Bạn Quyết Định Xây Nó</h1>
+  <p class="tts-block"><b>Nhân hiệu không xây trong một ngày.</b> Nhưng mỗi ngày bạn trì hoãn — một người khác đang xây tên tuổi trong lĩnh vực của bạn, từng bước chiếm vị trí đáng lẽ thuộc về bạn.</p>
+  <div class="quote-box tts-block">Đừng chờ đến khi "sẵn sàng hoàn toàn". Không ai sẵn sàng 100% khi bắt đầu điều lớn. Bắt đầu rồi sẽ thấy sẵn sàng. Hành động rồi sẽ thấy tự tin. Kết quả rồi sẽ thấy xứng đáng với hành trình đã bỏ ra. — Nhung Tech AI</div>
+  <div class="sec-label">3 hành động ngay bây giờ sau khi đọc xong</div>
+  <div class="action-item tts-block"><div class="action-num">01</div><p><b>Ngay hôm nay:</b> Cập nhật BIO trên Facebook/Zalo theo công thức 3C vừa học. Việc nhỏ nhất — nhưng là bước đầu tiên quan trọng nhất bạn có thể làm ngay bây giờ.</p></div>
+  <div class="action-item tts-block"><div class="action-num">02</div><p><b>Ngày mai:</b> Nhắn tin cho 3 người bạn đã giúp đỡ — xin 1 câu nhận xét thật. Đăng testimonial đầu tiên lên story. Đây là tài sản nhân hiệu đầu tiên.</p></div>
+  <div class="action-item tts-block"><div class="action-num">03</div><p><b>Tuần này:</b> Lập lịch content 30 ngày theo ma trận 4C. Tạo lead magnet đầu tiên. Cam kết 90 ngày và viết kế hoạch ra giấy theo trang trước.</p></div>
+  ${box('remember','🎁 Lời nhắn từ Nhung Tech AI', `
+    <p class="tts-block">Cảm ơn bạn đã đọc đến trang cuối. Mình trân trọng thời gian bạn đã dành cho cuốn sách này. <b>Nhân hiệu của bạn bắt đầu từ quyết định bạn đưa ra ngay lúc này.</b></p>
+    <p class="tts-block" style="margin:0;">Mình tin bạn có đủ năng lực và giá trị để xây dựng một tên tuổi thật sự đáng để người ta biết đến và tôn trọng. <b>Tên bạn đáng giá hơn bạn nghĩ rất nhiều.</b></p>
+  `)}`;
+
+const thanksHTML = `
+  <div class="hero-cover">
+    <h1 class="tts-block">Cảm Ơn Bạn</h1>
+    <p class="sub tts-block">đã đầu tư vào cuốn sách này — và quan trọng hơn, đầu tư vào phiên bản đáng giá hơn của chính bạn.</p>
+    <div class="quote-box tts-block" style="text-align:left;">"You cannot lose if you do not quit." — Alex Hormozi</div>
+    <div class="sec-label" style="text-align:left;">Kết nối với Nhung Tech AI</div>
+    <p class="tts-block" style="text-align:left;"><b>Facebook</b> — Nhung Tech AI (tìm kiếm trực tiếp trên Facebook)<br><b>Dịch vụ</b> — Landing page · Ebook · Ảnh/Video AI · Xây nhân hiệu cá nhân · Coaching ChatGPT, Notion</p>
+    ${box('remember','★ Nhung Tech AI có thể đồng hành cùng bạn', `
+      <ul style="margin:6px 0 0; text-align:left;">
+        <li class="tts-block"><b>Xây nhân hiệu cá nhân trọn gói</b> — Định vị, nội dung, phễu bán hàng đồng bộ</li>
+        <li class="tts-block"><b>Landing page</b> — Trang bán hàng chuyên nghiệp, đặt được đơn ngay</li>
+        <li class="tts-block"><b>Ebook & sản phẩm số</b> — Đóng gói kiến thức của bạn thành sản phẩm bán được</li>
+        <li class="tts-block"><b>Ảnh & video AI</b> — Hình ảnh thương hiệu chuyên nghiệp, tiết kiệm 90% chi phí</li>
+        <li class="tts-block"><b>Coaching ChatGPT, Notion</b> — Học dùng AI để làm việc nhanh gấp 10 lần</li>
+      </ul>`)}
+    <p style="margin-top:20px;"><a href="/" class="tts-block" style="display:inline-block; padding:12px 28px; border-radius:30px; background:linear-gradient(135deg,#C6923A,#E5B04D); color:#241F16; text-decoration:none; font-weight:800;">← Về trang chủ Nhung Tech AI</a></p>
+  </div>`;
+
+/* -------- Assemble full chapter list -------- */
+const chapters = [
+  {title:'Bìa sách', html:coverHTML},
+  {title:'Lời hứa chuyển hóa', html:promiseHTML},
+  {title:'Lời mở đầu', html:hookHTML},
+  {title:'Mục lục', html:tocHTML},
+  {title:'Về tác giả', html:introHTML},
+  {title:'Chẩn đoán cấp độ nhân hiệu', html:diagnosisHTML},
+  {title:'Tổng quan Framework', html:overviewHTML},
+  ...pillarData.map(t=>({title:`Trụ cột ${t.num}`, html:pillarChapter(t)})),
+  {title:'Checkpoint 8 trụ cột', html:checkpointHTML},
+  ...vidieuData.map(t=>({title:`Vi diệu ${t.num}`, html:vidieuChapter(t)})),
+  {title:'Công thức vàng — 9 bước', html:goldenFormulaHTML},
+  {title:'Case study 3 mô hình', html:caseStudyHTML},
+  {title:'Lộ trình ngày 1-30', html:roadmap30HTML},
+  {title:'Lộ trình ngày 31-60', html:roadmap60HTML},
+  {title:'Lộ trình ngày 61-90', html:roadmap90HTML},
+  {title:'AI Arsenal', html:aiArsenalHTML},
+  {title:'10 lỗi phổ biến', html:mistakesHTML},
+  {title:'FAQ', html:faqHTML},
+  {title:'Checklist tối ưu profile', html:checklistHTML},
+  {title:'Cam kết 90 ngày', html:commitmentHTML},
+  {title:'Lời kết', html:closingHTML},
+  {title:'Cảm ơn & kết nối', html:thanksHTML}
+];
+
+/* ================= APP LOGIC ================= */
+const STORAGE_KEY = 'ntai_tenban_progress_v1';
+const TRACKER_KEY = 'ntai_tenban_tracker90_v1';
+const CHECKLIST_KEY = 'ntai_tenban_checklist_v1';
+const CHECKPOINT_KEY = 'ntai_tenban_checkpoint_v1';
+const COMMIT_KEY = 'ntai_tenban_commit_v1';
+
+let current = 0;
+let readSet = new Set(JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'));
+let trackerDone = new Set(JSON.parse(localStorage.getItem(TRACKER_KEY) || '[]'));
+let checklistDone = new Set(JSON.parse(localStorage.getItem(CHECKLIST_KEY) || '[]'));
+let checkpointScores = JSON.parse(localStorage.getItem(CHECKPOINT_KEY) || '{}');
+let commitData = JSON.parse(localStorage.getItem(COMMIT_KEY) || '{}');
+
+const bookPage = document.getElementById('bookPage');
+const chapRange = document.getElementById('chapRange');
+const chapOf = document.getElementById('chapOf');
+const progressFill = document.getElementById('progressFill');
+const progressLabel = document.getElementById('progressLabel');
+const progressPct = document.getElementById('progressPct');
+const drawerList = document.getElementById('drawerList');
+
+chapRange.max = chapters.length - 1;
+
+function saveProgress(){ localStorage.setItem(STORAGE_KEY, JSON.stringify([...readSet])); }
+function saveTracker(){ localStorage.setItem(TRACKER_KEY, JSON.stringify([...trackerDone])); }
+function saveChecklist(){ localStorage.setItem(CHECKLIST_KEY, JSON.stringify([...checklistDone])); }
+function saveCheckpoint(){ localStorage.setItem(CHECKPOINT_KEY, JSON.stringify(checkpointScores)); }
+function saveCommit(){ localStorage.setItem(COMMIT_KEY, JSON.stringify(commitData)); }
+
+/* ---- 90-day tracker ---- */
+function renderTracker90(){
+  const t = document.getElementById('tracker90');
+  if(!t) return;
+  t.innerHTML='';
+  for(let i=1;i<=90;i++){
+    const d = document.createElement('div');
+    d.className = 'd' + (trackerDone.has(i) ? ' done' : '');
+    d.textContent = i;
+    d.onclick = () => {
+      if(trackerDone.has(i)) trackerDone.delete(i); else trackerDone.add(i);
+      saveTracker(); renderTracker90();
+    };
+    t.appendChild(d);
+  }
+}
+
+/* ---- Checklist 11 điểm ---- */
+const checklistItems = [
+  {group:'Facebook Profile', label:'Ảnh đại diện: rõ mặt, chuyên nghiệp, nền sạch'},
+  {group:'Facebook Profile', label:'Ảnh bìa: câu định vị + CTA "Nhắn tin để nhận [freebie]"'},
+  {group:'Facebook Profile', label:'Bio: "Tôi giúp [ai] đạt [gì] bằng cách [phương pháp]"'},
+  {group:'Facebook Profile', label:'Ghim bài: câu chuyện cá nhân hoặc post thành tích nổi bật nhất'},
+  {group:'Facebook Profile', label:'Story highlights: "Về tôi" / "Kết quả" / "Tips" / "Sản phẩm"'},
+  {group:'TikTok / Instagram', label:'Username nhất quán với tên thương hiệu trên tất cả nền tảng'},
+  {group:'TikTok / Instagram', label:'Bio 150 ký tự: Ai bạn là + giúp ai + CTA + link'},
+  {group:'TikTok / Instagram', label:'Link in bio: Linktree miễn phí → lead magnet / group / sản phẩm'},
+  {group:'Kiểm tra tổng thể', label:'Hỏi người lạ: "Xem profile 5 giây, bạn biết tôi làm gì không?"'},
+  {group:'Kiểm tra tổng thể', label:'Nhất quán hình ảnh + thông điệp trên TẤT CẢ nền tảng'},
+  {group:'Kiểm tra tổng thể', label:'Đặt lịch cập nhật profile lại mỗi khi định vị thay đổi'}
+];
+function renderChecklist(){
+  const c = document.getElementById('checklist60');
+  if(!c) return;
+  let html = '';
+  let lastGroup = '';
+  checklistItems.forEach((item,i)=>{
+    if(item.group !== lastGroup){
+      html += `<div class="sec-label">${item.group}</div>`;
+      lastGroup = item.group;
+    }
+    const checked = checklistDone.has(i);
+    html += `<div class="cbox-item tts-block ${checked?'checked':''}">
+      <input type="checkbox" id="cb${i}" ${checked?'checked':''} data-i="${i}">
+      <label for="cb${i}">${item.label}</label>
+    </div>`;
+  });
+  c.innerHTML = html;
+  c.querySelectorAll('input[type=checkbox]').forEach(cb=>{
+    cb.onchange = ()=>{
+      const i = parseInt(cb.dataset.i);
+      if(cb.checked) checklistDone.add(i); else checklistDone.delete(i);
+      saveChecklist(); renderChecklist();
+    };
+  });
+  const prog = document.getElementById('checklistProgress');
+  if(prog) prog.textContent = `Đã hoàn thành ${checklistDone.size}/${checklistItems.length} mục`;
+}
+
+/* ---- Checkpoint sliders ---- */
+function checkpointFeedback(score){
+  if(score <= 15) return 'Ưu tiên Trụ cột 1-3 ngay — hãy tập trung xây nền tảng trước khi làm gì khác.';
+  if(score <= 25) return 'Đúng hướng, tăng tốc — bạn đã có nền, giờ là lúc đẩy mạnh nội dung và niềm tin.';
+  if(score <= 35) return 'Xuất sắc, nhân rộng — nhân hiệu của bạn đã vững, hãy tập trung mở rộng ảnh hưởng.';
+  return 'Đế chế nhân hiệu đang hình thành! Hãy duy trì và mở rộng hệ sinh thái của bạn.';
+}
+function renderCheckpoint(){
+  const wrap = document.getElementById('checkpointSliders');
+  if(!wrap) return;
+  const labels = pillarData.map(p=>p.num+' — '+p.title.replace(/<[^>]+>/g,''));
+  wrap.innerHTML = labels.map((lbl,i)=>{
+    const val = checkpointScores[i] || 1;
+    return `<div class="slider-row tts-block">
+      <div class="lbl"><span>${lbl}</span><span class="val" id="cpVal${i}">${val}/5</span></div>
+      <input type="range" class="pillar-slider" min="1" max="5" step="1" value="${val}" data-i="${i}">
+    </div>`;
+  }).join('');
+  wrap.querySelectorAll('input[type=range]').forEach(sl=>{
+    sl.oninput = ()=>{
+      const i = parseInt(sl.dataset.i);
+      checkpointScores[i] = parseInt(sl.value);
+      document.getElementById('cpVal'+i).textContent = sl.value + '/5';
+      saveCheckpoint();
+      updateCheckpointTotal();
+    };
+  });
+  updateCheckpointTotal();
+}
+function updateCheckpointTotal(){
+  const txt = document.getElementById('checkpointScoreText');
+  if(!txt) return;
+  let sum = 0;
+  for(let i=0;i<8;i++) sum += (checkpointScores[i] || 1);
+  txt.innerHTML = `<b>${sum}/40 điểm.</b> ${checkpointFeedback(sum)}`;
+}
+
+/* ---- Cam kết 90 ngày (form) ---- */
+const commitFields = [
+  {key:'name', label:'Tên tôi là', type:'text', placeholder:'Nguyễn Văn A'},
+  {key:'level', label:'Tôi hiện đang ở cấp độ nhân hiệu', type:'text', placeholder:'Cấp 1 — Bắt đầu nhận diện'},
+  {key:'goal', label:'Mục tiêu nhân hiệu sau 90 ngày', type:'text', placeholder:'Đạt Cấp 3 — Nhân hiệu rõ ràng'},
+  {key:'audience', label:'Tệp khách hàng lý tưởng', type:'text', placeholder:'Chủ shop mỹ phẩm nhỏ dưới 10 nhân sự'},
+  {key:'position', label:'Câu định vị của tôi', type:'text', placeholder:'Tôi giúp [ai] đạt [gì] bằng [phương pháp]'},
+  {key:'revenue', label:'Doanh thu mục tiêu từ nhân hiệu (VNĐ/tháng)', type:'text', placeholder:'50.000.000'},
+  {key:'posts', label:'Tôi cam kết đăng content (bài/tuần)', type:'text', placeholder:'5'},
+  {key:'startdate', label:'Ngày bắt đầu', type:'date', placeholder:''}
+];
+function renderCommitForm(){
+  const wrap = document.getElementById('commitForm');
+  if(!wrap) return;
+  wrap.innerHTML = commitFields.map(f=>`
+    <div class="commit-field tts-block">
+      <label>${f.label}</label>
+      <input type="${f.type}" data-key="${f.key}" placeholder="${f.placeholder}" value="${commitData[f.key] ? commitData[f.key].replace(/"/g,'&quot;') : ''}">
+    </div>`).join('');
+  wrap.querySelectorAll('input').forEach(inp=>{
+    inp.oninput = ()=>{
+      commitData[inp.dataset.key] = inp.value;
+      saveCommit();
+      const note = document.getElementById('commitSaveNote');
+      if(note){ note.textContent = '✓ Đã lưu tự động'; setTimeout(()=>{ if(note) note.textContent=''; }, 1500); }
+    };
+  });
+}
+
+function renderDrawer(){
+  drawerList.innerHTML = chapters.map((c,i)=>`
+    <div class="drawer-item ${i===current?'current':''}" data-i="${i}">
+      <div class="chk">${readSet.has(i)?'✓':''}</div>
+      <div>${c.title}</div>
+    </div>`).join('');
+  drawerList.querySelectorAll('.drawer-item').forEach(el=>{
+    el.addEventListener('click', ()=>{ goTo(parseInt(el.dataset.i)); closeDrawer(); });
+  });
+}
+
+function renderInteractiveIfPresent(){
+  renderTracker90();
+  renderChecklist();
+  renderCheckpoint();
+  renderCommitForm();
+}
+
+function goTo(i){
+  stopSpeech();
+  current = Math.max(0, Math.min(chapters.length-1, i));
+  bookPage.innerHTML = chapters[current].html;
+  chapRange.value = current;
+  chapOf.textContent = `${chapters[current].title} · ${current+1}/${chapters.length}`;
+  progressLabel.textContent = `${chapters[current].title}`;
+  const pct = Math.round(((current+1)/chapters.length)*100);
+  progressFill.style.width = pct + '%';
+  progressPct.textContent = pct + '%';
+  document.getElementById('btnPrev').disabled = current===0;
+  document.getElementById('btnNext').disabled = current===chapters.length-1;
+  window.scrollTo({top:0, behavior:'instant'});
+  renderInteractiveIfPresent();
+  renderDrawer();
+  location.hash = 'c' + current;
+}
+
+document.getElementById('btnPrev').onclick = ()=>goTo(current-1);
+document.getElementById('btnNext').onclick = ()=>goTo(current+1);
+document.getElementById('btnCover').onclick = ()=>goTo(0);
+chapRange.oninput = (e)=>goTo(parseInt(e.target.value));
+
+document.getElementById('btnMarkDone').onclick = ()=>{
+  readSet.add(current); saveProgress(); renderDrawer();
+  const btn = document.getElementById('btnMarkDone');
+  btn.textContent = '✓ Đã đánh dấu hoàn thành!';
+  setTimeout(()=>{ btn.textContent = '✓ Đã đọc xong chương này'; }, 1800);
+};
+
+/* ---- Drawer open/close ---- */
+const drawer = document.getElementById('drawer');
+const drawerBackdrop = document.getElementById('drawerBackdrop');
+function openDrawer(){ drawer.classList.add('show'); drawerBackdrop.classList.add('show'); }
+function closeDrawer(){ drawer.classList.remove('show'); drawerBackdrop.classList.remove('show'); }
+document.getElementById('btnMenu').onclick = openDrawer;
+document.getElementById('drawerClose').onclick = closeDrawer;
+drawerBackdrop.onclick = closeDrawer;
+
+/* ---- Fullscreen ---- */
+document.getElementById('btnFull').onclick = ()=>{
+  if(!document.fullscreenElement){ document.documentElement.requestFullscreen?.(); }
+  else{ document.exitFullscreen?.(); }
+};
+
+/* ================= TEXT-TO-SPEECH (TIẾNG VIỆT) ================= */
+const synth = window.speechSynthesis;
+let speaking = false;
+let blocks = [];
+let blockIndex = 0;
+let viVoices = [];
+let chosenVoice = null;
+const voiceSelect = document.getElementById('voiceSelect');
+const voiceWarn = document.getElementById('voiceWarn');
+
+function isVietnameseVoice(v){
+  const lang = (v.lang || '').toLowerCase();
+  const name = (v.name || '').toLowerCase();
+  return lang.startsWith('vi') || lang.includes('vn') ||
+         name.includes('viet') || name.includes('việt') ||
+         name.includes('hoaimy') || name.includes('namminh');
+}
+
+function pickVoice(){
+  const voices = synth.getVoices();
+  if(!voices || !voices.length) return;
+  viVoices = voices.filter(isVietnameseVoice);
+
+  if(viVoices.length){
+    voiceWarn.style.display = 'none';
+    voiceSelect.style.display = '';
+    voiceSelect.innerHTML = viVoices.map((v,i)=>`<option value="${i}">🇻🇳 ${v.name}</option>`).join('');
+    chosenVoice = viVoices[0];
+  } else {
+    voiceSelect.style.display = 'none';
+    voiceWarn.style.display = 'flex';
+    chosenVoice = null;
+  }
+}
+if(synth){
+  pickVoice();
+  synth.onvoiceschanged = pickVoice;
+  setTimeout(pickVoice, 300);
+  setTimeout(pickVoice, 1200);
+}
+voiceSelect.onchange = ()=>{ chosenVoice = viVoices[parseInt(voiceSelect.value)] || null; };
+
+const voiceHelpModal = document.getElementById('voiceHelpModal');
+const voiceHelpBackdrop = document.getElementById('voiceHelpBackdrop');
+voiceWarn.onclick = ()=>{ voiceHelpModal.style.display = 'block'; voiceHelpBackdrop.classList.add('show'); };
+document.getElementById('voiceHelpClose').onclick = ()=>{ voiceHelpModal.style.display = 'none'; voiceHelpBackdrop.classList.remove('show'); };
+voiceHelpBackdrop.onclick = ()=>{ voiceHelpModal.style.display = 'none'; voiceHelpBackdrop.classList.remove('show'); };
+
+function getRate(){ return parseFloat(document.getElementById('rateSelect').value); }
+function getVol(){ return parseFloat(document.getElementById('volRange').value); }
+
+function clearHighlight(){
+  document.querySelectorAll('.tts-block.reading').forEach(el=>el.classList.remove('reading'));
+}
+
+function speakNextBlock(){
+  clearHighlight();
+  if(blockIndex >= blocks.length){
+    speaking = false;
+    document.getElementById('btnPlay').classList.remove('active');
+    document.getElementById('btnPlay').textContent = '🎧';
+    return;
+  }
+  const el = blocks[blockIndex];
+  el.classList.add('reading');
+  el.scrollIntoView({behavior:'smooth', block:'center'});
+  const text = el.innerText.trim();
+  if(!text){ blockIndex++; speakNextBlock(); return; }
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'vi-VN';
+  if(chosenVoice) u.voice = chosenVoice;
+  u.rate = getRate();
+  u.volume = getVol();
+  u.onend = ()=>{ blockIndex++; if(speaking) speakNextBlock(); };
+  u.onerror = ()=>{ blockIndex++; if(speaking) speakNextBlock(); };
+  synth.speak(u);
+}
+
+function startSpeech(){
+  if(!synth){ alert('Trình duyệt của bạn không hỗ trợ giọng đọc. Hãy thử Chrome hoặc Edge.'); return; }
+  stopSpeech();
+  blocks = Array.from(bookPage.querySelectorAll('.tts-block'));
+  blockIndex = 0;
+  speaking = true;
+  document.getElementById('btnPlay').classList.add('active');
+  document.getElementById('btnPlay').textContent = '⏸';
+  speakNextBlock();
+}
+function stopSpeech(){
+  speaking = false;
+  if(synth) synth.cancel();
+  clearHighlight();
+  document.getElementById('btnPlay').classList.remove('active');
+  document.getElementById('btnPlay').textContent = '🎧';
+}
+document.getElementById('btnPlay').onclick = ()=>{
+  if(speaking){ stopSpeech(); } else { startSpeech(); }
+};
+document.getElementById('rateSelect').onchange = ()=>{
+  if(speaking){ const wasIdx = blockIndex; stopSpeech(); blockIndex = wasIdx; speaking = true; document.getElementById('btnPlay').classList.add('active'); document.getElementById('btnPlay').textContent='⏸'; speakNextBlock(); }
+};
+
+/* ---- init ---- */
+(function init(){
+  const hashMatch = location.hash.match(/^#c(\d+)$/);
+  const start = hashMatch ? parseInt(hashMatch[1]) : 0;
+  goTo(isNaN(start) ? 0 : start);
+})();
+</script>
+</body>
+</html>
