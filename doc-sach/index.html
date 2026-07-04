@@ -58,6 +58,7 @@
   }
   .ctrl-btn:hover{background:linear-gradient(135deg,var(--blue),var(--purple)); border-color:transparent;}
   .ctrl-btn.active{background:linear-gradient(135deg,var(--blue),var(--purple)); border-color:transparent;}
+  .ctrl-btn.has-real-audio{ border-color:var(--gold); box-shadow:0 0 0 1px var(--gold) inset; }
   select.rate-select{
     background:rgba(255,255,255,.08); color:#fff; border:1px solid rgba(255,255,255,.15);
     border-radius:20px; padding:8px 10px; font-size:13px; cursor:pointer;
@@ -1062,6 +1063,20 @@ const chapters = [
   {title:'Cảm ơn & kết nối', html:thanksHTML}
 ];
 
+/* Tên file gốc (không đuôi) tương ứng từng chương, dùng để dò file audio thật đã thu âm.
+   Đặt file .mp3 hoặc .wav vào /audio/ với đúng tên này để thay giọng máy bằng giọng thật. */
+const AUDIO_BASENAMES = [
+  '00-bia-sach','01-loi-hua-chuyen-hoa','02-loi-mo-dau','03-muc-luc','04-ve-tac-gia',
+  '05-chan-doan-cap-do','06-tong-quan-framework',
+  '07-tru-cot-01-nang-luc','08-tru-cot-02-dinh-vi','09-tru-cot-03-khac-biet','10-tru-cot-04-gia-tri-cot-loi',
+  '11-tru-cot-05-niem-tin','12-tru-cot-06-he-noi-dung','13-tru-cot-07-he-san-pham-pheu','14-tru-cot-08-don-bay-anh-huong',
+  '15-checkpoint',
+  '16-vi-dieu-01-tai-san-ben-vung','17-vi-dieu-02-dinh-gia-cao-hon','18-vi-dieu-03-niem-tin-lon','19-vi-dieu-04-thu-hut-dung-tep',
+  '20-vi-dieu-05-dong-tien-deu-dan','21-vi-dieu-06-suc-anh-huong','22-vi-dieu-07-he-sinh-thai-rieng','23-vi-dieu-08-gia-tri-doc-ban',
+  '24-cong-thuc-vang','25-case-study','26-lo-trinh-ngay-1-30','27-lo-trinh-ngay-31-60','28-lo-trinh-ngay-61-90',
+  '29-ai-arsenal','30-10-loi-pho-bien','31-faq','32-checklist-profile','33-cam-ket-90-ngay','34-loi-ket','35-cam-on-ket-noi'
+];
+
 /* ================= APP LOGIC ================= */
 const STORAGE_KEY = 'ntai_tenban_progress_v1';
 const TRACKER_KEY = 'ntai_tenban_tracker90_v1';
@@ -1237,6 +1252,7 @@ function renderInteractiveIfPresent(){
 
 function goTo(i){
   stopSpeech();
+  stopRealAudio();
   current = Math.max(0, Math.min(chapters.length-1, i));
   bookPage.innerHTML = chapters[current].html;
   chapRange.value = current;
@@ -1251,6 +1267,7 @@ function goTo(i){
   renderInteractiveIfPresent();
   renderDrawer();
   location.hash = 'c' + current;
+  checkChapterAudio();
 }
 
 document.getElementById('btnPrev').onclick = ()=>goTo(current-1);
@@ -1349,6 +1366,58 @@ voiceHelpBackdrop.onclick = closeVoiceHelp;
 function getRate(){ return parseFloat(document.getElementById('rateSelect').value); }
 function getVol(){ return parseFloat(document.getElementById('volRange').value); }
 
+/* ================= GIỌNG ĐỌC THẬT (file audio đã thu âm) ================= */
+const AUDIO_EXTS = ['mp3','wav','m4a'];
+let realAudio = null;
+let realAudioAvailable = false;
+let realAudioPlaying = false;
+const btnPlayEl = document.getElementById('btnPlay');
+
+function stopRealAudio(){
+  if(realAudio){ realAudio.pause(); }
+  realAudioPlaying = false;
+  if(realAudioAvailable){ btnPlayEl.textContent = '🎙️'; btnPlayEl.classList.remove('active'); }
+}
+
+function checkChapterAudio(){
+  realAudioAvailable = false;
+  realAudio = null;
+  btnPlayEl.classList.remove('has-real-audio');
+  const chapterAtCallTime = current;
+  const base = AUDIO_BASENAMES[chapterAtCallTime];
+  if(!base) { btnPlayEl.textContent = '🎧'; return; }
+  tryExt(0);
+  function tryExt(i){
+    if(i >= AUDIO_EXTS.length){ if(current===chapterAtCallTime) btnPlayEl.textContent = '🎧'; return; }
+    const test = new Audio();
+    test.preload = 'auto';
+    test.oncanplaythrough = ()=>{
+      if(current !== chapterAtCallTime) return;
+      realAudio = test;
+      realAudioAvailable = true;
+      btnPlayEl.textContent = '🎙️';
+      btnPlayEl.title = 'Nghe giọng đọc thật của chương này';
+      btnPlayEl.classList.add('has-real-audio');
+      realAudio.onended = ()=>{ realAudioPlaying = false; btnPlayEl.classList.remove('active'); };
+    };
+    test.onerror = ()=>{ tryExt(i+1); };
+    test.src = `/audio/${base}.${AUDIO_EXTS[i]}`;
+  }
+}
+function playRealAudio(){
+  if(!realAudio) return;
+  realAudio.playbackRate = getRate();
+  realAudio.volume = getVol();
+  realAudio.play();
+  realAudioPlaying = true;
+  btnPlayEl.classList.add('active');
+}
+function pauseRealAudio(){
+  if(realAudio) realAudio.pause();
+  realAudioPlaying = false;
+  btnPlayEl.classList.remove('active');
+}
+
 function clearHighlight(){
   document.querySelectorAll('.tts-block.reading').forEach(el=>el.classList.remove('reading'));
 }
@@ -1390,14 +1459,22 @@ function stopSpeech(){
   speaking = false;
   if(synth) synth.cancel();
   clearHighlight();
-  document.getElementById('btnPlay').classList.remove('active');
-  document.getElementById('btnPlay').textContent = '🎧';
+  btnPlayEl.classList.remove('active');
+  btnPlayEl.textContent = realAudioAvailable ? '🎙️' : '🎧';
 }
 document.getElementById('btnPlay').onclick = ()=>{
+  if(realAudioAvailable){
+    if(realAudioPlaying){ pauseRealAudio(); } else { playRealAudio(); }
+    return;
+  }
   if(speaking){ stopSpeech(); } else { startSpeech(); }
 };
 document.getElementById('rateSelect').onchange = ()=>{
+  if(realAudioAvailable && realAudio){ realAudio.playbackRate = getRate(); return; }
   if(speaking){ const wasIdx = blockIndex; stopSpeech(); blockIndex = wasIdx; speaking = true; document.getElementById('btnPlay').classList.add('active'); document.getElementById('btnPlay').textContent='⏸'; speakNextBlock(); }
+};
+document.getElementById('volRange').oninput = ()=>{
+  if(realAudioAvailable && realAudio){ realAudio.volume = getVol(); }
 };
 
 /* ---- init ---- */
