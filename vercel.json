@@ -1,5 +1,5 @@
 {
   "rewrites": [
-    { "source": "/((?!api/|doc-sach).*)", "destination": "/index.html" }
+    { "source": "/((?!api/|tuduykiemtienfacebook).*)", "destination": "/index.html" }
   ]
 }
