@@ -283,14 +283,20 @@
     </div>
     <select class="rate-select" id="voiceSelect" title="Chọn giọng đọc" style="display:none;max-width:150px;"></select>
     <span id="voiceWarn" class="ctrl-btn" style="display:none;width:auto;border-radius:20px;padding:0 12px;font-size:12px;background:#5a2e2e;border-color:#a44;" title="Máy chưa có giọng tiếng Việt — bấm để xem cách cài">⚠ Chưa có giọng Việt</span>
+    <button class="ctrl-btn" id="btnVoiceDebug" title="Kiểm tra danh sách giọng đọc trên máy này">🔍</button>
     <button class="ctrl-btn" id="btnMenu" title="Danh sách chương">☰</button>
     <button class="ctrl-btn" id="btnFull" title="Toàn màn hình">⛶</button>
   </div>
 </div>
 
 <div class="drawer-backdrop" id="voiceHelpBackdrop"></div>
-<div style="display:none; position:fixed; z-index:80; top:50%; left:50%; transform:translate(-50%,-50%); background:#0A0F2E; border:1px solid rgba(229,176,77,.4); border-radius:14px; padding:22px 24px; max-width:420px; color:#fff;" id="voiceHelpModal">
+<div style="display:none; position:fixed; z-index:80; top:50%; left:50%; transform:translate(-50%,-50%); background:#0A0F2E; border:1px solid rgba(229,176,77,.4); border-radius:14px; padding:22px 24px; max-width:420px; max-height:80vh; overflow-y:auto; color:#fff;" id="voiceHelpModal">
   <h3 style="font-family:Georgia,serif; color:var(--gold); margin-top:0;">Cài giọng đọc tiếng Việt</h3>
+  <div style="background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); border-radius:10px; padding:10px 12px; margin-bottom:14px;">
+    <div style="font-size:12px; font-weight:800; letter-spacing:.5px; color:#b7bde8; margin-bottom:6px; text-transform:uppercase;">Giọng đọc máy này phát hiện được</div>
+    <div id="voiceDebugList" style="font-size:13px; max-height:180px; overflow-y:auto;"></div>
+    <button id="btnVoiceRefresh" style="margin-top:8px; padding:6px 14px; border-radius:16px; border:1px solid rgba(255,255,255,.2); background:rgba(255,255,255,.06); color:#fff; font-size:12px; cursor:pointer;">🔄 Quét lại</button>
+  </div>
   <p style="font-size:14px; line-height:1.7; color:#dfe3ff;">Trình duyệt của bạn đang đọc bằng giọng mặc định (có thể không phải tiếng Việt) vì máy chưa cài giọng đọc tiếng Việt hệ thống.</p>
   <p style="font-size:14px; line-height:1.7; color:#dfe3ff;"><b>Windows 10/11:</b> Settings → Time & Language → Speech → mục "Manage voices" → Add voices → chọn <b>Vietnamese (Việt Nam)</b> → tải về. Sau đó tải lại trang này.</p>
   <p style="font-size:14px; line-height:1.7; color:#dfe3ff;"><b>macOS:</b> System Settings → Accessibility → Spoken Content → System voice → tải giọng "Linh" (Vietnamese).</p>
@@ -1313,14 +1319,32 @@ if(synth){
   synth.onvoiceschanged = pickVoice;
   setTimeout(pickVoice, 300);
   setTimeout(pickVoice, 1200);
+  setTimeout(pickVoice, 3000);
 }
 voiceSelect.onchange = ()=>{ chosenVoice = viVoices[parseInt(voiceSelect.value)] || null; };
 
 const voiceHelpModal = document.getElementById('voiceHelpModal');
 const voiceHelpBackdrop = document.getElementById('voiceHelpBackdrop');
-voiceWarn.onclick = ()=>{ voiceHelpModal.style.display = 'block'; voiceHelpBackdrop.classList.add('show'); };
-document.getElementById('voiceHelpClose').onclick = ()=>{ voiceHelpModal.style.display = 'none'; voiceHelpBackdrop.classList.remove('show'); };
-voiceHelpBackdrop.onclick = ()=>{ voiceHelpModal.style.display = 'none'; voiceHelpBackdrop.classList.remove('show'); };
+function renderVoiceDebugList(){
+  const box = document.getElementById('voiceDebugList');
+  if(!box) return;
+  const voices = synth ? synth.getVoices() : [];
+  if(!voices.length){
+    box.innerHTML = '<div style="color:#f0a;">Không phát hiện được giọng đọc nào trên trình duyệt này.</div>';
+    return;
+  }
+  box.innerHTML = voices.map(v=>{
+    const isVi = isVietnameseVoice(v);
+    return `<div style="padding:3px 0; ${isVi?'color:#E5B04D;font-weight:800;':'color:#c7ccef;'}">${isVi?'🇻🇳 ':'· '}${v.name} <span style="opacity:.65;">(${v.lang}${v.localService?'':', network'})</span></div>`;
+  }).join('');
+}
+function openVoiceHelp(){ renderVoiceDebugList(); voiceHelpModal.style.display = 'block'; voiceHelpBackdrop.classList.add('show'); }
+function closeVoiceHelp(){ voiceHelpModal.style.display = 'none'; voiceHelpBackdrop.classList.remove('show'); }
+voiceWarn.onclick = openVoiceHelp;
+document.getElementById('btnVoiceDebug').onclick = openVoiceHelp;
+document.getElementById('btnVoiceRefresh').onclick = ()=>{ pickVoice(); renderVoiceDebugList(); };
+document.getElementById('voiceHelpClose').onclick = closeVoiceHelp;
+voiceHelpBackdrop.onclick = closeVoiceHelp;
 
 function getRate(){ return parseFloat(document.getElementById('rateSelect').value); }
 function getVol(){ return parseFloat(document.getElementById('volRange').value); }
