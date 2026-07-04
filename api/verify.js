@@ -8,8 +8,10 @@ module.exports = async function handler(req, res) {
 
   const token = (process.env.SEPAY_TOKEN || '').replace(/^﻿/, '').trim();
   const ebookLink = process.env.EBOOK_LINK;
-  const { name, phone, code } = req.body || {};
+  const { name, phone, code, amount: expectedAmountRaw, product } = req.body || {};
   const searchCode = (code || 'EBOOK').toUpperCase();
+  const expectedAmount = Number(expectedAmountRaw) || 199000;
+  const productName = product || 'Tên Bạn Đáng Giá Bao Nhiêu';
 
   if (!token) return res.status(500).json({ success: false, message: 'Hệ thống chưa cấu hình. Vui lòng liên hệ hỗ trợ.' });
 
@@ -39,7 +41,7 @@ module.exports = async function handler(req, res) {
       const content = (tx.transaction_content || tx.content || tx.description || '').toUpperCase();
       const amount = Number(tx.amount_in || tx.transferAmount || tx.amount || 0);
       const type = (tx.transferType || tx.type || 'in').toLowerCase();
-      return amount >= 199000 && content.includes(searchCode) && type !== 'out';
+      return amount >= expectedAmount && content.includes(searchCode) && type !== 'out';
     });
 
     if (match) {
@@ -49,7 +51,7 @@ module.exports = async function handler(req, res) {
       const chatId = (process.env.TELEGRAM_CHAT_ID || '').trim();
       if (botToken && chatId) {
         const text =
-          `🎉 *Đơn hàng mới – Tên Bạn Đáng Giá Bao Nhiêu*\n` +
+          `🎉 *Đơn hàng mới – ${productName}*\n` +
           `👤 Tên: ${name || 'Không rõ'}\n` +
           `📱 SĐT: ${phone || 'Không rõ'}\n` +
           `💰 Số tiền: ${amount.toLocaleString('vi-VN')}đ\n` +
