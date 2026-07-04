@@ -141,6 +141,17 @@
     background:#FBF3DF; border:1px solid #EAD9A8; color:#4a3d20; text-align:left; max-width:520px;
   }
 
+  .author-block{ display:flex; gap:26px; align-items:flex-start; margin-bottom:18px; }
+  .author-photo{ flex:none; width:190px; height:190px; border-radius:16px; object-fit:cover; border:3px solid var(--gold); box-shadow:0 8px 20px rgba(0,0,0,.15); }
+  .author-photo-col{ flex:none; text-align:center; }
+  .author-tags{ margin-top:10px; max-width:190px; }
+  .author-tag{ display:inline-block; font-size:11px; padding:4px 10px; border-radius:20px; border:1px solid var(--paper-line); color:var(--ink-soft); margin:2px 3px; background:#fff; }
+  @media (max-width:640px){
+    .author-block{ flex-direction:column; align-items:center; text-align:center; }
+    .author-photo{ width:160px; height:160px; }
+    .author-tags{ margin:10px auto 0; }
+  }
+
   table.toc{ width:100%; border-collapse:collapse; font-size:15px; }
   table.toc td{ padding:10px 6px; border-bottom:1px solid var(--paper-line); vertical-align:top; }
   table.toc td.n{ width:34px; font-weight:800; color:var(--gold-dark); }
@@ -732,8 +743,20 @@ const tocHTML = `
 const introHTML = `
   <div class="chap-eyebrow">Về tác giả</div>
   <h1 class="chap-title tts-block">Xin Chào — Mình Là Nhung Tech AI</h1>
-  <p class="tts-block" style="font-style:italic;color:var(--ink-soft);">AI Startup · Personal Brand Strategist</p>
-  <p class="tts-block">Xin chào bạn, mình là <b>Nhung Tech AI</b> — một startup trong lĩnh vực AI. Mình có niềm đam mê đặc biệt với việc <b>ứng dụng AI vào kinh doanh</b>, xây dựng các mô hình tạo thu nhập hiệu quả từ công nghệ này.</p>
+  <div class="author-block">
+    <div class="author-photo-col">
+      <img src="/images/author-forest.png" alt="Nhung Tech AI" class="author-photo">
+      <div class="author-tags">
+        <span class="author-tag">AI Business</span>
+        <span class="author-tag">Personal Brand</span>
+        <span class="author-tag">Social Media</span>
+      </div>
+    </div>
+    <div>
+      <p class="tts-block" style="font-style:italic;color:var(--ink-soft); margin-top:0;">AI Startup · Personal Brand Strategist</p>
+      <p class="tts-block">Xin chào bạn, mình là <b>Nhung Tech AI</b> — một startup trong lĩnh vực AI. Mình có niềm đam mê đặc biệt với việc <b>ứng dụng AI vào kinh doanh</b>, xây dựng các mô hình tạo thu nhập hiệu quả từ công nghệ này.</p>
+    </div>
+  </div>
   <p class="tts-block">Trên hành trình đó, mình nhận ra: <b>Công nghệ AI giúp bạn làm nhanh hơn</b> — nhưng chính <b>nhân hiệu cá nhân mạnh</b> mới là thứ khiến người ta TIN và MUA từ bạn. Không có nhân hiệu, AI cũng vô dụng.</p>
   <p class="tts-block">Cuốn sách này là hành trình mình muốn đồng hành cùng bạn — từng bước xây dựng một tên tuổi thật sự có giá trị trên thị trường. Mình không viết cuốn này để bạn thán phục mình. Mình viết để bạn đóng sách lại, mở mạng xã hội lên, và bắt đầu làm khác đi ngay hôm nay.</p>
   <div class="quote-box tts-block">"Nhân hiệu của bạn không cần bạn giỏi hơn người khác. Nó chỉ cần bạn kiên trì đúng cách hơn hôm qua." — Nhung Tech AI</div>`;
