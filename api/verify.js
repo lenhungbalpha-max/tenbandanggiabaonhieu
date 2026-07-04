@@ -39,7 +39,7 @@ module.exports = async function handler(req, res) {
       const content = (tx.transaction_content || tx.content || tx.description || '').toUpperCase();
       const amount = Number(tx.amount_in || tx.transferAmount || tx.amount || 0);
       const type = (tx.transferType || tx.type || 'in').toLowerCase();
-      return amount >= 99000 && content.includes(searchCode) && type !== 'out';
+      return amount >= 199000 && content.includes(searchCode) && type !== 'out';
     });
 
     if (match) {
