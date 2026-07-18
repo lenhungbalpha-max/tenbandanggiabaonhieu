@@ -434,22 +434,35 @@
   @media (max-width:600px){ .price-card{padding:26px 22px;} }
   .stack-list{border-top:1px solid var(--line);}
   .stack-row{
-    display:flex; justify-content:space-between; gap:20px; padding:18px 0;
+    display:flex; align-items:flex-start; gap:14px; padding:18px 0;
     border-bottom:1px solid var(--line);
   }
+  .stack-idx{
+    font-family:'JetBrains Mono',monospace; font-weight:700; font-size:13px;
+    color:var(--gold-dark); min-width:24px; padding-top:2px; flex-shrink:0;
+  }
+  .stack-row .item{flex:1;}
   .stack-row .item b{display:block; font-size:15.5px; color:var(--ink);}
   .stack-row .item span{font-size:13.5px; color:var(--ink-soft);}
-  .stack-row .val{font-family:'JetBrains Mono',monospace; color:var(--ink-soft); white-space:nowrap; font-size:14.5px;}
+  .stack-row .val{font-family:'JetBrains Mono',monospace; color:var(--ink-soft); white-space:nowrap; font-size:14.5px; flex-shrink:0;}
+  .stack-grandtotal{
+    margin-top:22px; padding-top:20px; border-top:1px solid var(--line);
+    text-align:center;
+  }
+  .stack-grandtotal .lbl{font-size:12.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-soft); font-weight:600;}
+  .stack-grandtotal .old{
+    display:block; font-family:'JetBrains Mono',monospace; text-decoration:line-through;
+    color:var(--ink-soft); font-size:24px; margin-top:6px;
+  }
   .stack-total{
-    margin-top:24px; padding-top:22px; border-top:2px solid var(--gold);
-    display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:10px;
+    margin-top:18px; padding-top:20px; border-top:2px solid var(--gold);
+    text-align:center;
   }
   .stack-total .lbl{font-size:14px; color:var(--ink-soft);}
-  .stack-total .old{font-family:'JetBrains Mono',monospace; text-decoration:line-through; color:var(--ink-soft); font-size:15px;}
-  .stack-total .new{font-family:'Playfair Display',serif; font-size:38px; color:var(--gold-dark); font-weight:700;}
+  .stack-total .new{display:block; font-family:'Playfair Display',serif; font-size:42px; color:var(--gold-dark); font-weight:700; margin-top:4px;}
   .save-badge{
-    display:inline-block; margin-top:14px; background:var(--gold-bright); color:var(--ink);
-    font-weight:700; font-size:13.5px; padding:7px 14px; border-radius:4px;
+    display:block; width:fit-content; margin:14px auto 0; background:var(--gold-bright); color:var(--ink);
+    font-weight:700; font-size:13.5px; padding:7px 16px; border-radius:4px;
   }
 
   /* ---------- guarantee ---------- */
@@ -594,7 +607,7 @@
         <div class="price-row">
           <span class="price-old">2.600.000đ</span>
           <span class="price-new">499.000đ</span>
-          <span style="font-size:13px; color:var(--clay); font-weight:600;">ưu đãi ra mắt</span>
+          <span style="font-size:13px; color:var(--clay); font-weight:600;">giảm 81% · ưu đãi ra mắt</span>
         </div>
 
         <div class="hero-actions">
@@ -853,18 +866,22 @@
 
     <div class="price-card reveal">
       <div class="stack-list">
-        <div class="stack-row"><div class="item"><b>Trợ lý Định Vị</b><span>Cá nhân hoá theo ngành, đối tượng và mục tiêu của bạn</span></div><div class="val">800.000đ</div></div>
-        <div class="stack-row"><div class="item"><b>Trợ lý Màu Sắc</b><span>Bảng màu, phong cách hình ảnh nhất quán mọi nền tảng</span></div><div class="val">600.000đ</div></div>
-        <div class="stack-row"><div class="item"><b>Trợ lý Content</b><span>Viết đúng giọng, đúng định vị, đúng màu sắc, trong 30 giây</span></div><div class="val">700.000đ</div></div>
-        <div class="stack-row"><div class="item"><b>200 mẫu câu hook</b><span>Mở đầu bài đăng giữ chân người xem</span></div><div class="val">250.000đ</div></div>
-        <div class="stack-row"><div class="item"><b>Hỗ trợ Zalo trọn đời</b><span>Kẹt chỗ nào hỏi chỗ đó, phản hồi trong 24 giờ</span></div><div class="val">250.000đ</div></div>
+        <div class="stack-row"><div class="stack-idx">01</div><div class="item"><b>Trợ lý Định Vị</b><span>Cá nhân hoá theo ngành, đối tượng và mục tiêu của bạn</span></div><div class="val">800.000đ</div></div>
+        <div class="stack-row"><div class="stack-idx">02</div><div class="item"><b>Trợ lý Màu Sắc</b><span>Bảng màu, phong cách hình ảnh nhất quán mọi nền tảng</span></div><div class="val">600.000đ</div></div>
+        <div class="stack-row"><div class="stack-idx">03</div><div class="item"><b>Trợ lý Content</b><span>Viết đúng giọng, đúng định vị, đúng màu sắc, trong 30 giây</span></div><div class="val">700.000đ</div></div>
+        <div class="stack-row"><div class="stack-idx">04</div><div class="item"><b>200 mẫu câu hook</b><span>Mở đầu bài đăng giữ chân người xem</span></div><div class="val">250.000đ</div></div>
+        <div class="stack-row"><div class="stack-idx">05</div><div class="item"><b>Hỗ trợ Zalo trọn đời</b><span>Kẹt chỗ nào hỏi chỗ đó, phản hồi trong 24 giờ</span></div><div class="val">250.000đ</div></div>
       </div>
 
-      <div class="stack-total">
-        <div><span class="lbl">Tổng giá trị thực</span><br><span class="old">2.600.000đ</span></div>
-        <div style="text-align:right;"><span class="lbl">Giá ưu đãi ra mắt</span><br><span class="new">499.000đ</span></div>
+      <div class="stack-grandtotal">
+        <span class="lbl">Tổng giá trị thực</span>
+        <span class="old">2.600.000đ</span>
       </div>
-      <span class="save-badge">Tiết kiệm 2.101.000đ · 81%</span>
+      <div class="stack-total">
+        <span class="lbl">Giá ưu đãi ra mắt</span>
+        <span class="new">499.000đ</span>
+      </div>
+      <span class="save-badge">Tiết kiệm 2.101.000đ · Giảm 81%</span>
     </div>
 
     <div class="fb-strip reveal" aria-label="Dải feedback ngắn">
