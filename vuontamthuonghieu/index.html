@@ -239,7 +239,9 @@
     background:var(--ink); color:var(--paper);
     display:flex;align-items:center;justify-content:center;
     font-family:'Playfair Display',serif; font-weight:700; font-size:18px;
+    overflow:hidden;
   }
+  .avatar-ph img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;}
   .letter-photo-row .who b{display:block; font-size:14.5px;}
   .letter-photo-row .who span{font-size:13px; color:var(--ink-soft);}
   @media (max-width:600px){ .letter{padding:32px 22px;} }
@@ -564,7 +566,7 @@
       <p class="signoff">Mình gọi nó là Công Thức 1-3-24. Một bản định vị gốc, ba trợ lý AI xây trên nền đó, hai mươi bốn giờ có trọn bộ.</p>
 
       <div class="letter-photo-row">
-        <div class="avatar-ph">N</div>
+        <div class="avatar-ph"><img src="images/author.jpg" alt="Nhung"></div>
         <div class="who">
           <b>Nhung</b>
           <span>facebook.com/nhungtechai · Zalo: 0902921645</span>
