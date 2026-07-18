@@ -232,6 +232,26 @@
     .hero-stats{grid-template-columns:repeat(2,1fr); row-gap:20px;}
     .hero-stats div:nth-child(3){border-left:none;}
   }
+  .hero-benefits{
+    list-style:none; margin:20px 0 0; padding:0;
+    display:flex; flex-direction:column; gap:9px;
+  }
+  .hero-benefits li{
+    display:flex; align-items:flex-start; gap:9px;
+    font-size:15px; color:rgba(255,255,255,0.9); font-weight:500;
+  }
+  .hero-benefits li b{color:var(--gold-light); font-weight:700;}
+  .hero-trust{
+    display:flex; align-items:center; gap:12px; margin-top:26px;
+  }
+  .hero-trust-avatars{display:flex;}
+  .hero-trust-avatars img{
+    width:34px; height:34px; border-radius:50%; object-fit:cover;
+    border:2px solid var(--ink); margin-left:-10px;
+  }
+  .hero-trust-avatars img:first-child{margin-left:0;}
+  .hero-trust-text{font-size:13px; color:rgba(255,255,255,0.85); line-height:1.5;}
+  .hero-trust-stars{color:var(--gold-light); letter-spacing:1px; margin-right:6px;}
 
   /* root motif svg card */
   .hero-visual{
@@ -565,6 +585,12 @@
         <h1>Công Thức 1&#8209;3&#8209;24: Dùng AI Định Hình Thương Hiệu Trong 24 Giờ, <em>Dù Bạn Không Rành Công Nghệ</em></h1>
         <p class="lede">Một bản định vị gốc. Ba trợ lý AI xây trên nền đó. Giao trọn bộ trong 24 giờ. Không cần thuê riêng người định vị, riêng người thiết kế, riêng người viết content mỗi tháng.</p>
 
+        <ul class="hero-benefits">
+          <li><b>✓</b> Có bản định vị gốc rõ ràng, biết đúng kênh, đúng đối tượng</li>
+          <li><b>✓</b> Bộ màu thương hiệu nhất quán trên mọi nền tảng</li>
+          <li><b>✓</b> Content đúng giọng mình, không còn trắng trang mỗi ngày</li>
+        </ul>
+
         <div class="price-row">
           <span class="price-old">2.600.000đ</span>
           <span class="price-new">499.000đ</span>
@@ -574,6 +600,15 @@
         <div class="hero-actions">
           <a href="#giu-suat" class="btn btn-primary">Tôi Muốn Có Công Thức 1-3-24 Ngay</a>
           <a href="#cau-chuyen" class="btn btn-outline on-dark">Đọc câu chuyện của Nhung</a>
+        </div>
+
+        <div class="hero-trust">
+          <div class="hero-trust-avatars">
+            <img src="images/testi-cam-tu.jpg" alt="Khách hàng thật">
+            <img src="images/testi-khanh-linh.jpg" alt="Khách hàng thật">
+            <img src="images/testi-anh-binh.jpg" alt="Khách hàng thật">
+          </div>
+          <div class="hero-trust-text"><span class="hero-trust-stars">★★★★★</span>Được hàng trăm chủ thương hiệu cá nhân tin dùng</div>
         </div>
 
         <div class="hero-stats">
