@@ -1,5 +1,5 @@
 {
   "rewrites": [
-    { "source": "/((?!api/|tuduykiemtienfacebook|doc-sach|comaynoidung|taotrolymoinganhnghe|vuontamthuonghieu).*)", "destination": "/index.html" }
+    { "source": "/((?!api/|tuduykiemtienfacebook|doc-sach|comaynoidung|taotrolymoinganhnghe|vuontamthuonghieu|bokitlandingpage|bokitsanphamso).*)", "destination": "/index.html" }
   ]
 }
