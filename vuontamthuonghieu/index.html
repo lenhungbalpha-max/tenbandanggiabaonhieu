@@ -20,19 +20,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --paper:#F4EFE2;
-    --paper-soft:#EDE6D3;
-    --ink:#17241C;
-    --ink-soft:#33463A;
-    --root:#6B4226;
-    --root-soft:#8C6547;
-    --gold:#B8863B;
-    --gold-bright:#D4A857;
-    --clay:#A6503A;
-    --sage:#5C7A5E;
-    --line: rgba(23,36,28,0.14);
-    --line-on-dark: rgba(244,239,226,0.18);
-    --shadow: 0 18px 40px rgba(23,36,28,0.14);
+    --paper:#FFFFFF;
+    --paper-soft:#F8F5EF;
+    --ink:#17375E;
+    --ink-soft:rgba(23,55,94,0.75);
+    --gold:#D6B36A;
+    --gold-bright:#F5A623;
+    --gold-dark:#D89B2C;
+    --gold-light:#FFB84D;
+    --clay:#F5A623;
+    --line: #D9DDE4;
+    --line-on-dark: rgba(255,255,255,0.18);
+    --shadow: 0 18px 40px rgba(23,55,94,0.14);
     --radius: 4px;
     --max: 760px;
   }
@@ -67,7 +66,7 @@
     display:block;
     margin-bottom:14px;
   }
-  .eyebrow.on-dark{color:var(--gold-bright);}
+  .eyebrow.on-dark{color:var(--gold-light);}
   p{margin:0 0 1em;}
   .lede{font-size:19px; color:var(--ink-soft);}
 
@@ -88,7 +87,7 @@
     padding-left:100%;
     animation: scroll-left 32s linear infinite;
   }
-  .marquee span{margin:0 28px; color:var(--gold-bright);}
+  .marquee span{margin:0 28px; color:var(--gold-light);}
   @keyframes scroll-left{
     from{transform:translateX(0);}
     to{transform:translateX(-100%);}
@@ -123,10 +122,12 @@
   nav.site-nav a:hover{color:var(--clay);}
   .hdr-cta{
     font-size:13.5px; font-weight:600; text-decoration:none;
-    background:var(--ink); color:var(--paper);
+    background:var(--gold-bright); color:var(--ink);
     padding:9px 16px; border-radius:var(--radius);
     white-space:nowrap;
+    transition:background .15s ease;
   }
+  .hdr-cta:hover{background:var(--gold-dark);}
   @media (max-width:720px){ nav.site-nav{display:none;} }
 
   /* ---------- buttons ---------- */
@@ -143,16 +144,18 @@
   }
   .btn:hover{transform:translateY(-1px);}
   .btn-primary{
-    background:linear-gradient(180deg, var(--gold-bright), var(--gold));
+    background:var(--gold-bright);
     color:var(--ink);
-    box-shadow: 0 10px 26px rgba(184,134,59,0.35);
+    box-shadow: 0 10px 26px rgba(245,166,35,0.35);
+    transition:background .15s ease, transform .15s ease, box-shadow .15s ease;
   }
-  .btn-primary:hover{box-shadow:0 14px 32px rgba(184,134,59,0.45);}
+  .btn-primary:hover{background:var(--gold-dark); box-shadow:0 14px 32px rgba(245,166,35,0.45);}
   .btn-outline{
     background:transparent; color:var(--ink);
     border:1.5px solid var(--ink);
   }
-  .btn-outline.on-dark{color:var(--paper); border-color:var(--line-on-dark);}
+  .btn-outline.on-dark{color:#FFFFFF; border-color:var(--gold);}
+  .btn-outline.on-dark:hover{border-color:var(--gold-light); color:var(--gold-light);}
   .btn:focus-visible{outline:3px solid var(--clay); outline-offset:3px;}
   .btn-block{width:100%;}
   .cta-note{font-size:13px; color:var(--ink-soft); margin-top:10px;}
@@ -167,28 +170,29 @@
   }
 
   /* ---------- hero ---------- */
-  .hero{padding:64px 0 56px;}
+  .hero{padding:64px 0 56px; background:var(--ink); color:#FFFFFF;}
   .hero-grid{display:grid; grid-template-columns:1.15fr .85fr; gap:52px; align-items:center;}
   @media (max-width:880px){ .hero-grid{grid-template-columns:1fr;} }
-  .hero h1{font-size:clamp(30px, 4.4vw, 46px); letter-spacing:-.01em;}
+  .hero h1{font-size:clamp(30px, 4.4vw, 46px); letter-spacing:-.01em; color:#FFFFFF;}
   .hero h1 em{
-    font-style:italic; color:var(--clay);
+    font-style:italic; color:var(--gold-light);
   }
+  .hero .lede{color:rgba(255,255,255,0.82);}
   .price-row{
     display:flex; align-items:baseline; gap:14px; margin:22px 0 26px;
     font-family:'JetBrains Mono', monospace;
   }
-  .price-old{font-size:16px; color:var(--ink-soft); text-decoration:line-through;}
-  .price-new{font-size:30px; font-weight:700; color:var(--clay);}
+  .price-old{font-size:16px; color:rgba(255,255,255,0.5); text-decoration:line-through;}
+  .price-new{font-size:30px; font-weight:700; color:var(--gold-bright);}
   .hero-actions{display:flex; flex-wrap:wrap; gap:14px; align-items:center;}
   .hero-stats{
     display:grid; grid-template-columns:repeat(4,1fr); gap:0;
-    margin-top:44px; border-top:1px solid var(--line);
+    margin-top:44px; border-top:1px solid rgba(255,255,255,0.18);
   }
-  .hero-stats div{padding:18px 14px 0; border-left:1px solid var(--line);}
+  .hero-stats div{padding:18px 14px 0; border-left:1px solid rgba(255,255,255,0.18);}
   .hero-stats div:first-child{border-left:none;}
-  .stat-num{font-family:'Playfair Display',serif; font-size:26px; font-weight:700; color:var(--clay);}
-  .stat-label{font-size:12.5px; color:var(--ink-soft); margin-top:2px;}
+  .stat-num{font-family:'Playfair Display',serif; font-size:26px; font-weight:700; color:var(--gold-light);}
+  .stat-label{font-size:12.5px; color:rgba(255,255,255,0.65); margin-top:2px;}
   @media (max-width:560px){
     .hero-stats{grid-template-columns:repeat(2,1fr); row-gap:20px;}
     .hero-stats div:nth-child(3){border-left:none;}
@@ -331,10 +335,12 @@
   .fb-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:16px;}
   @media (max-width:820px){ .fb-grid{grid-template-columns:repeat(2,1fr);} }
   .fb-shot{
-    aspect-ratio:9/16; border:1.5px dashed var(--line); border-radius:6px;
+    aspect-ratio:9/16; border:1px solid var(--line); border-radius:6px;
     display:flex; align-items:center; justify-content:center; text-align:center; padding:14px;
     background:var(--paper-soft); font-size:12.5px; color:var(--ink-soft); font-family:'JetBrains Mono',monospace;
+    overflow:hidden;
   }
+  .fb-shot img{width:100%; height:100%; object-fit:cover; object-position:top; display:block;}
   .fb-strip{
     display:flex; gap:14px; overflow-x:auto; margin-top:22px; padding-bottom:6px;
   }
@@ -408,7 +414,7 @@
   @media (max-width:720px){ .paths{grid-template-columns:1fr;} }
   .path{padding:30px 28px;}
   .path.no{background:rgba(244,239,226,0.04);}
-  .path.yes{background:rgba(184,134,59,0.10); border-left:1px solid var(--line-on-dark);}
+  .path.yes{background:rgba(245,166,35,0.12); border-left:1px solid var(--line-on-dark);}
   @media (max-width:720px){ .path.yes{border-left:none; border-top:1px solid var(--line-on-dark);} }
   .path .kicker{font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.08em; text-transform:uppercase; opacity:.7;}
   .path h3{color:var(--paper); font-size:18px; margin:8px 0 10px;}
@@ -470,11 +476,11 @@
     <div class="brand">
       <span class="mark">
         <svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M13 2 L13 13" stroke="#6B4226" stroke-width="1.6"/>
-          <path d="M13 13 C 9 15, 6 19, 6 24" stroke="#6B4226" stroke-width="1.6" fill="none"/>
-          <path d="M13 13 C 17 15, 20 19, 20 24" stroke="#6B4226" stroke-width="1.6" fill="none"/>
-          <path d="M13 13 C 13 17, 13 20, 13 24" stroke="#6B4226" stroke-width="1.6" fill="none"/>
-          <circle cx="13" cy="2" r="2.4" fill="#B8863B"/>
+          <path d="M13 2 L13 13" stroke="#17375E" stroke-width="1.6"/>
+          <path d="M13 13 C 9 15, 6 19, 6 24" stroke="#17375E" stroke-width="1.6" fill="none"/>
+          <path d="M13 13 C 17 15, 20 19, 20 24" stroke="#17375E" stroke-width="1.6" fill="none"/>
+          <path d="M13 13 C 13 17, 13 20, 13 24" stroke="#17375E" stroke-width="1.6" fill="none"/>
+          <circle cx="13" cy="2" r="2.4" fill="#D6B36A"/>
         </svg>
       </span>
       Thương Hiệu Từ Gốc
@@ -494,7 +500,7 @@
   <div class="wrap" style="max-width:1040px;">
     <div class="hero-grid">
       <div class="reveal in">
-        <span class="eyebrow">Công thức 1-3-24 · Chỉ 20 suất mỗi tuần</span>
+        <span class="eyebrow on-dark">Công thức 1-3-24 · Chỉ 20 suất mỗi tuần</span>
         <h1>Công Thức 1&#8209;3&#8209;24: Dùng AI Định Hình Thương Hiệu Trong 24 Giờ, <em>Dù Bạn Không Rành Công Nghệ</em></h1>
         <p class="lede">Một bản định vị gốc. Ba trợ lý AI xây trên nền đó. Giao trọn bộ trong 24 giờ. Không cần thuê riêng người định vị, riêng người thiết kế, riêng người viết content mỗi tháng.</p>
 
@@ -506,7 +512,7 @@
 
         <div class="hero-actions">
           <a href="#giu-suat" class="btn btn-primary">Tôi Muốn Có Công Thức 1-3-24 Ngay</a>
-          <a href="#cau-chuyen" class="btn btn-outline">Đọc câu chuyện của Nhung</a>
+          <a href="#cau-chuyen" class="btn btn-outline on-dark">Đọc câu chuyện của Nhung</a>
         </div>
 
         <div class="hero-stats">
@@ -519,22 +525,22 @@
 
       <figure class="hero-visual reveal">
         <svg viewBox="0 0 320 340" width="100%" xmlns="http://www.w3.org/2000/svg">
-          <ellipse cx="160" cy="72" rx="86" ry="46" fill="#5C7A5E" opacity="0.9"/>
-          <ellipse cx="112" cy="92" rx="52" ry="30" fill="#6E8A6E" opacity="0.85"/>
-          <ellipse cx="212" cy="92" rx="52" ry="30" fill="#6E8A6E" opacity="0.85"/>
-          <text x="160" y="78" text-anchor="middle" font-family="Playfair Display, serif" font-size="13" fill="#F4EFE2" font-weight="700">Thương hiệu của bạn</text>
-          <rect x="155" y="112" width="10" height="46" fill="#8C6547"/>
-          <path d="M160 158 C 130 178, 95 190, 62 236" stroke="#B8863B" stroke-width="4" fill="none" stroke-linecap="round"/>
-          <path d="M160 158 C 160 190, 160 210, 160 258" stroke="#B8863B" stroke-width="4" fill="none" stroke-linecap="round"/>
-          <path d="M160 158 C 190 178, 225 190, 258 236" stroke="#B8863B" stroke-width="4" fill="none" stroke-linecap="round"/>
-          <circle cx="62" cy="236" r="6" fill="#D4A857"/>
-          <circle cx="160" cy="258" r="6" fill="#D4A857"/>
-          <circle cx="258" cy="236" r="6" fill="#D4A857"/>
-          <text x="62" y="262" text-anchor="middle" font-family="Be Vietnam Pro" font-size="12" fill="#F4EFE2" font-weight="600">Định vị</text>
-          <text x="160" y="284" text-anchor="middle" font-family="Be Vietnam Pro" font-size="12" fill="#F4EFE2" font-weight="600">Màu sắc</text>
-          <text x="258" y="262" text-anchor="middle" font-family="Be Vietnam Pro" font-size="12" fill="#F4EFE2" font-weight="600">Content</text>
-          <circle cx="160" cy="20" r="18" fill="#17241C" stroke="#B8863B" stroke-width="1.5"/>
-          <text x="160" y="24" text-anchor="middle" font-family="JetBrains Mono" font-size="10.5" fill="#D4A857" font-weight="700">24H</text>
+          <ellipse cx="160" cy="72" rx="86" ry="46" fill="#D6B36A" opacity="0.9"/>
+          <ellipse cx="112" cy="92" rx="52" ry="30" fill="#D6B36A" opacity="0.85"/>
+          <ellipse cx="212" cy="92" rx="52" ry="30" fill="#D6B36A" opacity="0.85"/>
+          <text x="160" y="78" text-anchor="middle" font-family="Playfair Display, serif" font-size="13" fill="#FFFFFF" font-weight="700">Thương hiệu của bạn</text>
+          <rect x="155" y="112" width="10" height="46" fill="#D89B2C"/>
+          <path d="M160 158 C 130 178, 95 190, 62 236" stroke="#D6B36A" stroke-width="4" fill="none" stroke-linecap="round"/>
+          <path d="M160 158 C 160 190, 160 210, 160 258" stroke="#D6B36A" stroke-width="4" fill="none" stroke-linecap="round"/>
+          <path d="M160 158 C 190 178, 225 190, 258 236" stroke="#D6B36A" stroke-width="4" fill="none" stroke-linecap="round"/>
+          <circle cx="62" cy="236" r="6" fill="#F5A623"/>
+          <circle cx="160" cy="258" r="6" fill="#F5A623"/>
+          <circle cx="258" cy="236" r="6" fill="#F5A623"/>
+          <text x="62" y="262" text-anchor="middle" font-family="Be Vietnam Pro" font-size="12" fill="#FFFFFF" font-weight="600">Định vị</text>
+          <text x="160" y="284" text-anchor="middle" font-family="Be Vietnam Pro" font-size="12" fill="#FFFFFF" font-weight="600">Màu sắc</text>
+          <text x="258" y="262" text-anchor="middle" font-family="Be Vietnam Pro" font-size="12" fill="#FFFFFF" font-weight="600">Content</text>
+          <circle cx="160" cy="20" r="18" fill="#17375E" stroke="#D6B36A" stroke-width="1.5"/>
+          <text x="160" y="24" text-anchor="middle" font-family="JetBrains Mono" font-size="10.5" fill="#F5A623" font-weight="700">24H</text>
         </svg>
         <figcaption>Một gốc · Ba phần · Hai mươi bốn giờ</figcaption>
       </figure>
@@ -616,21 +622,21 @@
 
       <div class="root-svg-card reveal">
         <svg viewBox="0 0 340 380" width="100%" xmlns="http://www.w3.org/2000/svg">
-          <ellipse cx="170" cy="70" rx="98" ry="50" fill="#5C7A5E"/>
-          <ellipse cx="112" cy="94" rx="56" ry="32" fill="#6E8A6E" opacity="0.9"/>
-          <ellipse cx="228" cy="94" rx="56" ry="32" fill="#6E8A6E" opacity="0.9"/>
-          <text x="170" y="76" text-anchor="middle" font-family="Playfair Display, serif" font-size="15" fill="#17241C" font-weight="700">Thương hiệu tự vận hành</text>
-          <rect x="164" y="116" width="12" height="52" fill="#8C6547"/>
-          <path d="M170 168 C 130 194, 90 208, 50 268" stroke="#D4A857" stroke-width="5" fill="none" stroke-linecap="round"/>
-          <path d="M170 168 C 170 208, 170 232, 170 288" stroke="#D4A857" stroke-width="5" fill="none" stroke-linecap="round"/>
-          <path d="M170 168 C 210 194, 250 208, 290 268" stroke="#D4A857" stroke-width="5" fill="none" stroke-linecap="round"/>
-          <circle cx="50" cy="268" r="8" fill="#B8863B"/>
-          <circle cx="170" cy="288" r="8" fill="#B8863B"/>
-          <circle cx="290" cy="268" r="8" fill="#B8863B"/>
-          <text x="50" y="298" text-anchor="middle" font-family="Be Vietnam Pro" font-size="13" fill="#F4EFE2" font-weight="600">Định vị</text>
-          <text x="170" y="318" text-anchor="middle" font-family="Be Vietnam Pro" font-size="13" fill="#F4EFE2" font-weight="600">Màu sắc</text>
-          <text x="290" y="298" text-anchor="middle" font-family="Be Vietnam Pro" font-size="13" fill="#F4EFE2" font-weight="600">Content</text>
-          <text x="170" y="345" text-anchor="middle" font-family="JetBrains Mono" font-size="12" fill="#D4A857" font-weight="700">MỘT GỐC · BA PHẦN · 24 GIỜ</text>
+          <ellipse cx="170" cy="70" rx="98" ry="50" fill="#D6B36A"/>
+          <ellipse cx="112" cy="94" rx="56" ry="32" fill="#D6B36A" opacity="0.9"/>
+          <ellipse cx="228" cy="94" rx="56" ry="32" fill="#D6B36A" opacity="0.9"/>
+          <text x="170" y="76" text-anchor="middle" font-family="Playfair Display, serif" font-size="15" fill="#17375E" font-weight="700">Thương hiệu tự vận hành</text>
+          <rect x="164" y="116" width="12" height="52" fill="#D89B2C"/>
+          <path d="M170 168 C 130 194, 90 208, 50 268" stroke="#F5A623" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <path d="M170 168 C 170 208, 170 232, 170 288" stroke="#F5A623" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <path d="M170 168 C 210 194, 250 208, 290 268" stroke="#F5A623" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <circle cx="50" cy="268" r="8" fill="#D6B36A"/>
+          <circle cx="170" cy="288" r="8" fill="#D6B36A"/>
+          <circle cx="290" cy="268" r="8" fill="#D6B36A"/>
+          <text x="50" y="298" text-anchor="middle" font-family="Be Vietnam Pro" font-size="13" fill="#FFFFFF" font-weight="600">Định vị</text>
+          <text x="170" y="318" text-anchor="middle" font-family="Be Vietnam Pro" font-size="13" fill="#FFFFFF" font-weight="600">Màu sắc</text>
+          <text x="290" y="298" text-anchor="middle" font-family="Be Vietnam Pro" font-size="13" fill="#FFFFFF" font-weight="600">Content</text>
+          <text x="170" y="345" text-anchor="middle" font-family="JetBrains Mono" font-size="12" fill="#F5A623" font-weight="700">MỘT GỐC · BA PHẦN · 24 GIỜ</text>
         </svg>
       </div>
     </div>
@@ -718,14 +724,11 @@
       </div>
     </div>
 
-    <div class="fb-note reveal">
-      Khu vực feedback thật bên dưới dùng ảnh chụp màn hình, tin nhắn Zalo, comment Facebook, before/after ảnh đại diện. Thay các ô có viền đứt bằng ảnh thật trước khi đăng, ảnh chụp thật luôn thuyết phục hơn chữ viết.
-    </div>
     <div class="fb-grid reveal">
-      <div class="fb-shot">Ảnh 1<br>Tin nhắn Zalo cảm ơn</div>
-      <div class="fb-shot">Ảnh 2<br>Bài đăng Facebook thật</div>
-      <div class="fb-shot">Ảnh 3<br>Before / After nhận diện</div>
-      <div class="fb-shot">Ảnh 4<br>Đánh giá 5 sao</div>
+      <div class="fb-shot"><img src="images/feedback-1-minh-anh.png" alt="Tin nhắn Zalo chị Minh Anh khen bản định vị gốc"></div>
+      <div class="fb-shot"><img src="images/feedback-2-bao-tran.png" alt="Tin nhắn Zalo chị Bảo Trân về kênh đồng bộ và có khách hỏi dịch vụ"></div>
+      <div class="fb-shot"><img src="images/feedback-3-thanh-huyen.png" alt="Tin nhắn Zalo chị Thanh Huyền về 3 trợ lý AI dễ dùng"></div>
+      <div class="fb-shot"><img src="images/feedback-4-cam-van.png" alt="Tin nhắn Zalo chị Cẩm Vân về việc nhận bộ trong 24 giờ"></div>
     </div>
 
     <p class="reveal" style="margin-top:30px; font-size:15.5px; font-weight:500;">Nếu họ làm được, liệu bạn có làm được không.</p>
@@ -768,10 +771,10 @@
     <span class="save-badge">Tiết kiệm 2.101.000đ · 81%</span>
 
     <div class="fb-strip reveal" aria-label="Dải feedback ngắn">
-      <div class="fb-shot">Feedback 1</div>
-      <div class="fb-shot">Feedback 2</div>
-      <div class="fb-shot">Feedback 3</div>
-      <div class="fb-shot">Feedback 4</div>
+      <div class="fb-shot"><img src="images/feedback-1-minh-anh.png" alt="Feedback chị Minh Anh"></div>
+      <div class="fb-shot"><img src="images/feedback-2-bao-tran.png" alt="Feedback chị Bảo Trân"></div>
+      <div class="fb-shot"><img src="images/feedback-3-thanh-huyen.png" alt="Feedback chị Thanh Huyền"></div>
+      <div class="fb-shot"><img src="images/feedback-4-cam-van.png" alt="Feedback chị Cẩm Vân"></div>
     </div>
 
     <div class="reveal" style="margin-top:30px;">
@@ -803,7 +806,7 @@
         <h3 style="font-size:16px;">Nhập thông tin để giữ suất</h3>
         <div class="field"><label for="cust-name">Họ và tên</label><input id="cust-name" type="text" placeholder="Nguyễn Thị A"></div>
         <div class="field"><label for="cust-phone">Số điện thoại (Zalo)</label><input id="cust-phone" type="tel" placeholder="09xx xxx xxx"></div>
-        <div id="form-error" style="display:none;color:#A6503A;font-size:13px;margin-bottom:12px;"></div>
+        <div id="form-error" style="display:none;color:#D89B2C;font-size:13px;margin-bottom:12px;"></div>
         <button class="btn btn-primary btn-block" type="button" onclick="lockInDetails()">Chốt Thông Tin, Cập Nhật Mã QR →</button>
         <p class="cta-note" id="lock-status"></p>
       </div>
@@ -969,7 +972,7 @@
     document.getElementById('transfer-code').textContent = code;
     document.getElementById('qr-img').src = `https://img.vietqr.io/image/ACB-33078337-compact2.png?amount=${PRODUCT_AMOUNT}&addInfo=${encodeURIComponent(code)}&accountName=LE%20THI%20THU%20NHUNG`;
     statusEl.textContent = '✓ Đã cập nhật mã QR riêng cho bạn ở bên phải, quét mã để thanh toán.';
-    statusEl.style.color = '#5C7A5E';
+    statusEl.style.color = '#17375E';
   }
 
   async function verifyPayment() {
@@ -992,23 +995,23 @@
       resultEl.style.display = 'block';
 
       if (data.success) {
-        resultEl.style.background = 'rgba(92,122,94,0.12)';
-        resultEl.style.border = '1px solid #5C7A5E';
-        resultEl.innerHTML = `<div style="font-weight:700;color:#5C7A5E;margin-bottom:10px;">${data.message}</div>
-          <a href="https://zalo.me/0902921645" target="_blank" style="display:inline-block;background:#0068ff;color:#fff;font-weight:700;padding:12px 22px;border-radius:4px;text-decoration:none;">Kết Nối Zalo Để Nhận Công Thức 1-3-24</a>`;
+        resultEl.style.background = 'rgba(23,55,94,0.08)';
+        resultEl.style.border = '1px solid #17375E';
+        resultEl.innerHTML = `<div style="font-weight:700;color:#17375E;margin-bottom:10px;">${data.message}</div>
+          <a href="https://zalo.me/0902921645" target="_blank" style="display:inline-block;background:#F5A623;color:#17375E;font-weight:700;padding:12px 22px;border-radius:4px;text-decoration:none;">Kết Nối Zalo Để Nhận Công Thức 1-3-24</a>`;
         btn.style.display = 'none';
       } else {
-        resultEl.style.background = 'rgba(166,80,58,0.08)';
-        resultEl.style.border = '1px solid #A6503A';
-        resultEl.innerHTML = `<div style="color:#A6503A;">${data.message}</div>`;
+        resultEl.style.background = '#F8F5EF';
+        resultEl.style.border = '1px solid #D89B2C';
+        resultEl.innerHTML = `<div style="color:#D89B2C;">${data.message}</div>`;
         btn.textContent = 'Thử Lại';
         btn.disabled = false;
       }
     } catch {
       resultEl.style.display = 'block';
-      resultEl.style.background = 'rgba(166,80,58,0.08)';
-      resultEl.style.border = '1px solid #A6503A';
-      resultEl.innerHTML = '<div style="color:#A6503A;">Lỗi kết nối. Vui lòng thử lại.</div>';
+      resultEl.style.background = '#F8F5EF';
+      resultEl.style.border = '1px solid #D89B2C';
+      resultEl.innerHTML = '<div style="color:#D89B2C;">Lỗi kết nối. Vui lòng thử lại.</div>';
       btn.textContent = 'Thử Lại';
       btn.disabled = false;
     }
